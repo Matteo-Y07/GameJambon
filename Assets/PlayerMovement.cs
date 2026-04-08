@@ -10,7 +10,10 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Transform GroundCheckLeft;
     public Transform GroundCheckRight;
+    public Transform WallCheckLeft;
+    public Transform WallCheckRight;
     public LayerMask groundLayer;
+    public LayerMask wallLayer;
     public Camera PlayerCamera;
     public bool isGrounded= false;
     public bool hasJump = true;
@@ -67,6 +70,14 @@ public class PlayerMovement : MonoBehaviour
             hasJump = true;
             playerJump();
         }
+
+        //Grab Walls
+        if (Input.GetKeyDown(KeyCode.LeftShift) && CheckWall())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0.0f);
+            rb.gravityScale = 0.0f;
+        }
+        else if (!isDashing) rb.gravityScale = gravity; // On remet la gravité normale quand on arrête de grab
     }
 
     void playerMoveRight()
@@ -82,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void playerStop() {rb.velocity = new Vector2(0.0f, rb.velocity.y);}
+
     void playerJump(){
         if (hasJump) {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -120,6 +132,22 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded){
             hasJump = false;
             hasDash = true; // Récupère le dash quand on touche le sol
+        }
+    }
+
+    void CheckWall()
+    {
+        bool isTouchingWallLeft = Physics2D.OverlapArea(WallCheckLeft.position, WallCheckRight.position, wallLayer);
+        bool isTouchingWallRight = Physics2D.OverlapArea(WallCheckRight.position, WallCheckLeft.position, wallLayer);
+
+        if (isTouchingWallLeft || isTouchingWallRight)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0.0f); // On arrête la chute
+            rb.gravityScale = 0.0f; // On désactive la gravité pendant le grab
+        }
+        else if (!isDashing) 
+        {
+            rb.gravityScale = gravity; // On remet la gravité normale quand on arrête de grab
         }
     }
 
