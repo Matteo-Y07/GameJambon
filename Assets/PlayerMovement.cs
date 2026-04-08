@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform GroundCheckLeft;
     public Transform GroundCheckRight;
     public LayerMask groundLayer;
+    public Camera PlayerCamera;
     public bool isGrounded= false;
     public bool hasJump = true;
 
@@ -30,7 +31,22 @@ public class PlayerMovement : MonoBehaviour
         
     }
     
-   
+   private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        PlayerCamera = Camera.main;
+        PlayerCamera.enabled = true;
+    }
+    void OnGUI(){
+        Vector2 point = new Vector2();
+        Vector2 playerScreenPos = new Vector2();
+        Event currentEvent = Event.current;
+
+        PlayerPosX = currentEvent.PlayerPosition.x;
+        PlayerPosY = currentEvent.PlayerPosition.y;
+
+        point = PlayerCamera.WorldToScreenPoint(new Vector2(PlayerPosX, PlayerPosY));
+    }
     void Update()
     {
         KeyboardInput();
