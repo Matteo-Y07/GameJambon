@@ -153,10 +153,8 @@ public class PlayerMovement : MonoBehaviour
 
     void LimitFallSpeed()
     {
-        if (rb.velocity.y < -maxFallSpeed){
+        if (rb.velocity.y < -maxFallSpeed && !isDashing){
             rb.velocity = new Vector2(rb.velocity.x, -maxFallSpeed);
         }
     }
 }
-
-//caca
