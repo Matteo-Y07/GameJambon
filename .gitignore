@@ -1,1 +1,50 @@
+# ========== Unity générés ==========
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
 
+# Visual Studio / Rider / IDE
+.vscode/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+*.pidb.meta
+*.pdb.meta
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Unity Cache / Packages
+/[Pp]ackages/manifest.json
+/[Pp]ackages/packages-lock.json
+/[Pp]ackages/com.unity.package-manager-ui/
+
+# Build files
+*.apk
+*.aab
+*.unitypackage
+
+# Autres fichiers temporaires
+*.log
+*.swp
+*.tmp
+
+# Environment / Secrets
+.env
+*.key
