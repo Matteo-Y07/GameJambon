@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5.0f;
     public float jumpForce = 7.0f;
     public float maxFallSpeed = 8.0f;
+    public float maxTimerGrab = 3f;
 
     public Rigidbody2D rb;
     public Transform GroundCheckLeft;
@@ -16,7 +17,10 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask wallLayer;
     public Camera PlayerCamera;
     public bool isGrounded= false;
+    public bool isTouchingWallLeft;
+    public bool isTouchingWallRight;
     public bool hasJump = true;
+    public bool grab = false;
 
     // Dash variables
     public float dashPower = 20.0f;
@@ -34,13 +38,6 @@ public class PlayerMovement : MonoBehaviour
         
     }
     
-   private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        PlayerCamera = Camera.main;
-        PlayerCamera.enabled = true;
-    }
-    
     void Update()
     {
         KeyboardInput();
@@ -50,16 +47,18 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         CheckGround();
+        CheckWalls();
     }
 
     void KeyboardInput()
     {
         // Déplacement horizontal
-        if (Input.GetAxisRaw("Horizontal") > 0 && !isDashing) playerMoveRight();
-
-        else if (Input.GetAxisRaw("Horizontal") < 0 && !isDashing) playerMoveLeft();
-
-        else if (!isDashing) playerStop();
+        if (!isDashing && !grab)
+        {
+            if (Input.GetAxisRaw("Horizontal") > 0 && !isDashing) playerMoveRight();
+            else if (Input.GetAxisRaw("Horizontal") < 0 && !isDashing) playerMoveLeft();
+            else if (!isDashing) playerStop();
+        }
 
         // Dash
         if (Input.GetButtonDown("Jump") && !isGrounded && !hasJump && hasDash) StartCoroutine(playerDash());
@@ -72,12 +71,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Grab Walls
-        if (Input.GetKeyDown(KeyCode.LeftShift) && CheckWall())
+        if (Input.GetKeyDown(KeyCode.LeftShift) && (isTouchingWallLeft || isTouchingWallRight) && !grab)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0.0f);
-            rb.gravityScale = 0.0f;
+            StartCoroutine(playerGrabWall());
         }
-        else if (!isDashing) rb.gravityScale = gravity; // On remet la gravité normale quand on arrête de grab
+        else if (!isDashing && !grab) rb.gravityScale = gravity; // On remet la gravité normale quand on arrête de grab
     }
 
     void playerMoveRight()
@@ -100,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
             hasJump = false;
         }
     }
+
     IEnumerator playerDash()
     {
         isDashing = true;
@@ -126,6 +125,25 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
     }
 
+    IEnumerator playerGrabWall()
+{
+    grab = true;
+    float timer = 0f; // timer max pour le grab
+    rb.gravityScale = 0f; // On désactive la gravité pendant le grab
+
+    while (timer < maxTimerGrab && grab)
+    {
+        // grab
+        rb.velocity = new Vector2(rb.velocity.x, 0f);
+
+        timer += Time.deltaTime; // incrémente le timer
+        if (Input.GetKeyUp(KeyCode.LeftShift)) grab = false;
+        yield return null;
+    }
+    grab = false;
+    rb.gravityScale = gravity;
+}
+
     void CheckGround()
     {
         isGrounded = Physics2D.OverlapArea(GroundCheckLeft.position, GroundCheckRight.position, groundLayer);
@@ -135,20 +153,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void CheckWall()
+    void CheckWalls()
     {
-        bool isTouchingWallLeft = Physics2D.OverlapArea(WallCheckLeft.position, WallCheckRight.position, wallLayer);
-        bool isTouchingWallRight = Physics2D.OverlapArea(WallCheckRight.position, WallCheckLeft.position, wallLayer);
+        isTouchingWallLeft = Physics2D.OverlapArea(WallCheckLeft.position,WallCheckLeft.position + Vector3.right * 0.1f, wallLayer);
+        isTouchingWallRight = Physics2D.OverlapArea(WallCheckRight.position,WallCheckRight.position + Vector3.left * 0.1f, wallLayer);
 
-        if (isTouchingWallLeft || isTouchingWallRight)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, 0.0f); // On arrête la chute
-            rb.gravityScale = 0.0f; // On désactive la gravité pendant le grab
-        }
-        else if (!isDashing) 
-        {
-            rb.gravityScale = gravity; // On remet la gravité normale quand on arrête de grab
-        }
     }
 
     void LimitFallSpeed()

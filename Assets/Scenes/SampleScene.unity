@@ -838,15 +838,24 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 10
   maxFallSpeed: 8
+  wait: 3
   rb: {fileID: 1484510130}
   GroundCheckLeft: {fileID: 1329557825}
   GroundCheckRight: {fileID: 2047502569}
+  WallCheckLeft: {fileID: 203048123}
+  WallCheckRight: {fileID: 211052527}
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  wallLayer:
     serializedVersion: 2
     m_Bits: 8
   PlayerCamera: {fileID: 519420031}
   isGrounded: 0
+  isTouchingWallLeft: 0
+  isTouchingWallRight: 0
   hasJump: 0
+  grab: 0
   dashPower: 25
   dashDirection: {x: 0, y: 0}
   isDashing: 0
