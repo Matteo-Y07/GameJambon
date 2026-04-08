@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5.0f;
     public float jumpForce = 7.0f;
     public float maxFallSpeed = 8.0f;
-    public float maxTimerGrab = 3f;
+    public float maxTimerGrab = 1f;
 
     public Rigidbody2D rb;
     public Transform GroundCheckLeft;
@@ -42,10 +42,6 @@ public class PlayerMovement : MonoBehaviour
     {
         KeyboardInput();
         LimitFallSpeed();
-    }
-
-    void FixedUpdate()
-    {
         CheckGround();
         CheckWalls();
     }
@@ -61,12 +57,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Dash
-        if (Input.GetButtonDown("Jump") && !isGrounded && !hasJump && hasDash) StartCoroutine(playerDash());
+        if (Input.GetButtonDown("Jump") && !isGrounded && hasDash) StartCoroutine(playerDash());
 
         // Jump
-        if (Input.GetButtonDown("Jump") && isGrounded) 
+        if (Input.GetButtonDown("Jump") && (isGrounded || grab) && hasJump)
         {
-            hasJump = true;
             playerJump();
         }
 
@@ -102,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator playerDash()
     {
         isDashing = true;
+        
         hasDash = false;
         Vector2 dashDirection = Vector2.zero;
 
@@ -117,8 +113,9 @@ public class PlayerMovement : MonoBehaviour
 
         dashDirection.Normalize(); // On normalise la direction pour que les diagonales ne soient pas plus rapides (pas comme dans Minecraft)
         rb.gravityScale = 0.0f; // On désactive la gravité pendant le dash
+        rb.velocity = Vector2.zero; // On stop le mouvement du joueur avant de dash pour éviter les problèmes de momentum
+        yield return new WaitForSeconds(0.03f); // pause légère juste avant de dash
         rb.velocity = dashDirection * dashPower; // On dash
-
         yield return new WaitForSeconds(0.05f); // Durée du dash
         rb.velocity = dashDirection * moveSpeed; // On remet la vitesse qu'on avait avant le dash
         rb.gravityScale = gravity; // On réactive la gravité
@@ -148,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapArea(GroundCheckLeft.position, GroundCheckRight.position, groundLayer);
         if (isGrounded){
-            hasJump = false;
+            hasJump = true; // Récupère le jump quand on touche le sol
             hasDash = true; // Récupère le dash quand on touche le sol
         }
     }
@@ -157,7 +154,10 @@ public class PlayerMovement : MonoBehaviour
     {
         isTouchingWallLeft = Physics2D.OverlapArea(WallCheckLeft.position,WallCheckLeft.position + Vector3.right * 0.1f, wallLayer);
         isTouchingWallRight = Physics2D.OverlapArea(WallCheckRight.position,WallCheckRight.position + Vector3.left * 0.1f, wallLayer);
-
+        if (grab){
+            hasJump = true;
+            hasDash = true;// Récupère le jump et le dash quand on touche un mur
+        }
     }
 
     void LimitFallSpeed()
