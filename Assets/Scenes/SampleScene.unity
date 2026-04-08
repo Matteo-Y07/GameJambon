@@ -815,10 +815,11 @@ MonoBehaviour:
     m_Bits: 8
   isGrounded: 0
   hasJump: 0
-  dashPower: 10
+  dashPower: 25
   dashDirection: {x: 0, y: 0}
   isDashing: 0
   hasDash: 0
+  gravity: 2.5
   PlayerSpriteRenderer: {fileID: 0}
 --- !u!212 &1484510132
 SpriteRenderer:
