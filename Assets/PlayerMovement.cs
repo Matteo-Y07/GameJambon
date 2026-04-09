@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     public bool isTouchingWallRight;
     public bool hasJump = true;
     public bool grab = false;
+    public bool canGrab = true;
+
 
     // Dash variables
     public float dashPower = 20.0f;
@@ -66,11 +68,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Grab Walls
-        if (Input.GetKeyDown(KeyCode.LeftShift) && (isTouchingWallLeft || isTouchingWallRight) && !grab)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && (isTouchingWallLeft || isTouchingWallRight) && !grab && canGrab)
         {
+            Debug.Log("Grab");
             StartCoroutine(playerGrabWall());
+            StartCoroutine(canGrabWall());
         }
-        else if (!isDashing && !grab) rb.gravityScale = gravity; // On remet la gravité normale quand on arrête de grab
+        else if (!isDashing && !grab && !canGrab) rb.gravityScale = gravity; // On remet la gravité normale quand on arrête de grab
     }
 
     void playerMoveRight()
@@ -139,6 +143,7 @@ public class PlayerMovement : MonoBehaviour
     }
     grab = false;
     rb.gravityScale = gravity;
+    
 }
 
     void CheckGround()
@@ -158,6 +163,13 @@ public class PlayerMovement : MonoBehaviour
             hasJump = true;
             hasDash = true;// Récupère le jump et le dash quand on touche un mur
         }
+    }
+
+    IEnumerator canGrabWall()
+    {
+        canGrab = false;
+        yield return new WaitForSeconds(3f); // cooldown de 3 secondes
+        canGrab = true;
     }
 
     void LimitFallSpeed()

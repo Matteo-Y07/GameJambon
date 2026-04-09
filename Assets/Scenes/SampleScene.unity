@@ -131,7 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 203048123}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: WallCheckLeft
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -162,7 +162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 211052527}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: WallCheckRight
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -474,7 +474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1329557825}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: GroundCheckLeft
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -789,7 +789,7 @@ GameObject:
   - component: {fileID: 1484510131}
   - component: {fileID: 1484510130}
   - component: {fileID: 1484510134}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -856,6 +856,7 @@ MonoBehaviour:
   isTouchingWallRight: 0
   hasJump: 0
   grab: 0
+  canGrab: 1
   dashPower: 25
   dashDirection: {x: 0, y: 0}
   isDashing: 0
@@ -902,7 +903,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 67
   m_Sprite: {fileID: 303444714, guid: 2c8a6e63fbdc30c4989db9bf7ea554df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3580,7 +3581,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2047502569}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: GroundCheckRight
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
