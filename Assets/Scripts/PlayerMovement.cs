@@ -1,4 +1,3 @@
-<<<<<<< HEAD:Assets/PlayerMovement.cs
 using UnityEngine;
 using System.Collections;
 public class PlayerMovement : MonoBehaviour
