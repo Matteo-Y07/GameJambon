@@ -46,6 +46,9 @@ public class PlayerMovement : MonoBehaviour
         LimitFallSpeed();
         CheckGround();
         CheckWalls();
+        if (canGrab && (isTouchingWallLeft || isTouchingWallRight) && !grab){
+            rb.velocity = new Vector2(rb.velocity.x, -1f); // On ralentit la chute quand on touche un mur pour un effet de slide
+        }
     }
 
     void KeyboardInput()
