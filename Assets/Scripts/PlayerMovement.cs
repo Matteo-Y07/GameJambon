@@ -46,9 +46,7 @@ public class PlayerMovement : MonoBehaviour
         LimitFallSpeed();
         CheckGround();
         CheckWalls();
-        if (canGrab && (isTouchingWallLeft || isTouchingWallRight) && !grab){
-            rb.velocity = new Vector2(rb.velocity.x, -1f); // On ralentit la chute quand on touche un mur pour un effet de slide
-        }
+        
     }
 
     void KeyboardInput()
@@ -65,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && !isGrounded && hasDash) StartCoroutine(playerDash());
 
         // Jump
-        if (Input.GetButtonDown("Jump") && (isGrounded || grab) && hasJump)
+        if (Input.GetButtonDown("Jump") && (isGrounded || grab || canGrab) && hasJump)
         {
             playerJump();
         }
@@ -162,6 +160,18 @@ public class PlayerMovement : MonoBehaviour
     {
         isTouchingWallLeft = Physics2D.OverlapArea(WallCheckLeft.position,WallCheckLeft.position + Vector3.right * 0.1f, wallLayer);
         isTouchingWallRight = Physics2D.OverlapArea(WallCheckRight.position,WallCheckRight.position + Vector3.left * 0.1f, wallLayer);
+        if (canGrab && (isTouchingWallLeft || isTouchingWallRight) && !grab){
+            rb.velocity = new Vector2(rb.velocity.x, -1f); // On ralentit la chute quand on touche un mur pour un effet de slide
+        }
+        if (isTouchingWallLeft && !grab){
+            rb.velocity = new Vector2( rb.velocity.x, jumpForce);
+            hasJump = true;
+        }
+        
+        if (isTouchingWallRight && !grab){
+            rb.velocity = new Vector2( -rb.velocity.x, jumpForce);
+            hasJump = true;
+        }
         if (grab){
             hasJump = true;
             hasDash = true;// Récupère le jump et le dash quand on touche un mur
