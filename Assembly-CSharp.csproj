@@ -65,7 +65,11 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\MenuController.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\PlayerWall_Controller.cs" />
+    <Compile Include="Assets\Scripts\PlayerDash_Controller.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\PlayerJump_Controller.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovement_Controller.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
