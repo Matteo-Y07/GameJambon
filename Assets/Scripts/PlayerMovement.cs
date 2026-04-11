@@ -163,15 +163,16 @@ public class PlayerMovement : MonoBehaviour
         if (canGrab && (isTouchingWallLeft || isTouchingWallRight) && !grab){
             rb.velocity = new Vector2(rb.velocity.x, -1f); // On ralentit la chute quand on touche un mur pour un effet de slide
         }
-        if (isTouchingWallLeft && !grab){
-            rb.velocity = new Vector2( rb.velocity.x, jumpForce);
+        if (Input.GetButtonDown("Jump") && isTouchingWallLeft){
+            rb.velocity = new Vector2( moveSpeed, jumpForce);
             hasJump = true;
         }
         
-        if (isTouchingWallRight && !grab){
-            rb.velocity = new Vector2( -rb.velocity.x, jumpForce);
+        if (Input.GetButtonDown("Jump") && isTouchingWallLeft){
+            rb.velocity = new Vector2( -moveSpeed, jumpForce);
             hasJump = true;
         }
+        
         if (grab){
             hasJump = true;
             hasDash = true;// Récupère le jump et le dash quand on touche un mur
