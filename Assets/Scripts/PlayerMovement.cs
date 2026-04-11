@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     public bool hasJump = true;
     public bool grab = false;
     public bool canGrab = true;
+    public bool isWallJumping = false;
 
     // Dash variables
     public float dashPower = 20.0f;
@@ -37,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     
     // Wall jump variables
     public float wallJumpImpulseTime = 0.15f; // durée de l'impulsion
-    public float wallJumpImpulseX = 0f; // direction forcée
+    public float wallJumpImpulseX = 4f; // direction forcée
     public float wallJumpTimer = 0f; // timer actif
 
     // Controllers

@@ -11,7 +11,7 @@ public class PlayerMovement_Controller
 
     public void Handle()
     {
-        if (player.isDashing || player.grab) return;
+        if (player.isDashing || player.grab || player.isWallJumping) return;
 
         float input = Input.GetAxisRaw("Horizontal");
 

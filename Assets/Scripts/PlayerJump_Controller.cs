@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerJump_Controller
 {
@@ -13,23 +14,10 @@ public class PlayerJump_Controller
     {
         if (!Input.GetButtonDown("Jump")) return;
 
-        // Wall jump gauche (mur à gauche, on s'éjecte à droite)
-        if (player.isTouchingWallLeft && !player.isGrounded)
+        // Wall jump prioritaire
+        if (!player.isGrounded && (player.isTouchingWallLeft || player.isTouchingWallRight))
         {
-            player.grab = false;
-            float horizontalBoost = player.moveSpeed * 1.5f;
-            player.rb.velocity = new Vector2(horizontalBoost, player.jumpForce);
-            player.hasJump = true;
-            return;
-        }
-
-        // Wall jump droite (mur à droite, on s'éjecte à gauche)
-        if (player.isTouchingWallRight && !player.isGrounded)
-        {
-            player.grab = false;
-            float horizontalBoost = player.moveSpeed * 1.5f;
-            player.rb.velocity = new Vector2(-horizontalBoost, player.jumpForce);
-            player.hasJump = true;
+            player.StartCoroutine(WallJump());
             return;
         }
 
@@ -40,5 +28,24 @@ public class PlayerJump_Controller
             player.hasJump = false;
             player.grab = false;
         }
+    }
+
+    IEnumerator WallJump()
+    {
+        player.grab = false;
+        player.isWallJumping = true; // bloque le controle horizontal dans PlayerMovement
+
+        // mur a gauche donc vers la droite
+        if (player.isTouchingWallLeft)
+            player.rb.velocity = new Vector2(player.wallJumpImpulseX, player.jumpForce);
+
+        // mur a droite donc vers la gauche
+        else if (player.isTouchingWallRight)
+            player.rb.velocity = new Vector2(-player.wallJumpImpulseX, player.jumpForce);
+
+        yield return new WaitForSeconds(player.wallJumpImpulseTime);
+
+        player.isWallJumping = false; //remet le contrôle horizontal
+        player.hasJump = true;
     }
 }
