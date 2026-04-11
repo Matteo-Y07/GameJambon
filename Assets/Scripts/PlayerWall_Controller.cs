@@ -19,8 +19,7 @@ public class PlayerWall_Controller
 
     void HandleSlide()
 {
-    if (player.canGrab
-        && (player.isTouchingWallLeft || player.isTouchingWallRight) && !player.grab && !player.isGrounded && player.rb.velocity.y < 0)
+    if (player.canGrab && (player.isTouchingWallLeft || player.isTouchingWallRight) && !player.grab && !player.isGrounded && player.rb.velocity.y < 0)
     {
         player.rb.velocity = new Vector2(player.rb.velocity.x, -1f);
     }

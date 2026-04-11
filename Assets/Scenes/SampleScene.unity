@@ -865,7 +865,7 @@ MonoBehaviour:
   hasDash: 0
   gravity: 2.5
   wallJumpImpulseTime: 0.15
-  wallJumpImpulseX: 2
+  wallJumpImpulseX: 4
   wallJumpTimer: 0
 --- !u!212 &1484510132
 SpriteRenderer:
