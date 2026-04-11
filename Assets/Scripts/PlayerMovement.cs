@@ -3,13 +3,13 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // === TOUT TON CODE (variables inchangées) ===
+    // Variables
 
     public float moveSpeed = 5.0f;
     public float jumpForce = 7.0f;
     public float maxFallSpeed = 8.0f;
     public float maxTimerGrab = 1f;
-
+    // Références
     public Rigidbody2D rb;
     public Transform GroundCheckLeft;
     public Transform GroundCheckRight;
@@ -18,7 +18,9 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask wallLayer;
     public Camera PlayerCamera;
+    public SpriteRenderer PlayerSpriteRenderer;
 
+    // Variables d'état
     public bool isGrounded= false;
     public bool isTouchingWallLeft;
     public bool isTouchingWallRight;
@@ -26,13 +28,17 @@ public class PlayerMovement : MonoBehaviour
     public bool grab = false;
     public bool canGrab = true;
 
+    // Dash variables
     public float dashPower = 20.0f;
     public Vector2 dashDirection = new Vector2();
     public bool isDashing = false;
     public bool hasDash = true;
     public float gravity = 2.5f;
-
-    public SpriteRenderer PlayerSpriteRenderer;
+    
+    // Wall jump variables
+    public float wallJumpImpulseTime = 0.15f; // durée de l'impulsion
+    public float wallJumpImpulseX = 0f; // direction forcée
+    public float wallJumpTimer = 0f; // timer actif
 
     // Controllers
     PlayerMovement_Controller movement;
@@ -61,8 +67,6 @@ public class PlayerMovement : MonoBehaviour
         CheckGround();
         CheckWalls();
     }
-
-    // === TES FONCTIONS NON MODIFIÉES ===
 
     void CheckGround()
     {
