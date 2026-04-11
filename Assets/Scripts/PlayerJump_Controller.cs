@@ -45,11 +45,11 @@ public class PlayerJump_Controller
 
         // mur a gauche donc vers la droite
         if (player.isTouchingWallLeft)
-            player.rb.velocity = new Vector2(player.wallJumpImpulseX, (player.jumpForce/1.3f));
+            player.rb.velocity = new Vector2(player.wallJumpImpulseX, (player.jumpForce/1.5f));
 
         // mur a droite donc vers la gauche
         else if (player.isTouchingWallRight)
-            player.rb.velocity = new Vector2(-player.wallJumpImpulseX, (player.jumpForce/1.3f));
+            player.rb.velocity = new Vector2(-player.wallJumpImpulseX, (player.jumpForce/1.5f));
 
         yield return new WaitForSeconds(player.wallJumpImpulseTime);
 

@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     // Variables
 
-    public float moveSpeed = 5.0f;
+    public float moveSpeed = 4.0f;
     public float jumpForce = 7.0f;
     public float maxFallSpeed = 8.0f;
     public float maxTimerGrab = 1f;
@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isWallJumping = false;
 
     // Dash variables
-    public float dashPower = 20.0f;
+    public float dashPower = 25.0f;
     public Vector2 dashDirection = new Vector2();
     public bool isDashing = false;
     public bool hasDash = true;
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     
     // Wall jump variables
     public float wallJumpImpulseTime = 0.15f; // durée de l'impulsion
-    public float wallJumpImpulseX = 4f; // direction forcée
+    public float wallJumpImpulseX = 4.5f; // direction forcée
     public float wallJumpTimer = 0f; // timer actif
 
     // Controllers
@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         else
             jumpBufferTimer -= Time.deltaTime;
     }
-    
+
     void CheckGround()
     {
         isGrounded = Physics2D.OverlapArea(GroundCheckLeft.position, GroundCheckRight.position, groundLayer);
@@ -120,8 +120,7 @@ public class PlayerMovement : MonoBehaviour
 
     void ApplyFallGravity()
     {
-        if (grab || isDashing) return; // 👈 sort immédiatement si grab ou dash
-
+        if (grab || isDashing) return;
         if (rb.velocity.y < 0f)
             rb.gravityScale = gravity * 1.8f;
         else if (rb.velocity.y > 0f && (!Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.C)))
