@@ -12,7 +12,7 @@ public class PlayerJump_Controller
 
     public void Handle()
     {
-        // Saut variable - relâcher pour sauter moins haut
+        // Saut variable : relâcher pour sauter moins haut
         if ((Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.C)) && player.rb.velocity.y > 0f)
         {
             player.rb.velocity = new Vector2(player.rb.velocity.x, player.rb.velocity.y * player.jumpMultiplier);
