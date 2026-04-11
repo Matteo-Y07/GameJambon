@@ -6,9 +6,10 @@ public class PlayerMovement : MonoBehaviour
     // Variables
 
     public float moveSpeed = 4.0f;
-    public float jumpForce = 7.0f;
+    public float climbSpeed = 2.5f;
     public float maxFallSpeed = 8.0f;
-    public float maxTimerGrab = 1f;
+    public float jumpForce = 7.0f;
+    public float maxTimerGrab = 7.0f;
     public float coyoteTime = 0.12f;
     public float coyoteTimer = 0f;
     public float jumpBufferTime = 0.12f;
