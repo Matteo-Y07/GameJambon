@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce3effb40411a64c9711dd598d1df03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FollowSpeed: 5
+  FollowSpeed: 2
   Target: {fileID: 1484510133}
 --- !u!1 &619394800
 GameObject:
@@ -851,6 +851,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   PlayerCamera: {fileID: 519420031}
+  PlayerSpriteRenderer: {fileID: 0}
   isGrounded: 0
   isTouchingWallLeft: 0
   isTouchingWallRight: 0
@@ -862,7 +863,9 @@ MonoBehaviour:
   isDashing: 0
   hasDash: 0
   gravity: 2.5
-  PlayerSpriteRenderer: {fileID: 0}
+  wallJumpImpulseTime: 0.15
+  wallJumpImpulseX: 0
+  wallJumpTimer: 0
 --- !u!212 &1484510132
 SpriteRenderer:
   m_ObjectHideFlags: 0

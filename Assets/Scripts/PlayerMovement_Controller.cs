@@ -15,12 +15,14 @@ public class PlayerMovement_Controller
 
         float input = Input.GetAxisRaw("Horizontal");
 
-        if (input > 0 && player.isTouchingWallLeft) {
+        if (input < 0 && player.isTouchingWallLeft) {
             input = 0;
+            player.PlayerSpriteRenderer.flipX = true;
         }
 
-        if (input < 0 && player.isTouchingWallRight) {
+        if (input > 0 && player.isTouchingWallRight) {
             input = 0;
+            player.PlayerSpriteRenderer.flipX = false;
         }
 
         if (input > 0) MoveRight();
