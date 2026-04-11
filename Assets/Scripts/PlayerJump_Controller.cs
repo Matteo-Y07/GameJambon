@@ -12,7 +12,13 @@ public class PlayerJump_Controller
 
     public void Handle()
     {
-        if (!Input.GetButtonDown("Jump")) return;
+        // Saut variable - relâcher pour sauter moins haut
+        if ((Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.C)) && player.rb.velocity.y > 0f)
+        {
+            player.rb.velocity = new Vector2(player.rb.velocity.x, player.rb.velocity.y * player.jumpMultiplier);
+        }
+
+        if (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.C)) return;
 
         // Wall jump prioritaire
         if (!player.isGrounded && (player.isTouchingWallLeft || player.isTouchingWallRight))
@@ -22,10 +28,12 @@ public class PlayerJump_Controller
         }
 
         // Saut normal
-        if ((player.isGrounded || player.grab) && player.hasJump)
+        if (player.jumpBufferTimer > 0f && (player.coyoteTimer > 0f || player.grab) && player.hasJump)
         {
             player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpForce);
             player.hasJump = false;
+            player.coyoteTimer = 0f;
+            player.jumpBufferTimer = 0f;
             player.grab = false;
         }
     }

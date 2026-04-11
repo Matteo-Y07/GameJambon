@@ -9,6 +9,12 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 7.0f;
     public float maxFallSpeed = 8.0f;
     public float maxTimerGrab = 1f;
+    public float coyoteTime = 0.12f;
+    public float coyoteTimer = 0f;
+    public float jumpBufferTime = 0.12f;
+    public float jumpBufferTimer = 0f;
+    public float jumpMultiplier = 0.5f;
+
     // Références
     public Rigidbody2D rb;
     public Transform GroundCheckLeft;
@@ -59,16 +65,37 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        CheckGround();
+        CheckWalls();
+
+        HandleCoyoteTime();
+        HandleJumpBuffer();
+
         movement.Handle();
         jump.Handle();
         dash.Handle();
         wall.Handle();
 
+        ApplyFallGravity();
         LimitFallSpeed();
-        CheckGround();
-        CheckWalls();
     }
 
+    void HandleCoyoteTime()
+    {
+        if (isGrounded)
+            coyoteTimer = coyoteTime;
+        else
+            coyoteTimer -= Time.deltaTime;
+    }
+
+    void HandleJumpBuffer()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.C))
+            jumpBufferTimer = jumpBufferTime;
+        else
+            jumpBufferTimer -= Time.deltaTime;
+    }
+    
     void CheckGround()
     {
         isGrounded = Physics2D.OverlapArea(GroundCheckLeft.position, GroundCheckRight.position, groundLayer);
@@ -86,8 +113,22 @@ public class PlayerMovement : MonoBehaviour
 
     void LimitFallSpeed()
     {
-        if (rb.velocity.y < -maxFallSpeed && !isDashing){
+        if (rb.velocity.y < -maxFallSpeed && !isDashing && !grab) {
             rb.velocity = new Vector2(rb.velocity.x, -maxFallSpeed);
         }
     }
+
+    void ApplyFallGravity()
+    {
+        if (grab || isDashing) return; // 👈 sort immédiatement si grab ou dash
+
+        if (rb.velocity.y < 0f)
+            rb.gravityScale = gravity * 1.8f;
+        else if (rb.velocity.y > 0f && (!Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.C)))
+            rb.gravityScale = gravity * 1.3f;
+        else
+            rb.gravityScale = gravity;
+    }
+
 }
+
