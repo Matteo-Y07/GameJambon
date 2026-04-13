@@ -12,7 +12,7 @@ public class PlayerDash_Controller
 
     public void Handle()
     {
-        if (Input.GetKeyDown(KeyCode.X) && !player.isGrounded && player.hasDash && !player.grab && !player.isTouchingWallLeft && !player.isTouchingWallRight)
+        if (Input.GetButtonDown("Dash") && !player.isGrounded && player.hasDash && !player.grab && !player.isTouchingWallLeft && !player.isTouchingWallRight)
         {
             player.StartCoroutine(Dash());
         }

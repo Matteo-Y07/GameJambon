@@ -13,12 +13,12 @@ public class PlayerJump_Controller
     public void Handle()
     {
         // Saut variable : relâcher pour sauter moins haut
-        if ((Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.C)) && player.rb.velocity.y > 0f)
+        if ((Input.GetButtonUp("Jump")) && player.rb.velocity.y > 0f)
         {
             player.rb.velocity = new Vector2(player.rb.velocity.x, player.rb.velocity.y * player.jumpMultiplier);
         }
 
-        if (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.C)) return;
+        if (!Input.GetButtonDown("Jump")) return;
 
         // Wall jump prioritaire
         if (!player.isGrounded && (player.isTouchingWallLeft || player.isTouchingWallRight))

@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleJumpBuffer()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.C))
+        if (Input.GetButtonDown("Jump"))
             jumpBufferTimer = jumpBufferTime;
         else
             jumpBufferTimer -= Time.deltaTime;
@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
         if (grab || isDashing) return;
         if (rb.velocity.y < 0f)
             rb.gravityScale = gravity * 1.8f;
-        else if (rb.velocity.y > 0f && (!Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.C)))
+        else if (rb.velocity.y > 0f && (!Input.GetButton("Jump")))
             rb.gravityScale = gravity * 1.3f;
         else
             rb.gravityScale = gravity;

@@ -27,7 +27,7 @@ public class PlayerWall_Controller
 
     void HandleGrabInput()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && (player.isTouchingWallLeft || player.isTouchingWallRight) && !player.grab && player.canGrab)
+        if (Input.GetButtonDown("Grab") && (player.isTouchingWallLeft || player.isTouchingWallRight) && !player.grab && player.canGrab)
         {
             player.StartCoroutine(Grab());
             player.StartCoroutine(Cooldown());
@@ -53,7 +53,7 @@ public class PlayerWall_Controller
 
             player.rb.velocity = new Vector2(0f, climb);
 
-            if (Input.GetKeyUp(KeyCode.LeftShift))
+            if (Input.GetButtonUp("Grab"))
                 player.grab = false;
 
             timer += Time.deltaTime;

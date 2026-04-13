@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\MenuController.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\PilierSwitch.cs" />
     <Compile Include="Assets\Scripts\PlayerWall_Controller.cs" />
     <Compile Include="Assets\Scripts\PlayerDash_Controller.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
