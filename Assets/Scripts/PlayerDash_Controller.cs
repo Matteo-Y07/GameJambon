@@ -42,7 +42,7 @@ public class PlayerDash_Controller
 
         player.rb.velocity = dir * player.dashPower;
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.07f);
 
         player.rb.velocity = dir * player.moveSpeed;
         player.rb.gravityScale = player.gravity;

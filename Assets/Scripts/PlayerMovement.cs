@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isWallJumping = false;
 
     // Dash variables
-    public float dashPower = 25.0f;
+    public float dashPower = 15.0f;
     public Vector2 dashDirection = new Vector2();
     public bool isDashing = false;
     public bool hasDash = true;
