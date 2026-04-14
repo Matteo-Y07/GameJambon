@@ -1573,7 +1573,7 @@ MonoBehaviour:
   climbSpeed: 2.5
   maxFallSpeed: 8
   jumpForce: 10
-  maxTimerGrab: 1
+  maxTimerGrab: 7
   coyoteTime: 0.12
   coyoteTimer: 0
   jumpBufferTime: 0.12
