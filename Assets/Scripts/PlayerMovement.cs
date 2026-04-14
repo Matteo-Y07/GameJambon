@@ -20,8 +20,10 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Transform GroundCheckLeft;
     public Transform GroundCheckRight;
-    public Transform WallCheckLeft;
-    public Transform WallCheckRight;
+    public Transform WallCheckLeftBottom;
+    public Transform WallCheckRightBottom;
+    public Transform WallCheckLeftTop;
+    public Transform WallCheckRightTop;
     public LayerMask groundLayer;
     public LayerMask wallLayer;
     public Camera PlayerCamera;
@@ -29,6 +31,10 @@ public class PlayerMovement : MonoBehaviour
 
     // Variables d'état
     public bool isGrounded= false;
+    public bool isTouchingWallLeftTop;
+    public bool isTouchingWallRightTop;
+    public bool isTouchingWallLeftBottom;
+    public bool isTouchingWallRightBottom;
     public bool isTouchingWallLeft;
     public bool isTouchingWallRight;
     public bool hasJump = true;
@@ -108,8 +114,14 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckWalls()
     {
-        isTouchingWallLeft = Physics2D.OverlapArea(WallCheckLeft.position,WallCheckLeft.position + Vector3.right * 0.1f, wallLayer);
-        isTouchingWallRight = Physics2D.OverlapArea(WallCheckRight.position,WallCheckRight.position + Vector3.left * 0.1f, wallLayer);
+        isTouchingWallLeftTop = Physics2D.OverlapArea(WallCheckLeftTop.position,WallCheckLeftTop.position + Vector3.right * 0.1f, wallLayer);
+        isTouchingWallRightTop = Physics2D.OverlapArea(WallCheckRightTop.position,WallCheckRightTop.position + Vector3.left * 0.1f, wallLayer);
+        isTouchingWallLeftBottom = Physics2D.OverlapArea(WallCheckLeftBottom.position,WallCheckLeftBottom.position + Vector3.right * 0.1f, wallLayer);
+        isTouchingWallRightBottom = Physics2D.OverlapArea(WallCheckRightBottom.position,WallCheckRightBottom.position + Vector3.left * 0.1f, wallLayer);
+        if (isTouchingWallLeftTop || isTouchingWallLeftBottom) isTouchingWallLeft = true;
+        else isTouchingWallLeft = false;
+        if (isTouchingWallRightTop || isTouchingWallRightBottom) isTouchingWallRight = true;
+        else isTouchingWallRight = false;
     }
 
     void LimitFallSpeed()

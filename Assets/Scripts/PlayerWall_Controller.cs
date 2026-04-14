@@ -38,20 +38,31 @@ public class PlayerWall_Controller
     {
         player.grab = true;
         float timer = 0f;
-
         player.rb.gravityScale = 0f;
 
-        while (timer < player.maxTimerGrab && player.grab)
+        while (timer < player.maxTimerGrab && player.grab) // Tant que le timer n'est pas écoulé et que le grab n'est pas relâché
         {
             float vertical = Input.GetAxisRaw("Vertical");
             float climb = 0f;
+            bool onWall = player.isTouchingWallLeft || player.isTouchingWallRight;
+            if (onWall){
 
-            if (vertical > 0)
-                climb = player.climbSpeed;
-            else if (vertical < 0)
-                climb = -player.climbSpeed;
+                // On ne peut descendre que si le bas touche encore
+                if (vertical < 0 && (player.isTouchingWallLeftBottom || player.isTouchingWallRightBottom))
+                {
+                    climb = -player.climbSpeed;
+                }
 
-            player.rb.velocity = new Vector2(0f, climb);
+                // On ne peut monter que si le haut touche encore
+                else if (vertical > 0 && (player.isTouchingWallLeftTop || player.isTouchingWallRightTop))
+                {
+                    climb = player.climbSpeed;
+                }
+            }
+
+            else climb = 0f;
+
+            player.rb.velocity = new Vector2(0f, climb); // Permet de grimper ou descendre le long du mur
 
             if (Input.GetButtonUp("Grab"))
                 player.grab = false;
@@ -61,11 +72,12 @@ public class PlayerWall_Controller
         }
 
         player.grab = false;
-        player.rb.gravityScale = player.gravity;
+        player.rb.gravityScale = player.gravity; // Réactive la gravité après le grab
     }
 
     IEnumerator Cooldown()
     {
+        //Met un cooldown pour le grab
         player.canGrab = false;
         yield return new WaitForSeconds(3f);
         player.canGrab = true;
@@ -73,7 +85,7 @@ public class PlayerWall_Controller
 
     void HandleStateReset()
     {
-        if (player.grab)
+        if (player.grab) // Permet de réinitialiser le saut et le dash après un grab
         {
             player.hasJump = true;
             player.hasDash = true;
