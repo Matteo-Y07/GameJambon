@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\GarbageBar.cs" />
     <Compile Include="Assets\Scripts\MenuController.cs" />
+    <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\PilierSwitch.cs" />
     <Compile Include="Assets\Scripts\PlayerWall_Controller.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\HeartUI.cs" />
     <Compile Include="Assets\Scripts\PlayerJump_Controller.cs" />
+    <Compile Include="Assets\Scripts\HealthTester.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement_Controller.cs" />
   </ItemGroup>
   <ItemGroup>

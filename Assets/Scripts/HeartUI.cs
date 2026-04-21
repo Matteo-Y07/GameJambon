@@ -20,6 +20,10 @@ public class HeartUI : MonoBehaviour
         UpdateSprite();
     }
 
+    public int GetHP(){
+        return hp;
+    }
+
     void UpdateSprite()
     {
         float p = hp / 100f;
