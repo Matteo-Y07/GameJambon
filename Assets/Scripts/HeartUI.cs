@@ -11,7 +11,6 @@ public class HeartUI : MonoBehaviour
     public Sprite quarter;
     public Sprite empty;
 
-    [Range(0, 100)]
     public int hp = 100;
 
     public void SetHP(int value)
