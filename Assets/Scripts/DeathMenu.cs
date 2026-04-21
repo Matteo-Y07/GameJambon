@@ -39,6 +39,6 @@ public class DeathMenu : MonoBehaviour
     public void Quit()
     {
         Time.timeScale = 1f;
-        Application.Quit()
+        Application.Quit();
     }
 }

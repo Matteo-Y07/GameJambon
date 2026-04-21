@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement_Controller
 {
-    PlayerMovement player;
+    private PlayerMovement player;
 
     public PlayerMovement_Controller(PlayerMovement player)
     {
@@ -11,39 +11,56 @@ public class PlayerMovement_Controller
 
     public void Handle()
     {
-        if (player.isDashing || player.grab || player.isWallJumping) return;
+        Debug.Log("Movement Controller active");
+        Debug.Log(
+            "Dash=" + player.IsDashing() +
+            " Grab=" + player.IsGrabbing() +
+            " WallJump=" + player.IsWallJumping()
+        );
+        if (player.IsDashing() || player.IsGrabbing() || player.IsWallJumping())
+            return;
 
         float input = Input.GetAxisRaw("Horizontal");
 
-        if (input < 0 && player.isTouchingWallLeft) {
+        if (input < 0 && player.IsTouchingWallLeft())
             input = 0;
-            player.PlayerSpriteRenderer.flipX = true;
-        }
 
-        if (input > 0 && player.isTouchingWallRight) {
+        if (input > 0 && player.IsTouchingWallRight())
             input = 0;
-            player.PlayerSpriteRenderer.flipX = false;
-        }
 
-        if (input > 0) MoveRight();
-        else if (input < 0) MoveLeft();
-        else Stop();
+        if (input > 0)
+            MoveRight();
+        else if (input < 0)
+            MoveLeft();
+        else
+            Stop();
     }
 
-    void MoveRight()
+    private void MoveRight()
     {
-        player.PlayerSpriteRenderer.flipX = false;
-        player.rb.velocity = new Vector2(player.moveSpeed, player.rb.velocity.y);
+        player.GetSpriteRenderer().flipX = false;
+
+        player.GetRigidbody().velocity = new Vector2(
+            player.GetMoveSpeed(),
+            player.GetRigidbody().velocity.y
+        );
     }
 
-    void MoveLeft()
+    private void MoveLeft()
     {
-        player.PlayerSpriteRenderer.flipX = true;
-        player.rb.velocity = new Vector2(-player.moveSpeed, player.rb.velocity.y);
+        player.GetSpriteRenderer().flipX = true;
+
+        player.GetRigidbody().velocity = new Vector2(
+            -player.GetMoveSpeed(),
+            player.GetRigidbody().velocity.y
+        );
     }
 
-    void Stop()
+    private void Stop()
     {
-        player.rb.velocity = new Vector2(0f, player.rb.velocity.y);
+        player.GetRigidbody().velocity = new Vector2(
+            0f,
+            player.GetRigidbody().velocity.y
+        );
     }
 }

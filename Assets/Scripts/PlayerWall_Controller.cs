@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerWall_Controller
 {
-    PlayerMovement player;
+    private PlayerMovement player;
 
     public PlayerWall_Controller(PlayerMovement player)
     {
@@ -17,78 +17,84 @@ public class PlayerWall_Controller
         HandleStateReset();
     }
 
-    void HandleSlide()
+    private void HandleSlide()
     {
-        if ((player.isTouchingWallLeft || player.isTouchingWallRight) && !player.grab && !player.isGrounded && player.rb.velocity.y < 0)
+        if ((player.IsTouchingWallLeft() || player.IsTouchingWallRight()) &&
+            !player.IsGrabbing() &&
+            !player.IsGrounded() &&
+            player.GetRigidbody().velocity.y < 0f)
         {
-            player.rb.velocity = new Vector2(player.rb.velocity.x, -1f);
+            Vector2 v = player.GetRigidbody().velocity;
+            player.GetRigidbody().velocity = new Vector2(v.x, -1f);
         }
     }
 
-    void HandleGrabInput()
+    private void HandleGrabInput()
     {
-        if (Input.GetButtonDown("Grab") && (player.isTouchingWallLeft || player.isTouchingWallRight) && !player.grab && player.canGrab)
+        if (Input.GetButtonDown("Grab") &&
+            (player.IsTouchingWallLeft() || player.IsTouchingWallRight()) &&
+            !player.IsGrabbing() &&
+            player.CanGrab())
         {
             player.StartCoroutine(Grab());
             player.StartCoroutine(Cooldown());
         }
     }
 
-    IEnumerator Grab()
+    private IEnumerator Grab()
     {
-        player.grab = true;
         float timer = 0f;
-        player.rb.gravityScale = 0f;
 
-        while (timer < player.maxTimerGrab && player.grab) // Tant que le timer n'est pas écoulé et que le grab n'est pas relâché
+        player.SetGrab(true);
+        player.GetRigidbody().gravityScale = 0f;
+
+        while (timer < player.GetMaxTimerGrab() && player.IsGrabbing())
         {
             float vertical = Input.GetAxisRaw("Vertical");
             float climb = 0f;
-            bool onWall = player.isTouchingWallLeft || player.isTouchingWallRight;
-            if (onWall){
 
-                // On ne peut descendre que si le bas touche encore
-                if (vertical < 0 && (player.isTouchingWallLeftBottom || player.isTouchingWallRightBottom))
+            bool onWall = player.IsTouchingWallLeft() || player.IsTouchingWallRight();
+
+            if (onWall)
+            {
+                if (vertical < 0 &&
+                    (player.IsTouchingWallLeftBottom() || player.IsTouchingWallRightBottom()))
                 {
-                    climb = -player.climbSpeed;
+                    climb = -player.GetClimbSpeed();
                 }
-
-                // On ne peut monter que si le haut touche encore
-                else if (vertical > 0 && (player.isTouchingWallLeftTop || player.isTouchingWallRightTop))
+                else if (vertical > 0 &&
+                         (player.IsTouchingWallLeftTop() || player.IsTouchingWallRightTop()))
                 {
-                    climb = player.climbSpeed;
+                    climb = player.GetClimbSpeed();
                 }
             }
 
-            else climb = 0f;
-
-            player.rb.velocity = new Vector2(0f, climb); // Permet de grimper ou descendre le long du mur
+            player.GetRigidbody().velocity = new Vector2(0f, climb);
 
             if (Input.GetButtonUp("Grab"))
-                player.grab = false;
+                player.SetGrab(false);
 
             timer += Time.deltaTime;
             yield return null;
         }
 
-        player.grab = false;
-        player.rb.gravityScale = player.gravity; // Réactive la gravité après le grab
+        player.SetGrab(false);
+        player.GetRigidbody().gravityScale = player.GetGravity();
     }
 
-    IEnumerator Cooldown()
+    private IEnumerator Cooldown()
     {
-        //Met un cooldown pour le grab
-        player.canGrab = false;
+        player.SetCanGrab(false);
         yield return new WaitForSeconds(3f);
-        player.canGrab = true;
+        player.SetCanGrab(true);
     }
 
-    void HandleStateReset()
+    private void HandleStateReset()
     {
-        if (player.grab) // Permet de réinitialiser le saut et le dash après un grab
+        if (player.IsGrabbing())
         {
-            player.hasJump = true;
-            player.hasDash = true;
+            player.SetHasJump(true);
+            player.SetHasDash(true);
         }
     }
 }

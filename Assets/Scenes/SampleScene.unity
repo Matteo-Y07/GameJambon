@@ -179,9 +179,6 @@ MonoBehaviour:
   half: {fileID: -38206039, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
   quarter: {fileID: -1518376815, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
   empty: {fileID: 1297975419, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
-  heart3: {fileID: 0}
-  heart2: {fileID: 0}
-  heart1: {fileID: 0}
   hp: 100
 --- !u!114 &70861809
 MonoBehaviour:
@@ -1679,9 +1676,6 @@ MonoBehaviour:
   half: {fileID: -38206039, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
   quarter: {fileID: -1518376815, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
   empty: {fileID: 1297975419, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
-  heart3: {fileID: 0}
-  heart2: {fileID: 0}
-  heart1: {fileID: 0}
   hp: 100
 --- !u!114 &898048644
 MonoBehaviour:
@@ -2663,9 +2657,6 @@ MonoBehaviour:
   half: {fileID: -38206039, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
   quarter: {fileID: -1518376815, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
   empty: {fileID: 1297975419, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
-  heart3: {fileID: 0}
-  heart2: {fileID: 0}
-  heart1: {fileID: 0}
   hp: 100
 --- !u!114 &1422446259
 MonoBehaviour:
@@ -2812,46 +2803,32 @@ MonoBehaviour:
   climbSpeed: 2.5
   maxFallSpeed: 8
   jumpForce: 10
-  maxTimerGrab: 7
-  coyoteTime: 0.12
-  coyoteTimer: 0
-  jumpBufferTime: 0.12
-  jumpBufferTimer: 0
   jumpMultiplier: 0.5
+  coyoteTime: 0.12
+  jumpBufferTime: 0.12
+  gravity: 2.5
+  maxTimerGrab: 7
+  dashPower: 15
+  wallJumpImpulseTime: 0.15
+  wallJumpImpulseX: 4
   rb: {fileID: 1484510130}
-  GroundCheckLeft: {fileID: 1329557825}
-  GroundCheckRight: {fileID: 2047502569}
-  WallCheckLeftBottom: {fileID: 211052527}
-  WallCheckRightBottom: {fileID: 203048123}
-  WallCheckLeftTop: {fileID: 1371133339}
-  WallCheckRightTop: {fileID: 1641262107}
+  groundCheckLeft: {fileID: 1329557825}
+  groundCheckRight: {fileID: 2047502569}
+  wallCheckLeftBottom: {fileID: 211052527}
+  wallCheckLeftTop: {fileID: 1371133339}
+  wallCheckRightBottom: {fileID: 203048123}
+  wallCheckRightTop: {fileID: 1641262107}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   wallLayer:
     serializedVersion: 2
     m_Bits: 8
-  PlayerCamera: {fileID: 519420031}
-  PlayerSpriteRenderer: {fileID: 0}
+  playerCamera: {fileID: 519420031}
+  spriteRenderer: {fileID: 0}
   isGrounded: 0
-  isTouchingWallLeftTop: 0
-  isTouchingWallRightTop: 0
-  isTouchingWallLeftBottom: 0
-  isTouchingWallRightBottom: 0
   isTouchingWallLeft: 0
   isTouchingWallRight: 0
-  hasJump: 0
-  grab: 0
-  canGrab: 1
-  isWallJumping: 0
-  dashPower: 15
-  dashDirection: {x: 0, y: 0}
-  isDashing: 0
-  hasDash: 0
-  gravity: 2.5
-  wallJumpImpulseTime: 0.15
-  wallJumpImpulseX: 4
-  wallJumpTimer: 0
 --- !u!212 &1484510132
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2919,10 +2896,10 @@ Transform:
   m_Children:
   - {fileID: 1329557825}
   - {fileID: 2047502569}
-  - {fileID: 203048123}
-  - {fileID: 1641262107}
   - {fileID: 211052527}
   - {fileID: 1371133339}
+  - {fileID: 203048123}
+  - {fileID: 1641262107}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &1484510134
@@ -2975,6 +2952,9 @@ MonoBehaviour:
   heart3: {fileID: 1422446258}
   heart2: {fileID: 70861808}
   heart1: {fileID: 898048643}
+  hp3: 100
+  hp2: 100
+  hp1: 100
 --- !u!114 &1484510136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3004,9 +2984,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 1484510135}
-  player: {fileID: 1484510131}
+  playerMovement: {fileID: 1484510131}
   deathMenu: {fileID: 1570823168}
   pollution: 0
+  maxPollution: 100
 --- !u!1 &1570823167
 GameObject:
   m_ObjectHideFlags: 0
@@ -3203,7 +3184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9753d2387d907f41a0e65cc308aad78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Fill: {fileID: 1797145688}
+  fill: {fileID: 1797145688}
   currentValue: 0
   maxValue: 100
 --- !u!1 &1797145686
