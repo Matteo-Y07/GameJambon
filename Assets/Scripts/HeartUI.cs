@@ -25,15 +25,13 @@ public class HeartUI : MonoBehaviour
 
     void UpdateSprite()
     {
-        float p = hp / 100f;
-
-        if (p <= 0)
+        if (hp <= 0)
             img.sprite = empty;
-        else if (p <= 0.25f)
+        else if (hp <= 25)
             img.sprite = quarter;
-        else if (p <= 0.5f)
+        else if (hp <= 50 )
             img.sprite = half;
-        else if (p <= 0.75f)
+        else if (hp <= 75 )
             img.sprite = threeQuarters;
         else
             img.sprite = full;
