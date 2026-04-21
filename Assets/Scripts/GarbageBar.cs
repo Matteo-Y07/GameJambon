@@ -37,6 +37,6 @@ public class GarbageBar : MonoBehaviour
 
     void UpdateBar()
     {
-        fillImage.fillAmount = currentValue / maxValue;
+        Fill.fillAmount = currentValue / maxValue;
     }
 }
