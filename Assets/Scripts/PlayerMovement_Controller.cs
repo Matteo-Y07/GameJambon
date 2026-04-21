@@ -11,12 +11,7 @@ public class PlayerMovement_Controller
 
     public void Handle()
     {
-        Debug.Log("Movement Controller active");
-        Debug.Log(
-            "Dash=" + player.IsDashing() +
-            " Grab=" + player.IsGrabbing() +
-            " WallJump=" + player.IsWallJumping()
-        );
+        
         if (player.IsDashing() || player.IsGrabbing() || player.IsWallJumping())
             return;
 
