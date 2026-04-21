@@ -64,7 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\PlayerStateCheck.cs" />
+    <Compile Include="Assets\Scripts\DeathMenu.cs" />
     <Compile Include="Assets\Scripts\GarbageBar.cs" />
+    <Compile Include="Assets\Scripts\dzqd.cs" />
     <Compile Include="Assets\Scripts\MenuController.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />

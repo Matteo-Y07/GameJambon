@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class HealthTester : MonoBehaviour
 {
-    public PlayerHealth player;
-    public HeartUI heart3;
-    public HeartUI heart2;
-    public HeartUI heart1;
+    [Header("References")]
+    [SerializeField] private PlayerHealth player;
+
+    [Header("Hearts")]
+    [SerializeField] private HeartUI heart3;
+    [SerializeField] private HeartUI heart2;
+    [SerializeField] private HeartUI heart1;
 
     void Update()
     {

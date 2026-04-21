@@ -2,32 +2,42 @@ using UnityEngine;
 
 public class PlayerStateChecker : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
+    [Header("References")]
+    [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private DeathMenu deathMenu;
 
-    public int pollution = 0;
+    [Header("State")]
+    [SerializeField] private int pollution = 0;
+    [SerializeField] private int maxPollution = 100;
+
+    private bool isDead = false;
 
     void Update()
     {
-        CheckPlayerState();
-    }
+        if (isDead) return;
 
-    void CheckPlayerState()
-    {
-        int hp = playerHealth.GetTotalHP();
-
-        if (hp <= 0 || pollution >= 100)
+        if (playerHealth.IsDead() || pollution >= maxPollution)
         {
             Die();
         }
     }
 
+    public void AddPollution(int amount)
+    {
+        pollution = Mathf.Clamp(pollution + amount, 0, maxPollution);
+    }
+
     void Die()
     {
-        Debug.Log("Player is dead");
+        if (isDead) return;
 
-        //désactiver le joueur
-        //jouer animation de mort
-        //affichage menu restart ou quit
-        gameObject.SetActive(false);
+        isDead = true;
+
+        if (playerMovement != null)
+            playerMovement.enabled = false;
+
+        if (deathMenu != null)
+            deathMenu.ShowMenu();
     }
 }

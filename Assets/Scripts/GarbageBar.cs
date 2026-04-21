@@ -3,10 +3,12 @@ using UnityEngine.UI;
 
 public class GarbageBar : MonoBehaviour
 {
-    public Image Fill;
+    [Header("UI")]
+    [SerializeField] private Image fill;
 
-    public float currentValue = 0f;
-    public float maxValue = 100f;
+    [Header("Values")]
+    [SerializeField] private float currentValue = 0f;
+    [SerializeField] private float maxValue = 100f;
 
     void Start()
     {
@@ -15,7 +17,7 @@ public class GarbageBar : MonoBehaviour
 
     void Update()
     {
-        // test : augmente avec une touche
+        // test
         if (Input.GetKey(KeyCode.H))
         {
             Add(20f * Time.deltaTime);
@@ -24,8 +26,7 @@ public class GarbageBar : MonoBehaviour
 
     public void Add(float amount)
     {
-        currentValue += amount;
-        currentValue = Mathf.Clamp(currentValue, 0f, maxValue);
+        currentValue = Mathf.Clamp(currentValue + amount, 0f, maxValue);
         UpdateBar();
     }
 
@@ -35,8 +36,20 @@ public class GarbageBar : MonoBehaviour
         UpdateBar();
     }
 
+    public float GetValue()
+    {
+        return currentValue;
+    }
+
+    public float GetPercent()
+    {
+        return currentValue / maxValue;
+    }
+
     void UpdateBar()
     {
-        Fill.fillAmount = currentValue / maxValue;
+        if (fill == null) return;
+
+        fill.fillAmount = currentValue / maxValue;
     }
 }
