@@ -37,7 +37,9 @@ public class PlayerDash_Controller
 
         player.rb.gravityScale = 0;
         player.rb.velocity = Vector2.zero;
-
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(0.04f);
+        Time.timeScale = 1f;
         yield return new WaitForSeconds(0.03f);
 
         player.rb.velocity = dir * player.dashPower;
