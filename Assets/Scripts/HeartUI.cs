@@ -10,7 +10,9 @@ public class HeartUI : MonoBehaviour
     public Sprite half;
     public Sprite quarter;
     public Sprite empty;
-
+    public HeartUI heart3;
+    public HeartUI heart2;
+    public HeartUI heart1;
     public int hp = 100;
 
     public void SetHP(int value)

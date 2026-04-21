@@ -39,4 +39,9 @@ public class PlayerHealth : MonoBehaviour
             return 0;
         }
     }
+
+    public int GetTotalHP()
+    {
+        return heart1.GetHP() + heart2.GetHP() + heart3.GetHP();
+    }
 }

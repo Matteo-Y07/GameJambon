@@ -11,7 +11,7 @@ public class HealthTester : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            player.TakeDamage(5);
+            player.TakeDamage(80);
             Debug.Log("Test damage: 5");
             Debug.Log(heart3.GetHP());
             Debug.Log(heart2.GetHP());

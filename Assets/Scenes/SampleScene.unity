@@ -179,6 +179,9 @@ MonoBehaviour:
   half: {fileID: -38206039, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
   quarter: {fileID: -1518376815, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
   empty: {fileID: 1297975419, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
+  heart3: {fileID: 0}
+  heart2: {fileID: 0}
+  heart1: {fileID: 0}
   hp: 100
 --- !u!114 &70861809
 MonoBehaviour:
@@ -1333,6 +1336,9 @@ MonoBehaviour:
   half: {fileID: -38206039, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
   quarter: {fileID: -1518376815, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
   empty: {fileID: 1297975419, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
+  heart3: {fileID: 0}
+  heart2: {fileID: 0}
+  heart1: {fileID: 0}
   hp: 100
 --- !u!114 &898048644
 MonoBehaviour:
@@ -2180,6 +2186,9 @@ MonoBehaviour:
   half: {fileID: -38206039, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
   quarter: {fileID: -1518376815, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
   empty: {fileID: 1297975419, guid: 7a30aab01e4c4cf4892594806d4d9e5c, type: 3}
+  heart3: {fileID: 0}
+  heart2: {fileID: 0}
+  heart1: {fileID: 0}
   hp: 100
 --- !u!114 &1422446259
 MonoBehaviour:
@@ -2275,6 +2284,7 @@ GameObject:
   - component: {fileID: 1484510134}
   - component: {fileID: 1484510135}
   - component: {fileID: 1484510136}
+  - component: {fileID: 1484510137}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2501,9 +2511,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1484510135}
-  heart3: {fileID: 0}
-  heart2: {fileID: 0}
-  heart1: {fileID: 0}
+  heart3: {fileID: 1422446258}
+  heart2: {fileID: 70861808}
+  heart1: {fileID: 898048643}
+--- !u!114 &1484510137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484510128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5bcd19b43746054795e903731244e8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: {fileID: 1484510135}
+  pollution: 0
 --- !u!1 &1641262106
 GameObject:
   m_ObjectHideFlags: 0
