@@ -1,16 +1,18 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class PillarSwitch : MonoBehaviour
 {
-    public GameObject tilemapDead;
-    public GameObject tilemapAlive;
+    [Header("Tilemaps")]
+    [SerializeField] private GameObject tilemapDead;
+    [SerializeField] private GameObject tilemapAlive;
 
-    bool playerInside = false;
+    private bool playerInside = false;
 
     void Update()
     {
-        if (playerInside && Input.GetAxisRaw("Vertical") < 0) // touche S
+        if (!playerInside) return;
+
+        if (Input.GetAxisRaw("Vertical") < 0)
         {
             ChangeTilemap();
         }
@@ -18,8 +20,11 @@ public class PillarSwitch : MonoBehaviour
 
     void ChangeTilemap()
     {
-        tilemapDead.SetActive(false);
-        tilemapAlive.SetActive(true);
+        if (tilemapDead != null)
+            tilemapDead.SetActive(false);
+
+        if (tilemapAlive != null)
+            tilemapAlive.SetActive(true);
     }
 
     void OnTriggerEnter2D(Collider2D col)

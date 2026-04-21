@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerJump_Controller
 {
-    PlayerMovement player;
+    private PlayerMovement player;
 
     public PlayerJump_Controller(PlayerMovement player)
     {
@@ -12,48 +12,75 @@ public class PlayerJump_Controller
 
     public void Handle()
     {
-        // Saut variable : relâcher pour sauter moins haut
-        if ((Input.GetButtonUp("Jump")) && player.rb.velocity.y > 0f)
+        HandleVariableJump();
+        HandleJumpInput();
+    }
+
+    private void HandleVariableJump()
+    {
+        if (Input.GetButtonUp("Jump") && player.GetRigidbody().velocity.y > 0f)
         {
-            player.rb.velocity = new Vector2(player.rb.velocity.x, player.rb.velocity.y * player.jumpMultiplier);
+            Vector2 v = player.GetRigidbody().velocity;
+            player.GetRigidbody().velocity = new Vector2(
+                v.x,
+                v.y * player.GetJumpMultiplier()
+            );
         }
+    }
 
-        if (!Input.GetButtonDown("Jump")) return;
+    private void HandleJumpInput()
+    {
+        if (!Input.GetButtonDown("Jump"))
+            return;
 
-        // Wall jump prioritaire
-        if (!player.isGrounded && (player.isTouchingWallLeft || player.isTouchingWallRight))
+        // Wall jump priority
+        if (!player.IsGrounded() &&
+            (player.IsTouchingWallLeft() || player.IsTouchingWallRight()))
         {
             player.StartCoroutine(WallJump());
             return;
         }
 
-        // Saut normal
-        if (player.jumpBufferTimer > 0f && (player.coyoteTimer > 0f || player.grab) && player.hasJump)
+        // Normal jump
+        if (player.GetJumpBufferTimer() > 0f &&
+            (player.GetCoyoteTimer() > 0f || player.IsGrabbing()) &&
+            player.HasJump())
         {
-            player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpForce);
-            player.hasJump = false;
-            player.coyoteTimer = 0f;
-            player.jumpBufferTimer = 0f;
-            player.grab = false;
+            player.GetRigidbody().velocity =
+                new Vector2(player.GetRigidbody().velocity.x, player.GetJumpForce());
+
+            player.SetHasJump(false);
+            player.SetCoyoteTimer(0f);
+            player.SetJumpBufferTimer(0f);
+            player.SetGrab(false);
         }
     }
 
-    IEnumerator WallJump()
+    private IEnumerator WallJump()
     {
-        player.grab = false;
-        player.isWallJumping = true; // bloque le controle horizontal dans PlayerMovement
+        player.SetGrab(false);
+        player.SetWallJumping(true);
 
-        // mur a gauche donc vers la droite
-        if (player.isTouchingWallLeft)
-            player.rb.velocity = new Vector2(player.wallJumpImpulseX, (player.jumpForce/1.5f));
+        Vector2 vel = player.GetRigidbody().velocity;
 
-        // mur a droite donc vers la gauche
-        else if (player.isTouchingWallRight)
-            player.rb.velocity = new Vector2(-player.wallJumpImpulseX, (player.jumpForce/1.5f));
+        if (player.IsTouchingWallLeft())
+        {
+            player.GetRigidbody().velocity = new Vector2(
+                player.GetWallJumpImpulseX(),
+                player.GetJumpForce() / 1.5f
+            );
+        }
+        else if (player.IsTouchingWallRight())
+        {
+            player.GetRigidbody().velocity = new Vector2(
+                -player.GetWallJumpImpulseX(),
+                player.GetJumpForce() / 1.5f
+            );
+        }
 
-        yield return new WaitForSeconds(player.wallJumpImpulseTime);
+        yield return new WaitForSeconds(player.GetWallJumpImpulseTime());
 
-        player.isWallJumping = false; //remet le contrôle horizontal
-        player.hasJump = true;
+        player.SetWallJumping(false);
+        player.SetHasJump(true);
     }
 }

@@ -1,69 +1,68 @@
 using UnityEngine;
-using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Variables
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 4.0f;
+    [SerializeField] private float climbSpeed = 2.5f;
+    [SerializeField] private float maxFallSpeed = 8.0f;
 
-    public float moveSpeed = 4.0f;
-    public float climbSpeed = 2.5f;
-    public float maxFallSpeed = 8.0f;
-    public float jumpForce = 7.0f;
-    public float maxTimerGrab = 7.0f;
-    public float coyoteTime = 0.12f;
-    public float coyoteTimer = 0f;
-    public float jumpBufferTime = 0.12f;
-    public float jumpBufferTimer = 0f;
-    public float jumpMultiplier = 0.5f;
+    [Header("Jump")]
+    [SerializeField] private float jumpForce = 7.0f;
+    [SerializeField] private float jumpMultiplier = 0.5f;
+    [SerializeField] private float coyoteTime = 0.12f;
+    [SerializeField] private float jumpBufferTime = 0.12f;
 
-    // Références
-    public Rigidbody2D rb;
-    public Transform GroundCheckLeft;
-    public Transform GroundCheckRight;
-    public Transform WallCheckLeftBottom;
-    public Transform WallCheckRightBottom;
-    public Transform WallCheckLeftTop;
-    public Transform WallCheckRightTop;
-    public LayerMask groundLayer;
-    public LayerMask wallLayer;
-    public Camera PlayerCamera;
-    public SpriteRenderer PlayerSpriteRenderer;
+    [Header("State")]
+    [SerializeField] private float gravity = 2.5f;
+    [SerializeField] private float maxTimerGrab = 7.0f;
 
-    // Variables d'état
-    public bool isGrounded= false;
-    public bool isTouchingWallLeftTop;
-    public bool isTouchingWallRightTop;
-    public bool isTouchingWallLeftBottom;
-    public bool isTouchingWallRightBottom;
-    public bool isTouchingWallLeft;
-    public bool isTouchingWallRight;
-    public bool hasJump = true;
-    public bool grab = false;
-    public bool canGrab = true;
-    public bool isWallJumping = false;
+    [Header("Dash")]
+    [SerializeField] private float dashPower = 15.0f;
 
-    // Dash variables
-    public float dashPower = 15.0f;
-    public Vector2 dashDirection = new Vector2();
-    public bool isDashing = false;
-    public bool hasDash = true;
-    public float gravity = 2.5f;
+    [Header("Wall Jump")]
+    [SerializeField] private float wallJumpImpulseTime = 0.15f;
+    [SerializeField] private float wallJumpImpulseX = 4.5f;
+
+    [Header("References")]
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Transform groundCheckLeft;
+    [SerializeField] private Transform groundCheckRight;
+
+    [SerializeField] private Transform wallCheckLeftBottom;
+    [SerializeField] private Transform wallCheckLeftTop;
+    [SerializeField] private Transform wallCheckRightBottom;
+    [SerializeField] private Transform wallCheckRightTop;
+
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask wallLayer;
+
+    [SerializeField] private Camera playerCamera;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
+    [Header("Runtime State")]
+    [SerializeField] private bool isGrounded;
+    [SerializeField] private bool isTouchingWallLeft;
+    [SerializeField] private bool isTouchingWallRight;
+
+    private bool hasJump = true;
+    private bool grab = false;
+    private bool canGrab = true;
+    private bool isWallJumping = false;
+    private bool isDashing = false;
+    private bool hasDash = true;
+
+    private float coyoteTimer = 0f;
+    private float jumpBufferTimer = 0f;
+
+    private PlayerMovement_Controller movement;
+    private PlayerJump_Controller jump;
+    private PlayerDash_Controller dash;
+    private PlayerWall_Controller wall;
     
-    // Wall jump variables
-    public float wallJumpImpulseTime = 0.15f; // durée de l'impulsion
-    public float wallJumpImpulseX = 4.5f; // direction forcée
-    public float wallJumpTimer = 0f; // timer actif
-
-    // Controllers
-    PlayerMovement_Controller movement;
-    PlayerJump_Controller jump;
-    PlayerDash_Controller dash;
-    PlayerWall_Controller wall;
-
-    private void Awake()
-    {
-        PlayerSpriteRenderer = GetComponent<SpriteRenderer>();
-
+    private void Awake() 
+    { 
+        spriteRenderer = GetComponent<SpriteRenderer>();
         movement = new PlayerMovement_Controller(this);
         jump = new PlayerJump_Controller(this);
         dash = new PlayerDash_Controller(this);
@@ -71,26 +70,23 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update()
-    {
+    { 
         CheckGround();
         CheckWalls();
-
         HandleCoyoteTime();
         HandleJumpBuffer();
-
         movement.Handle();
         jump.Handle();
         dash.Handle();
         wall.Handle();
-
         ApplyFallGravity();
         LimitFallSpeed();
     }
 
     void HandleCoyoteTime()
     {
-        if (isGrounded)
-            coyoteTimer = coyoteTime;
+        if (IsGrounded())
+            coyoteTimer = GetCoyoteTime();
         else
             coyoteTimer -= Time.deltaTime;
     }
@@ -98,49 +94,183 @@ public class PlayerMovement : MonoBehaviour
     void HandleJumpBuffer()
     {
         if (Input.GetButtonDown("Jump"))
-            jumpBufferTimer = jumpBufferTime;
+            jumpBufferTimer = GetJumpBufferTime();
         else
             jumpBufferTimer -= Time.deltaTime;
     }
 
     void CheckGround()
     {
-        isGrounded = Physics2D.OverlapArea(GroundCheckLeft.position, GroundCheckRight.position, groundLayer);
-        if (isGrounded){
-            hasJump = true;
-            hasDash = true;
+        bool grounded = Physics2D.OverlapArea(
+            groundCheckLeft.position,
+            groundCheckRight.position,
+            groundLayer
+        );
+
+        SetGrounded(grounded);
+
+        if (grounded)
+        {
+            SetHasJump(true);
+            SetHasDash(true);
         }
     }
 
     void CheckWalls()
     {
-        isTouchingWallLeftTop = Physics2D.OverlapArea(WallCheckLeftTop.position,WallCheckLeftTop.position + Vector3.right * 0.1f, wallLayer);
-        isTouchingWallRightTop = Physics2D.OverlapArea(WallCheckRightTop.position,WallCheckRightTop.position + Vector3.left * 0.1f, wallLayer);
-        isTouchingWallLeftBottom = Physics2D.OverlapArea(WallCheckLeftBottom.position,WallCheckLeftBottom.position + Vector3.right * 0.1f, wallLayer);
-        isTouchingWallRightBottom = Physics2D.OverlapArea(WallCheckRightBottom.position,WallCheckRightBottom.position + Vector3.left * 0.1f, wallLayer);
-        if (isTouchingWallLeftTop || isTouchingWallLeftBottom) isTouchingWallLeft = true;
-        else isTouchingWallLeft = false;
-        if (isTouchingWallRightTop || isTouchingWallRightBottom) isTouchingWallRight = true;
-        else isTouchingWallRight = false;
+        bool leftTop = Physics2D.OverlapArea(
+            wallCheckLeftTop.position,
+            wallCheckLeftTop.position + Vector3.right * 0.1f,
+            wallLayer
+        );
+
+        bool leftBottom = Physics2D.OverlapArea(
+            wallCheckLeftBottom.position,
+            wallCheckLeftBottom.position + Vector3.right * 0.1f,
+            wallLayer
+        );
+
+        bool rightTop = Physics2D.OverlapArea(
+            wallCheckRightTop.position,
+            wallCheckRightTop.position + Vector3.left * 0.1f,
+            wallLayer
+        );
+
+        bool rightBottom = Physics2D.OverlapArea(
+            wallCheckRightBottom.position,
+            wallCheckRightBottom.position + Vector3.left * 0.1f,
+            wallLayer
+        );
+
+        SetWallLeft(leftTop || leftBottom);
+        SetWallRight(rightTop || rightBottom);
     }
 
     void LimitFallSpeed()
     {
-        if (rb.velocity.y < -maxFallSpeed && !isDashing && !grab) {
-            rb.velocity = new Vector2(rb.velocity.x, -maxFallSpeed);
+        if (rb.velocity.y < -GetMaxFallSpeed() && !IsDashing() && !IsGrabbing())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -GetMaxFallSpeed());
         }
     }
 
     void ApplyFallGravity()
     {
-        if (grab || isDashing) return;
+        if (IsGrabbing() || IsDashing())
+            return;
+
         if (rb.velocity.y < 0f)
-            rb.gravityScale = gravity * 1.8f;
-        else if (rb.velocity.y > 0f && (!Input.GetButton("Jump")))
-            rb.gravityScale = gravity * 1.3f;
+            rb.gravityScale = GetGravity() * 1.8f;
+        else if (rb.velocity.y > 0f && !Input.GetButton("Jump"))
+            rb.gravityScale = GetGravity() * 1.3f;
         else
-            rb.gravityScale = gravity;
+            rb.gravityScale = GetGravity();
     }
 
-}
+    // =========================
+    // GETTERS (CONFIG)
+    // =========================
 
+    public Rigidbody2D GetRigidbody() => rb;
+
+    public float GetMoveSpeed() => moveSpeed;
+    public float GetClimbSpeed() => climbSpeed;
+    public float GetMaxFallSpeed() => maxFallSpeed;
+
+    public float GetJumpForce() => jumpForce;
+    public float GetJumpMultiplier() => jumpMultiplier;
+    public float GetCoyoteTime() => coyoteTime;
+    public float GetJumpBufferTime() => jumpBufferTime;
+
+    public float GetGravity() => gravity;
+    public float GetMaxTimerGrab() => maxTimerGrab;
+
+    public float GetDashPower() => dashPower;
+
+    public float GetWallJumpImpulseTime() => wallJumpImpulseTime;
+    public float GetWallJumpImpulseX() => wallJumpImpulseX;
+
+    public SpriteRenderer GetSpriteRenderer() => spriteRenderer;
+    public Camera GetPlayerCamera() => playerCamera;
+
+    // =========================
+    // GETTERS (STATE)
+    // =========================
+
+    public bool IsGrounded() => isGrounded;
+    public bool IsTouchingWallLeft() => isTouchingWallLeft;
+    public bool IsTouchingWallRight() => isTouchingWallRight;
+
+    // -------------------------
+    // WALL CORNER GETTERS
+    // -------------------------
+
+    public bool IsTouchingWallLeftTop()
+    {
+        return Physics2D.OverlapArea(
+            wallCheckLeftTop.position,
+            wallCheckLeftTop.position,
+            wallLayer
+        );
+    }
+
+    public bool IsTouchingWallLeftBottom()
+    {
+        return Physics2D.OverlapArea(
+            wallCheckLeftBottom.position,
+            wallCheckLeftBottom.position + Vector3.right * 0.1f,
+            wallLayer
+        );
+    }
+
+    public bool IsTouchingWallRightTop()
+    {
+        return Physics2D.OverlapArea(
+            wallCheckRightTop.position,
+            wallCheckRightTop.position,
+            wallLayer
+        );
+    }
+
+    public bool IsTouchingWallRightBottom()
+    {
+        return Physics2D.OverlapArea(
+            wallCheckRightBottom.position,
+            wallCheckRightBottom.position + Vector3.left * 0.1f,
+            wallLayer
+        );
+    }
+   
+
+    public bool HasJump() => hasJump;
+    public bool HasDash() => hasDash;
+
+    public bool IsDashing() => isDashing;
+    public bool IsWallJumping() => isWallJumping;
+    public bool IsGrabbing() => grab;
+    public bool CanGrab() => canGrab;
+
+    public float GetCoyoteTimer() => coyoteTimer;
+    public float GetJumpBufferTimer() => jumpBufferTimer;
+
+    // =========================
+    // SETTERS (STATE ONLY)
+    // =========================
+
+    public void SetGrounded(bool value) => isGrounded = value;
+
+    public void SetWallLeft(bool value) => isTouchingWallLeft = value;
+    public void SetWallRight(bool value) => isTouchingWallRight = value;
+
+    public void SetHasJump(bool value) => hasJump = value;
+    public void SetHasDash(bool value) => hasDash = value;
+
+    public void SetGrab(bool value) => grab = value;
+    public void SetCanGrab(bool value) => canGrab = value;
+
+    public void SetDashing(bool value) => isDashing = value;
+    public void SetWallJumping(bool value) => isWallJumping = value;
+
+    public void SetCoyoteTimer(float value) => coyoteTimer = value;
+    public void SetJumpBufferTimer(float value) => jumpBufferTimer = value;
+}

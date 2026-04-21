@@ -64,13 +64,20 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.62f3\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\PlayerStateCheck.cs" />
+    <Compile Include="Assets\Scripts\DeathMenu.cs" />
+    <Compile Include="Assets\Scripts\GarbageBar.cs" />
+    <Compile Include="Assets\Scripts\dzqd.cs" />
     <Compile Include="Assets\Scripts\MenuController.cs" />
+    <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\PilierSwitch.cs" />
     <Compile Include="Assets\Scripts\PlayerWall_Controller.cs" />
     <Compile Include="Assets\Scripts\PlayerDash_Controller.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\HeartUI.cs" />
     <Compile Include="Assets\Scripts\PlayerJump_Controller.cs" />
+    <Compile Include="Assets\Scripts\HealthTester.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement_Controller.cs" />
   </ItemGroup>
   <ItemGroup>
