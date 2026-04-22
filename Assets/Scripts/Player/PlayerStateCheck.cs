@@ -20,7 +20,7 @@ public class PlayerStateChecker : MonoBehaviour
 
         pollution = (int)garbageBar.GetValue();
 
-        if (playerHealth.IsDead() || pollution >= maxPollution)
+        if (playerHealth.IsDead())
         {
             Die();
         }
