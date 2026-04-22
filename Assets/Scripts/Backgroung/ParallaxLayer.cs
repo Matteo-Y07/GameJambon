@@ -6,7 +6,6 @@ public class ParallaxLayer : MonoBehaviour
     [SerializeField] private float parallaxFactor = 0.5f;
 
     private float startX;
-    private float startY;
     private float startZ;
 
     void Start()
@@ -14,19 +13,20 @@ public class ParallaxLayer : MonoBehaviour
         if (cameraTransform == null)
             cameraTransform = Camera.main.transform;
 
+        // ✔ initialisé UNE seule fois
         startX = transform.position.x;
-        startY = transform.position.y;
         startZ = transform.position.z;
     }
 
     void LateUpdate()
     {
-        startX = transform.position.x;
-        startY = transform.position.y;
-        startZ = transform.position.z;
         float cameraX = cameraTransform.position.x;
         float cameraY = cameraTransform.position.y;
 
-        transform.position = new Vector3(startX + (cameraX - startX) * parallaxFactor, startY, startZ);
+        transform.position = new Vector3(
+            startX + (cameraX - startX) * parallaxFactor, // parallax X
+            cameraY,                                      // follow caméra Y
+            startZ                                        // Z fixe
+        );
     }
 }
