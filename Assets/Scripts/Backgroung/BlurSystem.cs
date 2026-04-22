@@ -5,24 +5,28 @@ using UnityEngine.Rendering.Universal;
 public class BlurSystem : MonoBehaviour
 {
     [SerializeField] private Volume volume;
-    [SerializeField] private TimeCycleSystem timeSystem;
 
     private DepthOfField dof;
 
     void Start()
     {
         volume.profile.TryGet(out dof);
+
+        if (dof != null)
+        {
+            dof.mode.value = DepthOfFieldMode.Gaussian;
+        }
     }
 
-    void Update()
+    public void SetBlur(float value)
     {
         if (dof == null) return;
 
-        float t = timeSystem.GetNormalizedTime();
+        value = Mathf.Clamp01(value);
 
-        // blur léger la nuit / transitions
-        float blur = Mathf.Abs(Mathf.Sin(t * Mathf.PI));
-
-        dof.focalLength.value = Mathf.Lerp(0f, 200f, blur);
+        //URP Gaussian DOF
+        dof.gaussianStart.value = Mathf.Lerp(0f, 5f, value);
+        dof.gaussianEnd.value = Mathf.Lerp(10f, 0.5f, value);
+        Camera.main.orthographicSize = Mathf.Lerp(5f, 6f, value);
     }
 }

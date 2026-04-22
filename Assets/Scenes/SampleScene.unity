@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.4
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &45406602
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -268,6 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.2
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &53776996
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -661,6 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.1
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &123152073
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -835,6 +838,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.4
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &167797445
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -934,6 +938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &189702537
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1163,6 +1168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.1
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &239392039
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1262,6 +1268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.7
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &319390192
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1387,7 +1394,7 @@ Transform:
   m_GameObject: {fileID: 401035937}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.31922016}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.163228, y: 4.163228, z: 4.163228}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1522,6 +1529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &428413965
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1951,7 +1959,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -2007,7 +2015,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2174,7 +2182,7 @@ Transform:
   m_GameObject: {fileID: 570253533}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.31922016}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.163228, y: 4.163228, z: 4.163228}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2231,6 +2239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &578715819
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2330,6 +2339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.2
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &579072774
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2429,6 +2439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.2
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &607656049
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2876,6 +2887,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.6
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &677511253
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3006,6 +3018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &713559770
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3105,6 +3118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.2
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &749479533
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3182,7 +3196,7 @@ Transform:
   m_GameObject: {fileID: 798108041}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.31922016}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.163228, y: 4.163228, z: 4.163228}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3241,6 +3255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.4
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &814224944
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3477,6 +3492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &900539338
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3576,6 +3592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.6
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &925271249
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3675,6 +3692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.4
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &971541716
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3890,7 +3908,7 @@ Transform:
   m_GameObject: {fileID: 1077657308}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.31922016}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.163228, y: 4.163228, z: 4.163228}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3927,7 +3945,7 @@ Transform:
   m_GameObject: {fileID: 1121401542}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.31922016}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.163228, y: 4.163228, z: 4.163228}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3984,6 +4002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.4
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1217897075
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4083,6 +4102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1225122133
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4182,6 +4202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.6
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1246056708
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4443,7 +4464,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volume: {fileID: 535080684}
-  timeSystem: {fileID: 1285302213}
 --- !u!114 &1285302211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4481,8 +4501,7 @@ MonoBehaviour:
   - {fileID: 1121401542}
   - {fileID: 1522621653}
   - {fileID: 401035937}
-  timeSystem: {fileID: 1285302213}
-  fadeDuration: 1
+  cycleDuration: 60
 --- !u!114 &1285302213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4753,6 +4772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.6
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1312699306
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5209,6 +5229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1364179151
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5308,6 +5329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.2
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1369251862
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5572,6 +5594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.1
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1384548580
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5942,6 +5965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.4
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1427710893
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6041,6 +6065,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.2
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1454330208
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6392,6 +6417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.2
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1488973553
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6491,6 +6517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.2
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1493471303
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6568,7 +6595,7 @@ Transform:
   m_GameObject: {fileID: 1522621653}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.31922016}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.163228, y: 4.163228, z: 4.163228}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6670,6 +6697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.6
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1583053459
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6831,6 +6859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.4
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1678593458
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7128,6 +7157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.7
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1833267541
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7227,6 +7257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.1
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1850936749
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7438,7 +7469,7 @@ Transform:
   m_GameObject: {fileID: 1910311088}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.31922016}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.163228, y: 4.163228, z: 4.163228}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7495,6 +7526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1920214133
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7597,7 +7629,6 @@ GameObject:
   - component: {fileID: 1932016215}
   - component: {fileID: 1932016217}
   - component: {fileID: 1932016216}
-  - component: {fileID: 1932016218}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -9099,20 +9130,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1932016218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932016214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 599e6b20d4bc7c9448f0fe41b09b6819, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 0}
-  parallaxFactor: 0
 --- !u!1 &1940130753
 GameObject:
   m_ObjectHideFlags: 0
@@ -9138,7 +9155,7 @@ Transform:
   m_GameObject: {fileID: 1940130753}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.31922016}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.163228, y: 4.163228, z: 4.163228}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11508,6 +11525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.6
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &1984486252
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11578,7 +11596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2027101402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11774,6 +11792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 519420032}
   parallaxFactor: 0.7
+  playerTarget: {fileID: 1484510133}
 --- !u!212 &2078681334
 SpriteRenderer:
   m_ObjectHideFlags: 0

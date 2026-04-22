@@ -19,7 +19,7 @@ public class ParallaxLayer : MonoBehaviour
     {
         Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
 
-        transform.position += new Vector3(deltaMovement.x * parallaxFactor, 0, 0);
+        transform.position += new Vector3(deltaMovement.x * parallaxFactor, deltaMovement.y * parallaxFactor, 0);
         lastCameraPosition = cameraTransform.position;
     }
 }

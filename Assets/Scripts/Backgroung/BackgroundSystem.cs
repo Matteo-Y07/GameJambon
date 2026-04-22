@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BackgroundSystem : MonoBehaviour
+public class BackgroundManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] backgrounds;
     [SerializeField] private float cycleDuration = 60f;
