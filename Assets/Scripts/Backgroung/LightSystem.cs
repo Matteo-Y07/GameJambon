@@ -14,6 +14,6 @@ public class LightSystem : MonoBehaviour
         float t = Mathf.Sin(timeSystem.GetNormalizedTime() * Mathf.PI);
 
         globalLight.color = Color.Lerp(nightColor, dayColor, t);
-        globalLight.intensity = Mathf.Lerp(0.3f, 1f, t);
+        globalLight.intensity = Mathf.Lerp(0.7f, 1f, t);
     }
 }

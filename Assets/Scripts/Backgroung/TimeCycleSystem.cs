@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TimeCycleSystem : MonoBehaviour
 {
-    [SerializeField] private float cycleDuration = 60f;
+    [SerializeField] private float cycleDuration = 120f;
 
     private float time;
 

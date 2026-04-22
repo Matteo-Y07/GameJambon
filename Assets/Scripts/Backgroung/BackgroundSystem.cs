@@ -1,20 +1,39 @@
 using UnityEngine;
+using System.Collections;
 
-public class BackgroundManager : MonoBehaviour
+public class BackgroundSystem : MonoBehaviour
 {
     [SerializeField] private GameObject[] backgrounds;
-    [SerializeField] private float cycleDuration = 60f;
+    [SerializeField] private float cycleDuration = 120f;
+    [SerializeField] private float fadeDuration = 2f;
 
     private float time;
     private int currentIndex = -1;
 
+    private SpriteRenderer[][] groups;
+    private Coroutine fadeCoroutine;
+
+    void Start()
+    {
+        groups = new SpriteRenderer[backgrounds.Length][];
+
+        for (int i = 0; i < backgrounds.Length; i++)
+        {
+            groups[i] = backgrounds[i].GetComponentsInChildren<SpriteRenderer>();
+
+            float alpha = (i == 0) ? 1f : 0f;
+
+            foreach (var sr in groups[i])
+                SetAlpha(sr, alpha);
+        }
+
+        currentIndex = 0;
+    }
+
     void Update()
     {
         if (backgrounds == null || backgrounds.Length == 0)
-        {
-            Debug.LogError("BackgroundManager: No backgrounds assigned!");
             return;
-        }
 
         time += Time.deltaTime;
 
@@ -25,24 +44,43 @@ public class BackgroundManager : MonoBehaviour
 
         if (index != currentIndex)
         {
-            SwitchBackground(index);
-        }
+            if (fadeCoroutine != null)
+                StopCoroutine(fadeCoroutine);
 
+            fadeCoroutine = StartCoroutine(Crossfade(currentIndex, index));
+            currentIndex = index;
+        }
     }
 
-    void SwitchBackground(int index)
+    IEnumerator Crossfade(int from, int to)
     {
-        for (int i = 0; i < backgrounds.Length; i++)
-        {
-            if (backgrounds[i] != null)
-                backgrounds[i].SetActive(i == index);
-        }
-        Debug.Log("Switch to: " + backgrounds[index].name);
+        float elapsed = 0f;
 
-        for (int i = 0; i < backgrounds.Length; i++)
+        while (elapsed < fadeDuration)
         {
-            Debug.Log(backgrounds[i].name + " active = " + (i == index));
+            elapsed += Time.deltaTime;
+            float t = elapsed / fadeDuration;
+
+            foreach (var sr in groups[from])
+                SetAlpha(sr, 1f - t);
+
+            foreach (var sr in groups[to])
+                SetAlpha(sr, t);
+
+            yield return null;
         }
-        currentIndex = index;
+
+        foreach (var sr in groups[from])
+            SetAlpha(sr, 0f);
+
+        foreach (var sr in groups[to])
+            SetAlpha(sr, 1f);
+    }
+
+    void SetAlpha(SpriteRenderer sr, float alpha)
+    {
+        Color c = sr.color;
+        c.a = alpha;
+        sr.color = c;
     }
 }
