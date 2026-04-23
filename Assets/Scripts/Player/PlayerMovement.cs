@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Camera playerCamera;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private TrailRenderer dashTrail;
 
     [Header("Runtime State")]
     [SerializeField] private bool isGrounded;
@@ -192,6 +193,7 @@ public class PlayerMovement : MonoBehaviour
 
     public SpriteRenderer GetSpriteRenderer() => spriteRenderer;
     public Camera GetPlayerCamera() => playerCamera;
+    public TrailRenderer GetTrail() => dashTrail;
 
     // =========================
     // GETTERS (STATE)

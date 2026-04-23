@@ -46,6 +46,9 @@ public class PlayerDash_Controller
         rb.gravityScale = 0f;
         rb.velocity = Vector2.zero;
 
+        player.GetTrail().enabled = true;
+        Camera.main.fieldOfView += 5f;
+
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(0.04f);
         Time.timeScale = 1f;
@@ -57,6 +60,9 @@ public class PlayerDash_Controller
 
         rb.velocity = dir * player.GetMoveSpeed();
         rb.gravityScale = player.GetGravity();
+
+        player.GetTrail().enabled = false;
+        Camera.main.fieldOfView -= 5f;
 
         player.SetDashing(false);
     }
