@@ -12,7 +12,7 @@ public class PillarSwitch : MonoBehaviour
 
     private bool playerInside = false;
     private float switchCooldown = 2f;
-    private float cooldownTimer = 0f;
+    [SerializeField] private float cooldownTimer = 0f;
     void Start()
     {
         normalGO.SetActive(true);
@@ -37,6 +37,7 @@ public class PillarSwitch : MonoBehaviour
                 cooldownTimer = 0f;
             }
         }
+        else cooldownTimer = 0f;
     }
 
     void SwitchTilemaps()

@@ -13,7 +13,6 @@ public class ParallaxLayer : MonoBehaviour
         if (cameraTransform == null)
             cameraTransform = Camera.main.transform;
 
-        // ✔ initialisé UNE seule fois
         startX = transform.position.x;
         startZ = transform.position.z;
     }

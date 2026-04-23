@@ -58,6 +58,18 @@ public class PlayerHealth : MonoBehaviour
         return hp1 + hp2 + hp3;
     }
 
+    public void ResetHealth()
+    {
+        hp1 = 100;
+        hp2 = 100;
+        hp3 = 100;
+
+        heart1.SetHP(hp1);
+        heart2.SetHP(hp2);
+        heart3.SetHP(hp3);
+        isDead = false;
+    }
+
     public bool IsDead()
     {
         return isDead;
