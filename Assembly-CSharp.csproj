@@ -78,15 +78,15 @@
     <Compile Include="Assets\Scripts\Player\PlayerJump_Controller.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Backgroung\LightSystem.cs" />
-    <Compile Include="Assets\Scripts\PlayerRespawn.cs" />
     <Compile Include="Assets\Scripts\GUI\GarbageBar.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\GUI\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\GUI\HealthTester.cs" />
     <Compile Include="Assets\Scripts\Backgroung\TimeCycleSystem.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Backgroung\ParallaxLayer.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerRespawn.cs" />
+    <Compile Include="Assets\Scripts\GUI\GameManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
