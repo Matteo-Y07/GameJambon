@@ -71,7 +71,9 @@
     <Compile Include="Assets\Scripts\GUI\MenuController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerWall_Controller.cs" />
     <Compile Include="Assets\Scripts\Checkpoint.cs" />
+    <Compile Include="Assets\Scripts\Player\DontDestroyPlayer.cs" />
     <Compile Include="Assets\Scripts\GUI\HeartUI.cs" />
+    <Compile Include="Assets\Scripts\SceneTransition.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerDash_Controller.cs" />
     <Compile Include="Assets\Scripts\PilierSwitch.cs" />
     <Compile Include="Assets\Scripts\Backgroung\BackgroundSystem.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Backgroung\LightSystem.cs" />
     <Compile Include="Assets\Scripts\GUI\GarbageBar.cs" />
+    <Compile Include="Assets\Scripts\SpawnManager.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\GUI\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\GUI\HealthTester.cs" />

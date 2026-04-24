@@ -41,8 +41,8 @@ public class BackgroundSystem : MonoBehaviour
 
         int index = Mathf.FloorToInt(t * backgrounds.Length);
         index = Mathf.Clamp(index, 0, backgrounds.Length - 1);
-
-        if (index != currentIndex)
+        if (index == null) return;
+        else if (index != currentIndex)
         {
             if (fadeCoroutine != null)
                 StopCoroutine(fadeCoroutine);

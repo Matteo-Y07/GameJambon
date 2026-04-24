@@ -68,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         jump = new PlayerJump_Controller(this);
         dash = new PlayerDash_Controller(this);
         wall = new PlayerWall_Controller(this);
+        playerCamera = GetComponent<Camera>();
         dashTrail = GetComponent<TrailRenderer>();
     }
 

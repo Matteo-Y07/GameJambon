@@ -7,9 +7,18 @@ public class GameManager : MonoBehaviour
     private Vector3 lastCheckpointPosition;
     private bool hasCheckpoint = false;
 
+    public string nextSpawnPoint;
+
     void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void SetCheckpoint(Vector3 pos)

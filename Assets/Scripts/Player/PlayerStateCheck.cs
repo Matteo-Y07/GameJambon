@@ -36,9 +36,6 @@ public class PlayerStateChecker : MonoBehaviour
         if (isDead) return;
 
         isDead = true;
-
-        Debug.Log("PLAYER DIED");
-        Debug.Log(playerRespawn != null ? "PlayerRespawn found" : "PlayerRespawn NOT found");
         // Désactive les contrôles
         if (playerMovement != null)
             playerMovement.enabled = false;
