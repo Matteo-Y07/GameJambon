@@ -68,6 +68,12 @@ public class PlayerMovement : MonoBehaviour
         jump = new PlayerJump_Controller(this);
         dash = new PlayerDash_Controller(this);
         wall = new PlayerWall_Controller(this);
+        dashTrail = GetComponent<TrailRenderer>();
+    }
+
+    void Start()
+    {
+        dashTrail.enabled = false;
     }
 
     void Update()
