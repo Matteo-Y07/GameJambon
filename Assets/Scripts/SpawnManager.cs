@@ -12,11 +12,12 @@ public class SpawnManager : MonoBehaviour
 
         if (!string.IsNullOrEmpty(spawnName))
         {
-            GameObject spawn = GameObject.Find(spawnName);
+            GameObject spawnPoint = GameObject.FindGameObjectWithTag("Spawn");
 
-            if (spawn != null)
+            if (spawnPoint != null)
             {
-                player.transform.position = spawn.transform.position;
+                player.transform.position = spawnPoint.transform.position;
+                GameManager.instance.SetCheckpoint(spawnPoint.transform.position);
             }
         }
     }

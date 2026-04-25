@@ -70,6 +70,8 @@ public class PlayerMovement : MonoBehaviour
         wall = new PlayerWall_Controller(this);
         playerCamera = GetComponent<Camera>();
         dashTrail = GetComponent<TrailRenderer>();
+        groundLayer = LayerMask.GetMask("Ground");
+        wallLayer = LayerMask.GetMask("Ground");
     }
 
     void Start()
