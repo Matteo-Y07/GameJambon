@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerDash_Controller
+public class PlayerDashController
 {
     private PlayerMovement player;
 
-    public PlayerDash_Controller(PlayerMovement player)
+    public PlayerDashController(PlayerMovement player)
     {
         this.player = player;
     }

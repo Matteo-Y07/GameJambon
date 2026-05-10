@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class PlayerMovement_Controller
+public class PlayerMovementController
 {
     private PlayerMovement player;
 
-    public PlayerMovement_Controller(PlayerMovement player)
+    public PlayerMovementController(PlayerMovement player)
     {
         this.player = player;
     }

@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerWall_Controller
+public class PlayerWallController
 {
     private PlayerMovement player;
 
-    public PlayerWall_Controller(PlayerMovement player)
+    public PlayerWallController(PlayerMovement player)
     {
         this.player = player;
     }

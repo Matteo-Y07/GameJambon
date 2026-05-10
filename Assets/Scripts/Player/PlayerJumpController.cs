@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerJump_Controller
+public class PlayerJumpController
 {
     private PlayerMovement player;
 
-    public PlayerJump_Controller(PlayerMovement player)
+    public PlayerJumpController(PlayerMovement player)
     {
         this.player = player;
     }

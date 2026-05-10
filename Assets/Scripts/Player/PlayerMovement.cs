@@ -24,11 +24,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float wallJumpImpulseTime = 0.15f;
     [SerializeField] private float wallJumpImpulseX = 4.5f;
 
+    [Header("Attack Settings")]
+    [SerializeField] private float attackRange = 2f;
+    [SerializeField] private int damage = 1;
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private float attackCooldown = 0.5f;
+
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheckLeft;
     [SerializeField] private Transform groundCheckRight;
-
     [SerializeField] private Transform wallCheckLeftBottom;
     [SerializeField] private Transform wallCheckLeftTop;
     [SerializeField] private Transform wallCheckRightBottom;
@@ -40,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private TrailRenderer dashTrail;
+
+    [SerializeField] private Transform attackPoint;
 
     [Header("Runtime State")]
     [SerializeField] private bool isGrounded;
@@ -56,18 +63,20 @@ public class PlayerMovement : MonoBehaviour
     private float coyoteTimer = 0f;
     private float jumpBufferTimer = 0f;
 
-    private PlayerMovement_Controller movement;
-    private PlayerJump_Controller jump;
-    private PlayerDash_Controller dash;
-    private PlayerWall_Controller wall;
+    private PlayerMovementController movement;
+    private PlayerJumpController jump;
+    private PlayerDashController dash;
+    private PlayerWallController wall;
+    private PlayerAttackController attack;
     
     private void Awake() 
     { 
         spriteRenderer = GetComponent<SpriteRenderer>();
-        movement = new PlayerMovement_Controller(this);
-        jump = new PlayerJump_Controller(this);
-        dash = new PlayerDash_Controller(this);
-        wall = new PlayerWall_Controller(this);
+        movement = new PlayerMovementController(this);
+        jump = new PlayerJumpController(this);
+        dash = new PlayerDashController(this);
+        wall = new PlayerWallController(this);
+        attack = new PlayerAttackController(this);
         playerCamera = GetComponent<Camera>();
         dashTrail = GetComponent<TrailRenderer>();
         groundLayer = LayerMask.GetMask("Ground");
@@ -89,8 +98,10 @@ public class PlayerMovement : MonoBehaviour
         jump.Handle();
         dash.Handle();
         wall.Handle();
+        attack.Handle();
         ApplyFallGravity();
         LimitFallSpeed();
+        
     }
 
     void HandleCoyoteTime()
@@ -204,6 +215,13 @@ public class PlayerMovement : MonoBehaviour
     public Camera GetPlayerCamera() => playerCamera;
     public TrailRenderer GetTrail() => dashTrail;
 
+    public float GetAttackRange() => attackRange;
+    public int GetDamage() => damage;
+    public LayerMask GetEnemyLayer() => enemyLayer;
+    public float GetAttackCooldown() => attackCooldown;
+
+    public Transform GetAttackPoint() => attackPoint;
+
     // =========================
     // GETTERS (STATE)
     // =========================
@@ -212,9 +230,9 @@ public class PlayerMovement : MonoBehaviour
     public bool IsTouchingWallLeft() => isTouchingWallLeft;
     public bool IsTouchingWallRight() => isTouchingWallRight;
 
-    // -------------------------
+    // =========================
     // WALL CORNER GETTERS
-    // -------------------------
+    // =========================
 
     public bool IsTouchingWallLeftTop()
     {
