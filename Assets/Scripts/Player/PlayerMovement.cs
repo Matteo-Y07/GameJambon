@@ -236,40 +236,23 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsTouchingWallLeftTop()
     {
-        return Physics2D.OverlapArea(
-            wallCheckLeftTop.position,
-            wallCheckLeftTop.position,
-            wallLayer
-        );
+        return Physics2D.OverlapArea(wallCheckLeftTop.position, wallCheckLeftTop.position, wallLayer);
     }
 
     public bool IsTouchingWallLeftBottom()
     {
-        return Physics2D.OverlapArea(
-            wallCheckLeftBottom.position,
-            wallCheckLeftBottom.position + Vector3.right * 0.1f,
-            wallLayer
-        );
+        return Physics2D.OverlapArea(wallCheckLeftBottom.position, wallCheckLeftBottom.position + Vector3.right * 0.1f, wallLayer);
     }
 
     public bool IsTouchingWallRightTop()
     {
-        return Physics2D.OverlapArea(
-            wallCheckRightTop.position,
-            wallCheckRightTop.position,
-            wallLayer
-        );
+        return Physics2D.OverlapArea(wallCheckRightTop.position, wallCheckRightTop.position, wallLayer);
     }
 
     public bool IsTouchingWallRightBottom()
     {
-        return Physics2D.OverlapArea(
-            wallCheckRightBottom.position,
-            wallCheckRightBottom.position + Vector3.left * 0.1f,
-            wallLayer
-        );
+        return Physics2D.OverlapArea(wallCheckRightBottom.position, wallCheckRightBottom.position + Vector3.left * 0.1f, wallLayer);
     }
-   
 
     public bool HasJump() => hasJump;
     public bool HasDash() => hasDash;
@@ -302,4 +285,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetCoyoteTimer(float value) => coyoteTimer = value;
     public void SetJumpBufferTimer(float value) => jumpBufferTimer = value;
+
+    // =========================
+    // SETTERS (CONFIG)
+    // =========================
+
+    public void SetMoveSpeed(float value) => moveSpeed = value;
 }

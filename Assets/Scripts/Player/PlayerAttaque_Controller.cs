@@ -12,46 +12,40 @@ public class PlayerAttackController
 
     public void Handle()
     {
-        if (Time.time >= nextAttackTime)
+        if (Time.time < nextAttackTime) return;
+
+        if (Input.GetButtonDown("Fire1"))
         {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                Attack();
-                nextAttackTime = Time.time + player.GetAttackCooldown();
-            }
+            Attack();
+            nextAttackTime = Time.time + player.GetAttackCooldown();
         }
     }
 
     void Attack()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(
-            player.GetAttackPoint().position,
-            player.GetAttackRange(),
-            player.GetEnemyLayer()
-        );
+        Collider2D[] hits = Physics2D.OverlapCircleAll(player.GetAttackPoint().position, player.GetAttackRange(), player.GetEnemyLayer());
 
-        foreach (Collider2D enemy in enemies)
+        foreach (Collider2D hit in hits)
         {
-            if (!EnnemiEstDevant(enemy.transform)) continue;
-
-            EnemyHealth health = enemy.GetComponent<EnemyHealth>();
-
-            if (health != null) health.TakeDamage(player.GetDamage());
+            if (!IsEnemyInFront(hit.transform)) continue;
+            Monster monster = hit.GetComponent<Monster>();
+            if (monster != null)
+            {
+                monster.TakeDamage(player.GetDamage());
+            }
         }
 
-        Debug.Log("Attaque ! Prochain attaque dans " + player.GetAttackCooldown() + " secondes.");
+        Debug.Log("Attaque ! Prochaine attaque dans " + player.GetAttackCooldown() + " secondes.");
     }
 
-    bool EnnemiEstDevant(Transform enemy)
+    bool IsEnemyInFront(Transform target)
     {
-        Vector2 directionToEnemy = (enemy.position - player.transform.position).normalized;
+        Vector2 directionToTarget = (target.position - player.transform.position).normalized;
 
         Vector2 facingDirection;
-        if (player.GetSpriteRenderer().flipX)
-            facingDirection = Vector2.left;
-        else
-            facingDirection = Vector2.right;
+            if (player.GetSpriteRenderer().flipX) facingDirection = Vector2.left;
+            else facingDirection = Vector2.right;
 
-        return Vector2.Dot(facingDirection, directionToEnemy) > 0.707f;
+        return Vector2.Dot(facingDirection, directionToTarget) > 0.707f;
     }
 }

@@ -1,39 +1,30 @@
 using UnityEngine;
 
-public class MonsterPollution : MonoBehaviour
+public class MonsterPollution : Monster
 {
-    [Header("Movement")]
-    [SerializeField] private float speed = 2f;
-
     [Header("Pollution")]
     [SerializeField] private GarbageBar garbageBar;
     [SerializeField] private float pollutionPerSecond = 5f;
 
-    private Transform player;
     private Renderer rend;
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
         rend = GetComponent<Renderer>();
-
-        GameObject p = GameObject.FindGameObjectWithTag("Player");
-        if (p != null)
-            player = p.transform;
     }
 
-    void Update()
+    protected override void Update()
     {
-        if (player == null) return;
+        base.Update();
+        Pollute();
+    }
 
-        // Move toward player
-        Vector2 direction = (player.position - transform.position).normalized;
-        transform.position += (Vector3)(direction * speed * Time.deltaTime);
-
-        // Pollution only if visible
-        if (IsVisible())
-        {
-            garbageBar.Add(pollutionPerSecond * Time.deltaTime);
-        }
+    void Pollute()
+    {
+        if (garbageBar == null) return;
+        if (!IsVisible()) return;
+        garbageBar.Add(pollutionPerSecond * Time.deltaTime);
     }
 
     bool IsVisible()
