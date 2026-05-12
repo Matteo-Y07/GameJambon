@@ -30,8 +30,7 @@ public class PillarSwitch : MonoBehaviour
         if (Input.GetAxisRaw("Vertical") < 0)
         {
             cooldownTimer += Time.deltaTime;
-            if (cooldownTimer < switchCooldown) return;
-            else
+            if (cooldownTimer > switchCooldown)
             {
                 SwitchTilemaps();
                 cooldownTimer = 0f;
