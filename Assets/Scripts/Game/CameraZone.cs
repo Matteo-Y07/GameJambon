@@ -17,8 +17,7 @@ public class CameraZone : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            CameraFollow cam =
-                Camera.main.GetComponent<CameraFollow>();
+            CameraFollow cam = Camera.main.GetComponent<CameraFollow>();
 
             cam.SetBounds(minX, maxX);
         }

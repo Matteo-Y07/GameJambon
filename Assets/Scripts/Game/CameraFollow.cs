@@ -7,21 +7,18 @@ public class CameraFollow : MonoBehaviour
 
     private float minX;
     private float maxX;
+    private Camera cam;
 
     void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+        cam = GetComponent<Camera>();
 
         if (player != null)
         {
             target = player.transform;
-
             // Position immédiate sur le joueur au début
-            transform.position = new Vector3(
-                target.position.x,
-                target.position.y,
-                -10f
-            );
+            transform.position = new Vector3(target.position.x, target.position.y, -10f);
         }
     }
 
@@ -34,22 +31,9 @@ public class CameraFollow : MonoBehaviour
         float targetY = target.position.y;
 
         // Clamp dans les limites de la zone
-        targetX = Mathf.Clamp(targetX, minX, maxX);
-        if (targetX == minX || targetX == maxX)
-        {
-            targetY = Mathf.Clamp(targetY, transform.position.y - 3f, transform.position.y + 3f);
-        }
-        Vector3 targetPosition = new Vector3(
-            targetX,
-            targetY,
-            -10f
-        );
-
-        transform.position = Vector3.Lerp(
-            transform.position,
-            targetPosition,
-            followSpeed * Time.deltaTime
-        );
+        targetX = Mathf.Clamp(targetX, minX + cam.orthographicSize*1.5f, maxX - cam.orthographicSize*1.5f);
+        Vector3 targetPosition = new Vector3(targetX, targetY, -10f);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
     }
 
     public void SetBounds(float newMinX, float newMaxX)
