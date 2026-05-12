@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Game\SpawnManager.cs" />
     <Compile Include="Assets\Scripts\Game\SceneTransition.cs" />
     <Compile Include="Assets\Scripts\Game\Checkpoint.cs" />
+    <Compile Include="Assets\Scripts\Game\CameraZone.cs" />
     <Compile Include="Assets\Scripts\GUI\HeartUI.cs" />
     <Compile Include="Assets\Scripts\Player\DontDestroyObject.cs" />
     <Compile Include="Assets\Scripts\Monster\Monster.cs" />
