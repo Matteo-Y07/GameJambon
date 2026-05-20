@@ -11,7 +11,6 @@ public class PlayerMovementController
 
     public void Handle()
     {
-        
         if (player.IsDashing() || player.IsGrabbing() || player.IsWallJumping())
             return;
 
@@ -29,6 +28,10 @@ public class PlayerMovementController
             MoveLeft();
         else
             Stop();
+        if (input != 0)
+            player.GetAnimator().SetBool("isRunning", true);
+        else
+            player.GetAnimator().SetBool("isRunning", false);
     }
 
     private void MoveRight()

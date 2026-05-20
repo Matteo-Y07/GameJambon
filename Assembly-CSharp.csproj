@@ -65,9 +65,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Monster\MonsterSleep.cs" />
+    <Compile Include="Assets\Scripts\Dialogue\DialogueManager.cs" />
     <Compile Include="Assets\Scripts\Monster\MonsterPollution.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStateCheck.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovementController.cs" />
+    <Compile Include="Assets\Scripts\Dialogue\DialogueLine.cs" />
     <Compile Include="Assets\Scripts\GUI\MenuController.cs" />
     <Compile Include="Assets\Scripts\Monster\MonsterDebuff.cs" />
     <Compile Include="Assets\Scripts\Game\SpawnManager.cs" />
@@ -76,9 +78,11 @@
     <Compile Include="Assets\Scripts\Game\CameraZone.cs" />
     <Compile Include="Assets\Scripts\GUI\HeartUI.cs" />
     <Compile Include="Assets\Scripts\Player\DontDestroyObject.cs" />
+    <Compile Include="Assets\Scripts\Dialogue\DialogueTrigger.cs" />
     <Compile Include="Assets\Scripts\Monster\Monster.cs" />
     <Compile Include="Assets\Scripts\Game\PilierSwitch.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAttaque_Controller.cs" />
+    <Compile Include="Assets\Scripts\Game\CatFollow.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerWallController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerJumpController.cs" />

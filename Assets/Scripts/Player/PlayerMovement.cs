@@ -48,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Transform attackPoint;
 
+    [SerializeField] private Animator animator;
+
     [Header("Runtime State")]
     [SerializeField] private bool isGrounded;
     [SerializeField] private bool isTouchingWallLeft;
@@ -72,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake() 
     { 
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         movement = new PlayerMovementController(this);
         jump = new PlayerJumpController(this);
         dash = new PlayerDashController(this);
@@ -221,7 +224,7 @@ public class PlayerMovement : MonoBehaviour
     public float GetAttackCooldown() => attackCooldown;
 
     public Transform GetAttackPoint() => attackPoint;
-
+    public Animator GetAnimator() => animator;
     // =========================
     // GETTERS (STATE)
     // =========================
