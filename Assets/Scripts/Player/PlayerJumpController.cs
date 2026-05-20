@@ -14,6 +14,7 @@ public class PlayerJumpController
     {
         HandleVariableJump();
         HandleJumpInput();
+        HandleAnimations();
     }
 
     private void HandleVariableJump()
@@ -32,7 +33,6 @@ public class PlayerJumpController
     {
         if (!Input.GetButtonDown("Jump"))
             return;
-
         // Wall jump priority
         if (!player.IsGrounded() &&
             (player.IsTouchingWallLeft() || player.IsTouchingWallRight()))
@@ -46,13 +46,24 @@ public class PlayerJumpController
             (player.GetCoyoteTimer() > 0f || player.IsGrabbing()) &&
             player.HasJump())
         {
-            player.GetRigidbody().velocity =
-                new Vector2(player.GetRigidbody().velocity.x, player.GetJumpForce());
-
+            player.GetRigidbody().velocity = new Vector2(player.GetRigidbody().velocity.x, player.GetJumpForce());
+            
             player.SetHasJump(false);
             player.SetCoyoteTimer(0f);
             player.SetJumpBufferTimer(0f);
             player.SetGrab(false);
+        }
+        if (player.IsGrounded() && Input.GetButtonDown("Jump")) player.GetAnimator().SetBool("isJumping", true);
+        else if (player.IsGrounded() && !Input.GetButtonDown("Jump")) player.GetAnimator().SetBool("isJumping", false);
+        
+    }
+
+    private void HandleAnimations()
+    {
+        // Si on touche le sol et qu'on ne monte pas, on arrête l'animation de saut
+        if (player.IsGrounded() && player.GetRigidbody().velocity.y <= 0.1f)
+        {
+            player.GetAnimator().SetBool("isJumping", false);
         }
     }
 
