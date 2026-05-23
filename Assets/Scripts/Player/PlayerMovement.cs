@@ -108,8 +108,6 @@ public class PlayerMovement : MonoBehaviour
         playerAnimation.Handle();
         ApplyFallGravity();
         LimitFallSpeed();
-        
-        if (IsGrounded() && GetRigidbody().velocity.y <= 0f) SetJumping(false);
     }
 
     void HandleCoyoteTime()
@@ -132,6 +130,8 @@ public class PlayerMovement : MonoBehaviour
         {
             SetHasJump(true);
             SetHasDash(true);
+            SetWallJumping(false);
+            SetJumping(false);
         }
     }
 

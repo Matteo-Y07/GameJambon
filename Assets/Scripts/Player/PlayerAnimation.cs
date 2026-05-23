@@ -21,21 +21,19 @@ public class PlayerAnimation
         // pour la course
         player.GetAnimator().SetBool("isGrounded", player.IsGrounded());
         player.GetAnimator().SetBool("isRunning", player.IsGrounded() && Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f);
-        //pour le saut
-        player.GetAnimator().SetBool("isGrounded", player.IsGrounded() && !player.IsJumping());
 
+        //pour le saut
+        player.GetAnimator().SetBool("isJumping", player.IsJumping());
+        
         //pour le grab
         player.GetAnimator().SetBool("isGrabbing", (player.IsTouchingWallLeft() || player.IsTouchingWallRight()) && player.IsGrabbing());
-
-        //pour le dash
-        //player.GetAnimator().SetBool("isDashing", player.IsDashing());
 
         //pour le slide
         player.GetAnimator().SetBool("isSliding", (player.IsTouchingWallLeft() || player.IsTouchingWallRight()) && !player.IsGrabbing() && !player.IsGrounded());
 
         //pour la chute
-        player.GetAnimator().SetBool("isFalling", player.GetRigidbody().velocity.y < -0.1f && !player.IsGrounded() && !(player.IsTouchingWallLeft() || player.IsTouchingWallRight()));
-
+        player.GetAnimator().SetBool("isFalling", player.GetRigidbody().velocity.y < -2f && !player.IsGrounded() && !(player.IsTouchingWallLeft() || player.IsTouchingWallRight()));
+        Debug.Log("isFalling: " + player.GetAnimator().GetBool("isFalling") + " | velocityY: " + player.GetRigidbody().velocity.y);
         //pour l'atterissage
         player.GetAnimator().SetBool("isLanding", player.IsGrounded() && player.GetRigidbody().velocity.y < -0.1f);
 

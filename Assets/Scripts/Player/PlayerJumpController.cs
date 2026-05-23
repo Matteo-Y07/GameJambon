@@ -12,27 +12,16 @@ public class PlayerJumpController
 
     public void Handle()
     {
-        HandleVariableJump();
         HandleJumpInput();
-    }
-
-    private void HandleVariableJump()
-    {
-        if (Input.GetButtonUp("Jump") && player.GetRigidbody().velocity.y > 0f)
-        {
-            Vector2 v = player.GetRigidbody().velocity;
-            player.GetRigidbody().velocity = new Vector2(
-                v.x,
-                v.y * player.GetJumpMultiplier()
-            );
-        }
+        HandleVariableJump();
+        HandleJumpState();
     }
 
     private void HandleJumpInput()
     {
-        if (!Input.GetButtonDown("Jump"))
-            return;
-        // Wall jump priority
+        if (!Input.GetButtonDown("Jump")) return;
+
+        // Priorité wall jump
         if (!player.IsGrounded() &&
             (player.IsTouchingWallLeft() || player.IsTouchingWallRight()))
         {
@@ -40,21 +29,28 @@ public class PlayerJumpController
             return;
         }
 
-        // Normal jump
-        if (player.GetJumpBufferTimer() > 0f &&
-            (player.GetCoyoteTimer() > 0f || player.IsGrabbing()) &&
-            player.HasJump())
+        // NORMAL JUMP
+        if (player.GetJumpBufferTimer() > 0f && (player.GetCoyoteTimer() > 0f || player.IsTouchingWallLeft() || player.IsTouchingWallRight()) && player.HasJump())
         {
+            Rigidbody2D rb = player.GetRigidbody();
+
             player.SetJumping(true);
-            player.GetAnimator().SetTrigger("Jump");
-            player.GetRigidbody().velocity = new Vector2(player.GetRigidbody().velocity.x, player.GetJumpForce());
+            rb.velocity = new Vector2(rb.velocity.x, player.GetJumpForce());
+
             player.SetHasJump(false);
             player.SetCoyoteTimer(0f);
             player.SetJumpBufferTimer(0f);
             player.SetGrab(false);
-
         }
-        
+    }
+
+    private void HandleVariableJump()
+    {
+        if (Input.GetButtonUp("Jump") && player.GetRigidbody().velocity.y > 0f)
+        {
+            Rigidbody2D rb = player.GetRigidbody();
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * player.GetJumpMultiplier());
+        }
     }
 
     private IEnumerator WallJump()
@@ -62,30 +58,28 @@ public class PlayerJumpController
         player.SetGrab(false);
         player.SetWallJumping(true);
 
-        Vector2 vel = player.GetRigidbody().velocity;
-
-        if (player.IsTouchingWallLeft())
-        {
-            player.GetRigidbody().velocity = new Vector2(
-                player.GetWallJumpImpulseX(),
-                player.GetJumpForce()
-            );
-            player.SetJumping(true);
-            player.GetAnimator().SetTrigger("Jump");
-        }
-        else if (player.IsTouchingWallRight())
-        {
-            player.GetRigidbody().velocity = new Vector2(
-                -player.GetWallJumpImpulseX(),
-                player.GetJumpForce()
-            );
-            player.SetJumping(true);
-            player.GetAnimator().SetTrigger("Jump");
-        }
+        Rigidbody2D rb = player.GetRigidbody();
+        float direction = player.IsTouchingWallLeft() ? 1f : -1f;
+        rb.velocity = new Vector2(player.GetWallJumpImpulseX() * direction, player.GetJumpForce());
+        player.SetJumping(true);
 
         yield return new WaitForSeconds(player.GetWallJumpImpulseTime());
 
         player.SetWallJumping(false);
         player.SetHasJump(true);
+    }
+
+    private void HandleJumpState()
+    {
+        Rigidbody2D rb = player.GetRigidbody();
+
+        if (player.IsGrounded())
+        {
+            player.SetJumping(false);
+            return;
+        }
+
+        if (rb.velocity.y > 0f)player.SetJumping(true);
+        else player.SetJumping(false);
     }
 }
