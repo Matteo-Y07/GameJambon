@@ -22,8 +22,6 @@ public class PlayerAnimation
         player.GetAnimator().SetBool("isGrounded", player.IsGrounded());
         player.GetAnimator().SetBool("isRunning", player.IsGrounded() && Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f);
         //pour le saut
-        //if (Input.GetButtonDown("Jump") && player.IsGrounded()) player.GetAnimator().SetTrigger("Jump"); Debug.Log("isGrounded: " + player.IsGrounded() + "SetTrigger: " + Input.GetButtonDown("Jump"));
-
         player.GetAnimator().SetBool("isGrounded", player.IsGrounded() && !player.IsJumping());
 
         //pour le grab
@@ -42,7 +40,6 @@ public class PlayerAnimation
         player.GetAnimator().SetBool("isLanding", player.IsGrounded() && player.GetRigidbody().velocity.y < -0.1f);
 
         //pour l'escalade
-        player.GetAnimator().SetBool("isClimbing", player.IsGrabbing() && Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.1f);
-        
+        player.GetAnimator().SetBool("isClimbing", player.IsGrabbing() && Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0f);
     }
 }

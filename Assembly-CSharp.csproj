@@ -72,7 +72,6 @@
     <Compile Include="Assets\Scripts\Dialogue\DialogueLine.cs" />
     <Compile Include="Assets\Scripts\GUI\MenuController.cs" />
     <Compile Include="Assets\Scripts\Monster\MonsterDebuff.cs" />
-    <Compile Include="Assets\Scripts\Game\PlayerAnimation.cs" />
     <Compile Include="Assets\Scripts\Game\SpawnManager.cs" />
     <Compile Include="Assets\Scripts\Game\SceneTransition.cs" />
     <Compile Include="Assets\Scripts\Game\Checkpoint.cs" />
@@ -93,9 +92,10 @@
     <Compile Include="Assets\Scripts\GUI\HealthTester.cs" />
     <Compile Include="Assets\Scripts\Backgroung\RepeatBg.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerDashController.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Backgroung\ParallaxLayer.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerRespawn.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerAnimation.cs" />
     <Compile Include="Assets\Scripts\GUI\GameManager.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -68,7 +68,7 @@ public class PlayerJumpController
         {
             player.GetRigidbody().velocity = new Vector2(
                 player.GetWallJumpImpulseX(),
-                player.GetJumpForce() / 1.5f
+                player.GetJumpForce()
             );
             player.SetJumping(true);
             player.GetAnimator().SetTrigger("Jump");
@@ -77,7 +77,7 @@ public class PlayerJumpController
         {
             player.GetRigidbody().velocity = new Vector2(
                 -player.GetWallJumpImpulseX(),
-                player.GetJumpForce() / 1.5f
+                player.GetJumpForce()
             );
             player.SetJumping(true);
             player.GetAnimator().SetTrigger("Jump");
