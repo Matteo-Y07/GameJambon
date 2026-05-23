@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Dialogue\DialogueLine.cs" />
     <Compile Include="Assets\Scripts\GUI\MenuController.cs" />
     <Compile Include="Assets\Scripts\Monster\MonsterDebuff.cs" />
+    <Compile Include="Assets\Scripts\Game\PlayerAnimation.cs" />
     <Compile Include="Assets\Scripts\Game\SpawnManager.cs" />
     <Compile Include="Assets\Scripts\Game\SceneTransition.cs" />
     <Compile Include="Assets\Scripts\Game\Checkpoint.cs" />

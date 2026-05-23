@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 4.0f;
+    [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private float climbSpeed = 2.5f;
     [SerializeField] private float maxFallSpeed = 8.0f;
 
@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Runtime State")]
     [SerializeField] private bool isGrounded;
+    [SerializeField] private bool isJumping;
     [SerializeField] private bool isTouchingWallLeft;
     [SerializeField] private bool isTouchingWallRight;
 
@@ -70,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerDashController dash;
     private PlayerWallController wall;
     private PlayerAttackController attack;
+    private PlayerAnimation playerAnimation;
     
     private void Awake() 
     { 
@@ -80,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
         dash = new PlayerDashController(this);
         wall = new PlayerWallController(this);
         attack = new PlayerAttackController(this);
+        playerAnimation = new PlayerAnimation(this);
         playerCamera = GetComponent<Camera>();
         dashTrail = GetComponent<TrailRenderer>();
         groundLayer = LayerMask.GetMask("Ground");
@@ -102,9 +105,14 @@ public class PlayerMovement : MonoBehaviour
         dash.Handle();
         wall.Handle();
         attack.Handle();
+        playerAnimation.Handle();
         ApplyFallGravity();
         LimitFallSpeed();
         
+        if (IsGrounded() && GetRigidbody().velocity.y <= 0f)
+        {
+            SetJumping(false);
+        }
     }
 
     void HandleCoyoteTime()
@@ -168,6 +176,11 @@ public class PlayerMovement : MonoBehaviour
 
         SetWallLeft(leftTop || leftBottom);
         SetWallRight(rightTop || rightBottom);
+
+        if (IsTouchingWallLeft() && spriteRenderer.flipX == false && !IsGrounded())
+            spriteRenderer.flipX = true;
+        else if (IsTouchingWallRight() && spriteRenderer.flipX == true && !IsGrounded())
+            spriteRenderer.flipX = false;
     }
 
     void LimitFallSpeed()
@@ -230,6 +243,7 @@ public class PlayerMovement : MonoBehaviour
     // =========================
 
     public bool IsGrounded() => isGrounded;
+    public bool IsJumping() => isJumping;
     public bool IsTouchingWallLeft() => isTouchingWallLeft;
     public bool IsTouchingWallRight() => isTouchingWallRight;
 
@@ -273,6 +287,7 @@ public class PlayerMovement : MonoBehaviour
     // =========================
 
     public void SetGrounded(bool value) => isGrounded = value;
+    public void SetJumping(bool value) => isJumping = value;
 
     public void SetWallLeft(bool value) => isTouchingWallLeft = value;
     public void SetWallRight(bool value) => isTouchingWallRight = value;

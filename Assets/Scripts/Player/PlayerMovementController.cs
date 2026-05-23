@@ -28,10 +28,6 @@ public class PlayerMovementController
             MoveLeft();
         else
             Stop();
-        if (input != 0)
-            player.GetAnimator().SetBool("isRunning", true);
-        else
-            player.GetAnimator().SetBool("isRunning", false);
     }
 
     private void MoveRight()

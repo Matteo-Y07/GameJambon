@@ -738,7 +738,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.21133333}
+  m_Offset: {x: 0, y: 0.14714003}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -749,7 +749,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.1283865}
   m_EdgeRadius: 0
 --- !u!4 &77961199
 Transform:
@@ -4062,7 +4062,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9383,9 +9383,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1484510133}
   - component: {fileID: 1484510132}
-  - component: {fileID: 1484510131}
   - component: {fileID: 1484510130}
   - component: {fileID: 1484510134}
+  - component: {fileID: 1484510142}
   - component: {fileID: 1484510135}
   - component: {fileID: 1484510136}
   - component: {fileID: 1484510137}
@@ -9427,57 +9427,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1484510131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484510128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4f1351ea4d4f53429611b632770fa46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  climbSpeed: 2.5
-  maxFallSpeed: 8
-  jumpForce: 10
-  jumpMultiplier: 0.5
-  coyoteTime: 0.12
-  jumpBufferTime: 0.12
-  gravity: 2.5
-  maxTimerGrab: 7
-  dashPower: 15
-  wallJumpImpulseTime: 0.15
-  wallJumpImpulseX: 4
-  attackRange: 2
-  damage: 1
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  attackCooldown: 0.5
-  rb: {fileID: 1484510130}
-  groundCheckLeft: {fileID: 1329557825}
-  groundCheckRight: {fileID: 2047502569}
-  wallCheckLeftBottom: {fileID: 211052527}
-  wallCheckLeftTop: {fileID: 1371133339}
-  wallCheckRightBottom: {fileID: 203048123}
-  wallCheckRightTop: {fileID: 1641262107}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  playerCamera: {fileID: 519420031}
-  spriteRenderer: {fileID: 1484510132}
-  dashTrail: {fileID: 1484510139}
-  attackPoint: {fileID: 0}
-  animator: {fileID: 1484510141}
-  isGrounded: 0
-  isTouchingWallLeft: 0
-  isTouchingWallRight: 0
 --- !u!212 &1484510132
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9633,7 +9582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 1484510135}
-  playerMovement: {fileID: 1484510131}
+  playerMovement: {fileID: 1484510142}
   garbageBar: {fileID: 1789415076}
   playerRespawn: {fileID: 1484510138}
   pollution: 0
@@ -9734,8 +9683,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0}
+      key0: {r: 0.36862746, g: 1, b: 0.944005, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 0.41960785}
       key2: {r: 0, g: 0.4312644, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -9751,8 +9700,8 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
-      atime2: 0
+      atime1: 386
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -9761,7 +9710,7 @@ TrailRenderer:
       m_Mode: 2
       m_ColorSpace: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
+      m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -9807,6 +9756,58 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1484510142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484510128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea0374d18edb794f9ff59c194ed57b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  climbSpeed: 2.5
+  maxFallSpeed: 8
+  jumpForce: 7
+  jumpMultiplier: 0.5
+  coyoteTime: 0.12
+  jumpBufferTime: 0.12
+  gravity: 2
+  maxTimerGrab: 7
+  dashPower: 25
+  wallJumpImpulseTime: 0.15
+  wallJumpImpulseX: 4.5
+  attackRange: 2
+  damage: 1
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  attackCooldown: 0.5
+  rb: {fileID: 1484510130}
+  groundCheckLeft: {fileID: 1329557825}
+  groundCheckRight: {fileID: 2047502569}
+  wallCheckLeftBottom: {fileID: 211052527}
+  wallCheckLeftTop: {fileID: 1371133339}
+  wallCheckRightBottom: {fileID: 203048123}
+  wallCheckRightTop: {fileID: 1641262107}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerCamera: {fileID: 519420031}
+  spriteRenderer: {fileID: 0}
+  dashTrail: {fileID: 1484510139}
+  attackPoint: {fileID: 0}
+  animator: {fileID: 1484510141}
+  isGrounded: 0
+  isJumping: 0
+  isTouchingWallLeft: 0
+  isTouchingWallRight: 0
 --- !u!1 &1488973550
 GameObject:
   m_ObjectHideFlags: 0
