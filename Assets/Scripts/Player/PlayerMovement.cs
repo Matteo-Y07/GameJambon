@@ -109,38 +109,25 @@ public class PlayerMovement : MonoBehaviour
         ApplyFallGravity();
         LimitFallSpeed();
         
-        if (IsGrounded() && GetRigidbody().velocity.y <= 0f)
-        {
-            SetJumping(false);
-        }
+        if (IsGrounded() && GetRigidbody().velocity.y <= 0f) SetJumping(false);
     }
 
     void HandleCoyoteTime()
     {
-        if (IsGrounded())
-            coyoteTimer = GetCoyoteTime();
-        else
-            coyoteTimer -= Time.deltaTime;
+        if (IsGrounded()) coyoteTimer = GetCoyoteTime();
+        else coyoteTimer -= Time.deltaTime;
     }
 
     void HandleJumpBuffer()
     {
-        if (Input.GetButtonDown("Jump"))
-            jumpBufferTimer = GetJumpBufferTime();
-        else
-            jumpBufferTimer -= Time.deltaTime;
+        if (Input.GetButtonDown("Jump")) jumpBufferTimer = GetJumpBufferTime();
+        else jumpBufferTimer -= Time.deltaTime;
     }
 
     void CheckGround()
     {
-        bool grounded = Physics2D.OverlapArea(
-            groundCheckLeft.position,
-            groundCheckRight.position,
-            groundLayer
-        );
-
+        bool grounded = Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position, groundLayer);
         SetGrounded(grounded);
-
         if (grounded)
         {
             SetHasJump(true);
@@ -150,37 +137,17 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckWalls()
     {
-        bool leftTop = Physics2D.OverlapArea(
-            wallCheckLeftTop.position,
-            wallCheckLeftTop.position + Vector3.right * 0.1f,
-            wallLayer
-        );
-
-        bool leftBottom = Physics2D.OverlapArea(
-            wallCheckLeftBottom.position,
-            wallCheckLeftBottom.position + Vector3.right * 0.1f,
-            wallLayer
-        );
-
-        bool rightTop = Physics2D.OverlapArea(
-            wallCheckRightTop.position,
-            wallCheckRightTop.position + Vector3.left * 0.1f,
-            wallLayer
-        );
-
-        bool rightBottom = Physics2D.OverlapArea(
-            wallCheckRightBottom.position,
-            wallCheckRightBottom.position + Vector3.left * 0.1f,
-            wallLayer
-        );
+        bool leftTop = Physics2D.OverlapArea(wallCheckLeftTop.position, wallCheckLeftTop.position + Vector3.right * 0.1f, wallLayer);
+        bool leftBottom = Physics2D.OverlapArea(wallCheckLeftBottom.position, wallCheckLeftBottom.position + Vector3.right * 0.1f, wallLayer);
+        bool rightTop = Physics2D.OverlapArea(wallCheckRightTop.position, wallCheckRightTop.position + Vector3.left * 0.1f, wallLayer);
+        bool rightBottom = Physics2D.OverlapArea(wallCheckRightBottom.position, wallCheckRightBottom.position + Vector3.left * 0.1f, wallLayer);
 
         SetWallLeft(leftTop || leftBottom);
         SetWallRight(rightTop || rightBottom);
 
-        if (IsTouchingWallLeft() && spriteRenderer.flipX == false && !IsGrounded())
-            spriteRenderer.flipX = true;
-        else if (IsTouchingWallRight() && spriteRenderer.flipX == true && !IsGrounded())
-            spriteRenderer.flipX = false;
+        if (IsTouchingWallLeft() && spriteRenderer.flipX == false && !IsGrounded()) spriteRenderer.flipX = true;
+
+        else if (IsTouchingWallRight() && spriteRenderer.flipX == true && !IsGrounded()) spriteRenderer.flipX = false;
     }
 
     void LimitFallSpeed()
@@ -193,63 +160,109 @@ public class PlayerMovement : MonoBehaviour
 
     void ApplyFallGravity()
     {
-        if (IsGrabbing() || IsDashing())
-            return;
+        if (IsGrabbing() || IsDashing()) return;
 
-        if (rb.velocity.y < 0f)
-            rb.gravityScale = GetGravity() * 1.8f;
-        else if (rb.velocity.y > 0f && !Input.GetButton("Jump"))
-            rb.gravityScale = GetGravity() * 1.3f;
-        else
-            rb.gravityScale = GetGravity();
+        if (rb.velocity.y < 0f) rb.gravityScale = GetGravity() * 1.8f;
+        else if (rb.velocity.y > 0f && !Input.GetButton("Jump")) rb.gravityScale = GetGravity() * 1.3f;
+        else rb.gravityScale = GetGravity();
     }
 
     // =========================
     // GETTERS (CONFIG)
     // =========================
 
+    //GETTERS PHISICS 
+
     public Rigidbody2D GetRigidbody() => rb;
-
     public float GetMoveSpeed() => moveSpeed;
-    public float GetClimbSpeed() => climbSpeed;
     public float GetMaxFallSpeed() => maxFallSpeed;
+    public float GetGravity() => gravity;
 
+
+    //GETTERS JUMP MECHANICS 
     public float GetJumpForce() => jumpForce;
     public float GetJumpMultiplier() => jumpMultiplier;
     public float GetCoyoteTime() => coyoteTime;
     public float GetJumpBufferTime() => jumpBufferTime;
 
-    public float GetGravity() => gravity;
+
+    //GETTERS WALL MECHANICS
+
+    public float GetClimbSpeed() => climbSpeed;
     public float GetMaxTimerGrab() => maxTimerGrab;
-
-    public float GetDashPower() => dashPower;
-
     public float GetWallJumpImpulseTime() => wallJumpImpulseTime;
     public float GetWallJumpImpulseX() => wallJumpImpulseX;
 
-    public SpriteRenderer GetSpriteRenderer() => spriteRenderer;
-    public Camera GetPlayerCamera() => playerCamera;
-    public TrailRenderer GetTrail() => dashTrail;
+
+    //GETTERS DASH MECHANICS
+
+    public float GetDashPower() => dashPower;
+
+
+    //GETTERS ATTACK MECHANICS
 
     public float GetAttackRange() => attackRange;
     public int GetDamage() => damage;
     public LayerMask GetEnemyLayer() => enemyLayer;
     public float GetAttackCooldown() => attackCooldown;
-
     public Transform GetAttackPoint() => attackPoint;
+
+
+    //GETTERS VISUALS 
+
+    public SpriteRenderer GetSpriteRenderer() => spriteRenderer;
+    public TrailRenderer GetTrail() => dashTrail;
+
+
+    //GETTERS CAMERA
+
+    public Camera GetPlayerCamera() => playerCamera;
+
+
+    // GETTERS ANIMATOR
+
     public Animator GetAnimator() => animator;
+
+
+
+
     // =========================
     // GETTERS (STATE)
     // =========================
 
+    // PLAYER STATE
+
     public bool IsGrounded() => isGrounded;
     public bool IsJumping() => isJumping;
+    public bool IsDashing() => isDashing;
+    public bool IsWallJumping() => isWallJumping;
+    public bool IsGrabbing() => grab;
+    public bool CanGrab() => canGrab;
+
+
+    // ABILITIES
+
+    public bool HasJump() => hasJump;
+    public bool HasDash() => hasDash;
+
+
+    // TIMERS
+
+    public float GetCoyoteTimer() => coyoteTimer;
+    public float GetJumpBufferTimer() => jumpBufferTimer;
+
+
+    // =========================
+    // GETTERS (WALL DETECTION)
+    // =========================
+
+    // BASIC WALL CHECKERS
+
     public bool IsTouchingWallLeft() => isTouchingWallLeft;
     public bool IsTouchingWallRight() => isTouchingWallRight;
 
-    // =========================
-    // WALL CORNER GETTERS
-    // =========================
+
+    // CORNER CHECKS
 
     public bool IsTouchingWallLeftTop()
     {
@@ -271,42 +284,44 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapArea(wallCheckRightBottom.position, wallCheckRightBottom.position + Vector3.left * 0.1f, wallLayer);
     }
 
-    public bool HasJump() => hasJump;
-    public bool HasDash() => hasDash;
-
-    public bool IsDashing() => isDashing;
-    public bool IsWallJumping() => isWallJumping;
-    public bool IsGrabbing() => grab;
-    public bool CanGrab() => canGrab;
-
-    public float GetCoyoteTimer() => coyoteTimer;
-    public float GetJumpBufferTimer() => jumpBufferTimer;
-
-    // =========================
-    // SETTERS (STATE ONLY)
-    // =========================
-
-    public void SetGrounded(bool value) => isGrounded = value;
-    public void SetJumping(bool value) => isJumping = value;
-
-    public void SetWallLeft(bool value) => isTouchingWallLeft = value;
-    public void SetWallRight(bool value) => isTouchingWallRight = value;
-
-    public void SetHasJump(bool value) => hasJump = value;
-    public void SetHasDash(bool value) => hasDash = value;
-
-    public void SetGrab(bool value) => grab = value;
-    public void SetCanGrab(bool value) => canGrab = value;
-
-    public void SetDashing(bool value) => isDashing = value;
-    public void SetWallJumping(bool value) => isWallJumping = value;
-
-    public void SetCoyoteTimer(float value) => coyoteTimer = value;
-    public void SetJumpBufferTimer(float value) => jumpBufferTimer = value;
-
     // =========================
     // SETTERS (CONFIG)
     // =========================
 
+    // MOVEMENT
+    
     public void SetMoveSpeed(float value) => moveSpeed = value;
+
+
+    // =========================
+    // SETTERS (STATE)
+    // =========================
+
+    // PLAYER STATE
+
+    public void SetGrounded(bool value) => isGrounded = value;
+    public void SetJumping(bool value) => isJumping = value;
+    public void SetDashing(bool value) => isDashing = value;
+    public void SetWallJumping(bool value) => isWallJumping = value;
+    public void SetGrab(bool value) => grab = value;
+    public void SetCanGrab(bool value) => canGrab = value;
+
+
+    // WALL STATE
+
+    public void SetWallLeft(bool value) => isTouchingWallLeft = value;
+    public void SetWallRight(bool value) => isTouchingWallRight = value;
+
+
+    // ABILITIES
+
+    public void SetHasJump(bool value) => hasJump = value;
+    public void SetHasDash(bool value) => hasDash = value;
+
+
+    // TIMERS
+
+    public void SetCoyoteTimer(float value) => coyoteTimer = value;
+    public void SetJumpBufferTimer(float value) => jumpBufferTimer = value;
+
 }
