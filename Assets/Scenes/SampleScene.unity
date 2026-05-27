@@ -12462,6 +12462,9 @@ MonoBehaviour:
   moveSpeed: 5
   climbSpeed: 2.5
   maxFallSpeed: 8
+  baseMoveSpeed: 0
+  slowMultiplier: 1
+  isSlipping: 0
   jumpForce: 7
   jumpMultiplier: 0.5
   coyoteTime: 0.12
@@ -12490,6 +12493,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 8
+  garbageBar: {fileID: 1789415076}
   playerCamera: {fileID: 519420031}
   spriteRenderer: {fileID: 0}
   dashTrail: {fileID: 1484510139}

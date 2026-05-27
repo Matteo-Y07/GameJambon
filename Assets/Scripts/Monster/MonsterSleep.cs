@@ -19,6 +19,15 @@ public class MonsterSleep : Monster
         monsterCollider = GetComponent<Collider2D>();
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        SetDetectionRange(5f);
+        SetAttackRange(0f);
+        SetMoveSpeed(4f);
+        SetDamage(1);
+        SetHealth(1);
+    }
     protected override void Update()
     {
         base.Update();

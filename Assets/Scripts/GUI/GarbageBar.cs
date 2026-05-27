@@ -35,7 +35,6 @@ public class GarbageBar : MonoBehaviour
 
         if (!maxReached && currentValue >= maxValue)
         {
-            Debug.Log("Garbage bar is full. Instance ID: " + GetInstanceID());
             maxReached = true;
         }
     }

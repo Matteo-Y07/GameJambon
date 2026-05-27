@@ -9,6 +9,7 @@ public class Monster : MonoBehaviour
 
     [Header("Detection")]
     [SerializeField] protected float detectionRange = 10f;
+    [SerializeField] protected float attackRange = 1f;
 
     [Header("References")]
     [SerializeField] protected Rigidbody2D rb;
@@ -72,4 +73,20 @@ public class Monster : MonoBehaviour
             playerHealth.TakeDamage(damage);
         }
     }
+
+    //Setters & Getters
+    
+    public float GetDetectionRange() => detectionRange;
+    public float GetAttackRange() => attackRange;
+    public float GetMoveSpeed() => moveSpeed;
+    public int GetDamage() => damage;
+    public int GetHealth() => health;
+
+    public void SetDetectionRange(float range) => detectionRange = range;
+    public void SetAttackRange(float range) => attackRange = range;
+    public void SetMoveSpeed(float speed) => moveSpeed = speed;
+    public void SetDamage(int dmg) => damage = dmg;
+    public void SetHealth(int hp) => health = hp;
+
+
 }

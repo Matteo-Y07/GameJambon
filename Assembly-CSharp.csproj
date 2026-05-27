@@ -93,6 +93,7 @@
     <Compile Include="Assets\Scripts\GUI\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\GUI\HealthTester.cs" />
     <Compile Include="Assets\Scripts\Backgroung\RepeatBg.cs" />
+    <Compile Include="Assets\Scripts\Monster\DebuffProjectile.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerDashController.cs" />
     <Compile Include="Assets\Scripts\Backgroung\ParallaxLayer.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />

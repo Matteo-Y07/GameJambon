@@ -3,9 +3,9 @@ using UnityEngine;
 public class MonsterPollution : Monster
 {
     [Header("Pollution")]
-    [SerializeField] private GarbageBar garbageBar;
     [SerializeField] private float pollutionPerSecond = 5f;
 
+    private GarbageBar garbageBar;
     private Renderer rend;
 
     protected override void Awake()
@@ -17,7 +17,18 @@ public class MonsterPollution : Monster
     protected override void Start()
     {
         base.Start();
-        garbageBar = FindObjectOfType<GarbageBar>();
+
+        if (player != null)
+        {
+            PlayerMovement pm = player.GetComponent<PlayerMovement>();
+            if (pm != null) garbageBar = pm.GetGarbageBar();
+        }
+
+        SetDetectionRange(10f);
+        SetAttackRange(0f);
+        SetMoveSpeed(1f);
+        SetDamage(0);
+        SetHealth(3);
     }
 
     protected override void Update()
@@ -30,6 +41,7 @@ public class MonsterPollution : Monster
     {
         if (garbageBar == null) return;
         if (!IsVisible()) return;
+
         garbageBar.Add(pollutionPerSecond * Time.deltaTime);
     }
 

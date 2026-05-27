@@ -1,11 +1,14 @@
 using UnityEngine;
-
+using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private float climbSpeed = 2.5f;
     [SerializeField] private float maxFallSpeed = 8.0f;
+    [SerializeField] private float baseMoveSpeed;
+    [SerializeField] private float slowMultiplier = 1f;
+    [SerializeField] private bool isSlipping = false;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 7.0f;
@@ -43,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     // Visuals
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private GarbageBar garbageBar; 
     
     // References
     [SerializeField] private Camera playerCamera;
@@ -73,6 +77,8 @@ public class PlayerMovement : MonoBehaviour
     private float coyoteTimer = 0f;
     private float jumpBufferTimer = 0f;
 
+
+
     // Controllers
     private PlayerMovementController movement;
     private PlayerJumpController jump;
@@ -95,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
         dashTrail = GetComponent<TrailRenderer>();
         groundLayer = LayerMask.GetMask("Ground");
         wallLayer = LayerMask.GetMask("Ground");
+        baseMoveSpeed = moveSpeed;
     }
 
     void Start()
@@ -175,6 +182,35 @@ public class PlayerMovement : MonoBehaviour
         else rb.gravityScale = GetGravity();
     }
 
+    // =========================
+    // PUBLIC METHODS (Ice, Slow)
+    // =========================
+    public void ApplySlow(float multiplier, float duration)
+    {
+        StopCoroutine("ResetSlow");
+        slowMultiplier = multiplier;
+        StartCoroutine(ResetSlow(duration));
+    }
+
+    private IEnumerator ResetSlow(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        slowMultiplier = 1f;
+    }
+
+    public void ApplyIce(float duration)
+    {
+        StopCoroutine("ResetIce");
+        isSlipping = true;
+        StartCoroutine(ResetIce(duration));
+    }
+
+    private IEnumerator ResetIce(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        isSlipping = false;
+    }
+
     // ========================= 
     // GETTERS (CONFIG)
     // =========================
@@ -182,7 +218,7 @@ public class PlayerMovement : MonoBehaviour
     //GETTERS PHISICS 
 
     public Rigidbody2D GetRigidbody() => rb;
-    public float GetMoveSpeed() => moveSpeed;
+    public float GetMoveSpeed() => baseMoveSpeed * slowMultiplier;
     public float GetMaxFallSpeed() => maxFallSpeed;
     public float GetGravity() => gravity;
 
@@ -220,7 +256,7 @@ public class PlayerMovement : MonoBehaviour
 
     public SpriteRenderer GetSpriteRenderer() => spriteRenderer;
     public TrailRenderer GetTrail() => dashTrail;
-
+    public GarbageBar GetGarbageBar() => FindObjectOfType<GarbageBar>();
 
     //GETTERS CAMERA
 
@@ -291,6 +327,8 @@ public class PlayerMovement : MonoBehaviour
     {
         return Physics2D.OverlapArea(wallCheckRightBottom.position, wallCheckRightBottom.position + Vector3.left * 0.1f, wallLayer);
     }
+
+
 
     // =========================
     // SETTERS (CONFIG)
