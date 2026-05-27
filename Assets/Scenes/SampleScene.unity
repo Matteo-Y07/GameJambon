@@ -12275,7 +12275,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 1484510135}
   playerMovement: {fileID: 1484510142}
-  garbageBar: {fileID: 1789415076}
   playerRespawn: {fileID: 1484510138}
 --- !u!114 &1484510138
 MonoBehaviour:
@@ -12291,9 +12290,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawnDelay: 0.2
   playerHealth: {fileID: 1484510135}
-  garbageBar: {fileID: 1056083678}
-  stateChecker: {fileID: 0}
-  rb: {fileID: 0}
+  stateCheck: {fileID: 1484510137}
+  rb: {fileID: 1484510130}
 --- !u!96 &1484510139
 TrailRenderer:
   serializedVersion: 3
@@ -15358,7 +15356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c25844f0774f245ac28c8c30187f04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnType: 2
+  spawnType: 3
 --- !u!1 &1641262106
 GameObject:
   m_ObjectHideFlags: 0
