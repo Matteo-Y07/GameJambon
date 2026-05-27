@@ -3,29 +3,51 @@ using System.Collections;
 
 public class PlayerRespawn : MonoBehaviour
 {
+    [Header("Settings")]
     [SerializeField] private float respawnDelay = 0.2f;
+
+    [Header("References")]
     [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerStateCheck stateCheck;
+    [SerializeField] private Rigidbody2D rb;
+
+    private GarbageBar garbageBar;
 
     private Vector3 startPosition;
+    private bool isRespawning;
 
     void Start()
     {
         startPosition = transform.position;
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
+        garbageBar = FindObjectOfType<GarbageBar>();
     }
 
-    public void Die()
+    public void TriggerRespawn()
     {
-        StartCoroutine(Respawn());
+        if (isRespawning) return;
+        StartCoroutine(RespawnRoutine());
     }
 
-    IEnumerator Respawn()
+    private IEnumerator RespawnRoutine()
     {
+        Debug.Log("Respawning player...");
+        isRespawning = true;
+
         yield return new WaitForSeconds(respawnDelay);
 
         Vector3 respawnPos = GameManager.instance.GetCheckpoint(startPosition);
         transform.position = respawnPos;
-        playerHealth.ResetHealth();
-        GetComponent<PlayerStateChecker>().ResetState();
+
+        if (playerHealth != null) playerHealth.ResetHealth();
+        if (garbageBar != null) garbageBar.ResetBar();
+        if (rb != null) rb.velocity = Vector2.zero;
+        Debug.Log("Player respawned at: " + respawnPos);
+        if (stateCheck != null) stateCheck.ResetState();
+        if (stateCheck == null) Debug.Log("stateCheck is null.");
+        Debug.Log("Player state reset after respawn.");
+
+        isRespawning = false;
     }
 
     public Vector3 GetStartPosition()

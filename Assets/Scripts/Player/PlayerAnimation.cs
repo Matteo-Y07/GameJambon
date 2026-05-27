@@ -33,7 +33,7 @@ public class PlayerAnimation
 
         //pour la chute
         player.GetAnimator().SetBool("isFalling", player.GetRigidbody().velocity.y < -2f && !player.IsGrounded() && !(player.IsTouchingWallLeft() || player.IsTouchingWallRight()));
-        Debug.Log("isFalling: " + player.GetAnimator().GetBool("isFalling") + " | velocityY: " + player.GetRigidbody().velocity.y);
+
         //pour l'atterissage
         player.GetAnimator().SetBool("isLanding", player.IsGrounded() && player.GetRigidbody().velocity.y < -0.1f);
 

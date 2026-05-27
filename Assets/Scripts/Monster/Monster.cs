@@ -9,7 +9,6 @@ public class Monster : MonoBehaviour
 
     [Header("Detection")]
     [SerializeField] protected float detectionRange = 10f;
-    [SerializeField] protected float attackRange = 2f;
 
     [Header("References")]
     [SerializeField] protected Rigidbody2D rb;
@@ -26,9 +25,7 @@ public class Monster : MonoBehaviour
 
     protected virtual void Start()
     {
-        GameObject p =
-            GameObject.FindGameObjectWithTag("Player");
-
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
         if (p != null) player = p.transform;
     }
 
@@ -46,14 +43,15 @@ public class Monster : MonoBehaviour
         if (distance > detectionRange) return;
 
         Vector2 direction = (player.position - transform.position).normalized;
+
         rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
+
         spriteRenderer.flipX = direction.x < 0;
     }
 
     public virtual void TakeDamage(int amount)
     {
         health -= amount;
-        Debug.Log(name + " HP : " + health);
         if (health <= 0) Die();
     }
 
@@ -66,7 +64,12 @@ public class Monster : MonoBehaviour
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Player")) return;
+
         PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
-        if (playerHealth != null) playerHealth.TakeDamage(damage); 
+
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(damage);
+        }
     }
 }

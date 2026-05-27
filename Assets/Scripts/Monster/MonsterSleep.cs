@@ -22,7 +22,10 @@ public class MonsterSleep : Monster
     IEnumerator SleepPlayer(PlayerMovement player)
     {
         player.enabled = false;
+        Debug.Log("Player asleep for " + sleepDuration + " seconds");
         yield return new WaitForSeconds(sleepDuration);
         player.enabled = true;
+        Debug.Log("Player awake");
+
     }
 }

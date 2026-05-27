@@ -14,6 +14,12 @@ public class MonsterPollution : Monster
         rend = GetComponent<Renderer>();
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        garbageBar = FindObjectOfType<GarbageBar>();
+    }
+
     protected override void Update()
     {
         base.Update();

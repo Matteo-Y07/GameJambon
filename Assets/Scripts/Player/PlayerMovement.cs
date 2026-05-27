@@ -28,9 +28,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private int damage = 1;
     [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private float attackCooldown = 0.5f;
+    [SerializeField] private float attackCooldown = 1f;
 
     [Header("References")]
+    // Physics & Collisions
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheckLeft;
     [SerializeField] private Transform groundCheckRight;
@@ -39,15 +40,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform wallCheckRightBottom;
     [SerializeField] private Transform wallCheckRightTop;
 
+    // Visuals
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
-
+    
+    // References
     [SerializeField] private Camera playerCamera;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private TrailRenderer dashTrail;
-
+    
+    // Attack
     [SerializeField] private Transform attackPoint;
-
+    
+    // Animator
     [SerializeField] private Animator animator;
 
     [Header("Runtime State")]
@@ -56,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isTouchingWallLeft;
     [SerializeField] private bool isTouchingWallRight;
 
+    // Abilities state
     private bool hasJump = true;
     private bool grab = false;
     private bool canGrab = true;
@@ -63,9 +69,11 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing = false;
     private bool hasDash = true;
 
+    // Timers
     private float coyoteTimer = 0f;
     private float jumpBufferTimer = 0f;
 
+    // Controllers
     private PlayerMovementController movement;
     private PlayerJumpController jump;
     private PlayerDashController dash;

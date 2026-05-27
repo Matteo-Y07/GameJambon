@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class GarbageBar : MonoBehaviour
 {
@@ -10,46 +11,52 @@ public class GarbageBar : MonoBehaviour
     [SerializeField] private float currentValue = 0f;
     [SerializeField] private float maxValue = 100f;
 
-    void Start()
+    private bool maxReached;
+
+    void Awake()
     {
         UpdateBar();
     }
 
-    void Update()
+    void OnEnable()
     {
-        // test
-        if (Input.GetKey(KeyCode.H))
-        {
-            Add(20f * Time.deltaTime);
-        }
+        UpdateBar();
     }
 
     public void Add(float amount)
     {
-        currentValue = Mathf.Clamp(currentValue + amount, 0f, maxValue);
-        UpdateBar();
+        Set(currentValue + amount);
     }
 
     public void Set(float value)
     {
         currentValue = Mathf.Clamp(value, 0f, maxValue);
         UpdateBar();
+
+        if (!maxReached && currentValue >= maxValue)
+        {
+            Debug.Log("Garbage bar is full. Instance ID: " + GetInstanceID());
+            maxReached = true;
+        }
     }
 
-    public float GetValue()
+    public void ResetBar()
     {
-        return currentValue;
+        currentValue = 0f;
+        maxReached = false;
+        UpdateBar();
     }
 
     public float GetPercent()
     {
-        return currentValue / maxValue;
+        return maxValue <= 0f ? 0f : currentValue / maxValue;
     }
 
     void UpdateBar()
     {
         if (fill == null) return;
-
-        fill.fillAmount = currentValue / maxValue;
+        fill.fillAmount = GetPercent();
     }
+
+    public bool IsMaxReached() => maxReached;
 }
