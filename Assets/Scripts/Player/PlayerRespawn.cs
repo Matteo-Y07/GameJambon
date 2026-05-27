@@ -31,7 +31,6 @@ public class PlayerRespawn : MonoBehaviour
 
     private IEnumerator RespawnRoutine()
     {
-        Debug.Log("Respawning player...");
         isRespawning = true;
 
         yield return new WaitForSeconds(respawnDelay);
@@ -42,10 +41,7 @@ public class PlayerRespawn : MonoBehaviour
         if (playerHealth != null) playerHealth.ResetHealth();
         if (garbageBar != null) garbageBar.ResetBar();
         if (rb != null) rb.velocity = Vector2.zero;
-        Debug.Log("Player respawned at: " + respawnPos);
         if (stateCheck != null) stateCheck.ResetState();
-        if (stateCheck == null) Debug.Log("stateCheck is null.");
-        Debug.Log("Player state reset after respawn.");
 
         isRespawning = false;
     }

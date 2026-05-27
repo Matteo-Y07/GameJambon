@@ -12,8 +12,6 @@ public class PlayerStateCheck : MonoBehaviour
     void Start()
     {
         garbageBar = FindObjectOfType<GarbageBar>();
-        if (garbageBar == null) Debug.LogError("GarbageBar not found in the scene.");
-        if (playerHealth == null) Debug.LogError("PlayerHealth reference not set.");
         
     }
 
@@ -25,16 +23,13 @@ public class PlayerStateCheck : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Die() appelé");
         if (playerMovement != null) playerMovement.enabled = false;
         if (playerRespawn != null) playerRespawn.TriggerRespawn();
     }
 
     public void ResetState()
     {
-        Debug.Log("stauts du mouvement du joueur avant dead" + playerMovement.enabled);
         isDead = false;
-        Debug.Log("stauts du mouvement du joueur " + playerMovement.enabled);
         if (playerMovement != null && !playerMovement.enabled) playerMovement.enabled = true;
     }
 }
