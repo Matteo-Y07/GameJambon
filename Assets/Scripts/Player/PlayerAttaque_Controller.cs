@@ -14,7 +14,7 @@ public class PlayerAttackController
     {
         if (Time.time < nextAttackTime) return;
 
-        if (Input.GetButtonDown("Attack"))
+        if (Input.GetButtonDown("Attack")) 
         {
             Attack();
             nextAttackTime = Time.time + player.GetAttackCooldown();

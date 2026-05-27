@@ -175,7 +175,7 @@ public class PlayerMovement : MonoBehaviour
         else rb.gravityScale = GetGravity();
     }
 
-    // =========================
+    // ========================= 
     // GETTERS (CONFIG)
     // =========================
 
