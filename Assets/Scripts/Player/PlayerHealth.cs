@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
         UpdateUI();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage) 
     {
         if (isDead) return;
         if (damage <= 0) return;
