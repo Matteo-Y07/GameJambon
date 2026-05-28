@@ -32,6 +32,7 @@ public class PlayerAttackController
             if (monster != null) monster.TakeDamage(player.GetDamage());
         }
         Debug.Log("Attaque !" + " Ennemis touchés: " + hits.Length + " | Prochain attaque dans: " + nextAttackTime + " secondes");
+        
     }
 
     bool IsEnemyInFront(Transform target)
