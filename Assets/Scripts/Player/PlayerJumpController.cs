@@ -30,7 +30,7 @@ public class PlayerJumpController
         }
 
         // NORMAL JUMP
-        if (player.GetJumpBufferTimer() > 0f && (player.GetCoyoteTimer() > 0f || player.IsTouchingWallLeft() || player.IsTouchingWallRight()) && player.HasJump())
+        if (player.GetJumpBufferTimer() > 0f && (player.GetCoyoteTimer() > 0f || player.IsTouchingWallLeft() || player.IsTouchingWallRight()) && player.HasJump() && !player.IsGrabbing())
         {
             Rigidbody2D rb = player.GetRigidbody();
 

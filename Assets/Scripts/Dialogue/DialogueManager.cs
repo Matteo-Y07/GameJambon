@@ -19,22 +19,11 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        if(dialoguePanel.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        if(dialoguePanel.activeSelf && Input.GetButtonDown("Submit"))
         {
             // Si le texte est encore en train de s'écrire
             // on le termine instantanément
-            if(isTyping)
-            {
-                StopAllCoroutines();
-
-                dialogueText.text = currentDialogue[index].text;
-
-                isTyping = false;
-            }
-            else
-            {
-                NextLine();
-            }
+            ContinueDialogue();
         }
     }
 
@@ -53,8 +42,13 @@ public class DialogueManager : MonoBehaviour
         DialogueLine line = currentDialogue[index];
 
         nameText.text = line.characterName;
-
-        portraitImage.sprite = line.portrait;
+        if (line.portrait != null)
+        {
+            portraitImage.sprite = line.portrait;
+        }
+        else {
+            GetComponent<Image>().enabled = false;
+        }
 
         StopAllCoroutines();
         StartCoroutine(TypeLine(line.text));
@@ -87,5 +81,23 @@ public class DialogueManager : MonoBehaviour
         }
 
         isTyping = false;
+    }
+
+    public void ContinueDialogue()
+    {
+        if (!dialoguePanel.activeSelf)
+            return;
+
+        if (isTyping)
+        {
+            StopAllCoroutines();
+
+            dialogueText.text = currentDialogue[index].text;
+            isTyping = false;
+        }
+        else
+        {
+            NextLine();
+        }
     }
 }

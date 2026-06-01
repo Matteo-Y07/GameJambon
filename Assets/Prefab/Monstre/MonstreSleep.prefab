@@ -113,7 +113,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &919790007802244422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +130,7 @@ MonoBehaviour:
   moveSpeed: 2
   damage: 1
   detectionRange: 10
+  attackRange: 1
   rb: {fileID: 1816006478894286883}
   spriteRenderer: {fileID: 6282800570831702484}
   sleepDuration: 2

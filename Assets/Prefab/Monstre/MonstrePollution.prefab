@@ -113,7 +113,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &9068190182346706125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,9 +130,9 @@ MonoBehaviour:
   moveSpeed: 2
   damage: 1
   detectionRange: 10
+  attackRange: 1
   rb: {fileID: 5142125398753166662}
   spriteRenderer: {fileID: 8109656288991910857}
-  garbageBar: {fileID: 0}
   pollutionPerSecond: 5
 --- !u!61 &5400797551067531439
 BoxCollider2D:

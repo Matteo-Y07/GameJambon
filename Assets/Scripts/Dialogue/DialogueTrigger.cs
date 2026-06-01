@@ -5,8 +5,21 @@ public class DialogueTrigger : MonoBehaviour
     public DialogueManager manager;
 
     private bool triggered = false;
+    private IntroFade introFade;
+    void Start()
+    {
+        if (introFade == null)
+        {
+            introFade = FindObjectOfType<IntroFade>();
+        }
+    }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void Update()
+    {
+        Debug.Log("Intro fade status: " + (introFade != null ? introFade.intro.ToString() : "No IntroFade found"));
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
     {
         if(other.CompareTag("Player") && !triggered)
         {
