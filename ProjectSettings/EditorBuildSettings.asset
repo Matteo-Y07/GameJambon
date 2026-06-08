@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DarkForest.unity
     guid: f70130a6999a30d4eab69c3164f8bbee
+  - enabled: 1
+    path: Assets/Scenes/BossTuto.unity
+    guid: a44747dd1a6087b4b8e7de85ddab4000
   m_configObjects: {}

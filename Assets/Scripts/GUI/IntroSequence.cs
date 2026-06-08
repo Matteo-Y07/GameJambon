@@ -7,6 +7,8 @@ public class IntroSequence : MonoBehaviour
     [SerializeField] private DialogueManager dialogueManager;
 
     [SerializeField] private DialogueLine[] dialogue1;
+    [SerializeField] private DialogueLine[] dialogue2;    
+
 
     private void Start()
     {
