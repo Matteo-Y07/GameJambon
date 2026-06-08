@@ -35,29 +35,29 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("References")]
     // Physics & Collisions
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheckLeft;
-    [SerializeField] private Transform groundCheckRight;
-    [SerializeField] private Transform wallCheckLeftBottom;
-    [SerializeField] private Transform wallCheckLeftTop;
-    [SerializeField] private Transform wallCheckRightBottom;
-    [SerializeField] private Transform wallCheckRightTop;
+    private Rigidbody2D rb;
+    private Transform groundCheckLeft;
+    private Transform groundCheckRight;
+    private Transform wallCheckLeftBottom;
+    private Transform wallCheckLeftTop;
+    private Transform wallCheckRightBottom;
+    private Transform wallCheckRightTop;
 
     // Visuals
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private LayerMask wallLayer;
-    [SerializeField] private GarbageBar garbageBar; 
+    private LayerMask groundLayer;
+    private LayerMask wallLayer;
+    private GarbageBar garbageBar; 
     
     // References
-    [SerializeField] private Camera playerCamera;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private TrailRenderer dashTrail;
+    private Camera playerCamera;
+    private SpriteRenderer spriteRenderer;
+    private TrailRenderer dashTrail;
     
     // Attack
-    [SerializeField] private Transform attackPoint;
+    private Transform attackPoint;
     
     // Animator
-    [SerializeField] private Animator animator;
+    private Animator animator;
 
     [Header("Runtime State")]
     [SerializeField] private bool isGrounded;
@@ -89,24 +89,48 @@ public class PlayerMovement : MonoBehaviour
     
     private void Awake() 
     { 
+        // Recherche automatique sur le joueur lui-même
+        rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        dashTrail = GetComponent<TrailRenderer>();
+        GameObject cameraObj = GameObject.FindWithTag("MainCamera");
+        playerCamera = cameraObj.GetComponent<Camera>();
+
+        // Recherche automatique dans les enfants par leur nom exact dans la hiérarchie
+        groundCheckLeft = transform.Find("GroundCheckLeft");
+        groundCheckRight = transform.Find("GroundCheckRight");
+        wallCheckLeftBottom = transform.Find("WallCheckLeftBottom");
+        wallCheckLeftTop = transform.Find("WallCheckLeftTop");
+        wallCheckRightBottom = transform.Find("WallCheckRightBottom");
+        wallCheckRightTop = transform.Find("WallCheckRightTop");
+        attackPoint = transform.Find("AttackPoint");
+
+        // Configuration automatique des LayerMasks
+        groundLayer = LayerMask.GetMask("Ground");
+        wallLayer = LayerMask.GetMask("Ground"); // Ajuste si ton layer de mur s'appelle autrement
+        baseMoveSpeed = moveSpeed;
+
+        // Initialisation de tes controllers
         movement = new PlayerMovementController(this);
         jump = new PlayerJumpController(this);
         dash = new PlayerDashController(this);
         wall = new PlayerWallController(this);
         attack = new PlayerAttackController(this);
         playerAnimation = new PlayerAnimation(this);
-        playerCamera = GetComponent<Camera>();
-        dashTrail = GetComponent<TrailRenderer>();
-        groundLayer = LayerMask.GetMask("Ground");
-        wallLayer = LayerMask.GetMask("Ground");
-        baseMoveSpeed = moveSpeed;
+
     }
 
     void Start()
     {
-        dashTrail.enabled = false;
+        if (dashTrail != null) dashTrail.enabled = false;
+
+        // Recherche automatique de la GarbageBar dans le Canvas persistant
+        if (garbageBar == null)
+        {
+            garbageBar = FindObjectOfType<GarbageBar>(true); 
+            // Le (true) permet de la trouver même si le Canvas est temporairement désactivé
+        }
     }
 
     void Update()

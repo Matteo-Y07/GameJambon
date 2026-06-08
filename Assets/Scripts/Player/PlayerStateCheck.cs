@@ -2,19 +2,31 @@ using UnityEngine;
 
 public class PlayerStateCheck : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private PlayerHealth playerHealth;
-    [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private PlayerRespawn playerRespawn;
+    // Références
+    private PlayerHealth playerHealth;
+    private PlayerMovement playerMovement;
+    private PlayerRespawn playerRespawn;
 
     private GarbageBar garbageBar;
 
     private bool isDead;
     private bool deathHandled;
 
+    void Awake()
+    {
+        // Trouve automatiquement les scripts frères sur le même GameObject
+        if (playerHealth == null) playerHealth = GetComponent<PlayerHealth>();
+        if (playerMovement == null) playerMovement = GetComponent<PlayerMovement>();
+        if (playerRespawn == null) playerRespawn = GetComponent<PlayerRespawn>();
+    }
+
     void Start()
     {
-        garbageBar = FindObjectOfType<GarbageBar>();
+        // Trouve automatiquement la GarbageBar dans le camion UI
+        if (garbageBar == null)
+        {
+            garbageBar = FindObjectOfType<GarbageBar>(true);
+        }
     }
 
     void Update()

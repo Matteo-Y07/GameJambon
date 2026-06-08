@@ -3,10 +3,10 @@ using System;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("Hearts")]
-    [SerializeField] private HeartUI heart3;
-    [SerializeField] private HeartUI heart2;
-    [SerializeField] private HeartUI heart1;
+    [Header("Hearts (Automated)")]
+    private HeartUI heart3;
+    private HeartUI heart2;
+    private HeartUI heart1;
 
     [Header("HP")]
     [SerializeField] private int hp3 = 100;
@@ -18,6 +18,22 @@ public class PlayerHealth : MonoBehaviour
 
     void Awake()
     {
+        // AUTOMATISATION : On cherche les objets UI par leur nom exact dans le camion
+        // Remplace "Heart3", "Heart2", "Heart1" par le NOM EXACT de tes GameObjects de cœurs dans ta hiérarchie UI
+        GameObject h3Obj = GameObject.Find("Heart 3");
+        GameObject h2Obj = GameObject.Find("Heart 2");
+        GameObject h1Obj = GameObject.Find("Heart 1");
+
+        if (h3Obj != null) heart3 = h3Obj.GetComponent<HeartUI>();
+        if (h2Obj != null) heart2 = h2Obj.GetComponent<HeartUI>();
+        if (h1Obj != null) heart1 = h1Obj.GetComponent<HeartUI>();
+
+        // Petit message de sécurité au cas où tu as fait une faute de frappe dans le nom
+        if (heart1 == null || heart2 == null || heart3 == null)
+        {
+            Debug.LogError("PlayerHealth : Un ou plusieurs HeartUI n'ont pas pu être trouvés. Vérifie le nom de tes objets.");
+        }
+
         UpdateUI();
     }
 
