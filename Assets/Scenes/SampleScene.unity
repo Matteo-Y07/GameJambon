@@ -1673,15 +1673,10 @@ MonoBehaviour:
     text: "*Huh* Qu'est ce qui se passe ? O\xF9 suis-je ? "
     portrait: {fileID: 21300000, guid: 766605f9b92419949b97b3a19c545c0a, type: 3}
   dialogue2:
-<<<<<<< HEAD
-  - characterName: ???
-    text: 
-    portrait: {fileID: 21300000, guid: 766605f9b92419949b97b3a19c545c0a, type: 3}
-=======
+
   - characterName: "Syst\xE8me"
     text: "Appuyez sur Q ou D pour vous d\xE9placer"
     portrait: {fileID: 21300000, guid: cd1c2af6d3122f347b2a569bc4461239, type: 3}
->>>>>>> 67dc50e1f2d7d62820176336e206e8f2be0982ca
 --- !u!1 &444249799
 GameObject:
   m_ObjectHideFlags: 0
@@ -12096,13 +12091,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a7650e3a5341d44b982ed69051cb123, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  sceneToLoad: TutoBossScene
-  spawnPointName: spawnPlayer
-=======
+
   sceneToLoad: BossTuto
   spawnPointName: SpawnCave
->>>>>>> 67dc50e1f2d7d62820176336e206e8f2be0982ca
 --- !u!4 &483479241
 Transform:
   m_ObjectHideFlags: 0
@@ -13673,11 +13664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-<<<<<<< HEAD
-  m_IsActive: 0
-=======
   m_IsActive: 1
->>>>>>> 67dc50e1f2d7d62820176336e206e8f2be0982ca
 --- !u!224 &806159591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14853,7 +14840,6 @@ Transform:
   - {fileID: 2010379338}
   m_Father: {fileID: 462963466}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!1 &1128102751
 GameObject:
   m_ObjectHideFlags: 0
@@ -14949,8 +14935,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1737849856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
->>>>>>> 67dc50e1f2d7d62820176336e206e8f2be0982ca
+
 --- !u!1 &1128664572
 GameObject:
   m_ObjectHideFlags: 0
@@ -20959,10 +20944,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2089046548}
-<<<<<<< HEAD
   - {fileID: 1128102754}
-=======
->>>>>>> 67dc50e1f2d7d62820176336e206e8f2be0982ca
+
   - {fileID: 383082106}
   - {fileID: 1631909032}
   - {fileID: 1216427419}
@@ -25708,11 +25691,7 @@ Transform:
   m_GameObject: {fileID: 2089046547}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-<<<<<<< HEAD
   m_LocalPosition: {x: 10.288776, y: -1.5848116, z: 0.8039561}
-=======
-  m_LocalPosition: {x: 0.11, y: -1.5848116, z: 0.8039561}
->>>>>>> 67dc50e1f2d7d62820176336e206e8f2be0982ca
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25732,12 +25711,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - characterName: Hero
-<<<<<<< HEAD
+
     text: "*Huh* Qu'est ce qui se passe ? O\xF9 suis-je ? "
     portrait: {fileID: 21300000, guid: 766605f9b92419949b97b3a19c545c0a, type: 3}
   - characterName: Hero
-=======
->>>>>>> 67dc50e1f2d7d62820176336e206e8f2be0982ca
+
     text: "C\u2019est encore pire que ce que je pensais, l\u2019air est irrespirable
       ici, je vais encore devoir m\u2019occuper de cette satan\xE9e pollution\u2026"
     portrait: {fileID: 21300000, guid: 766605f9b92419949b97b3a19c545c0a, type: 3}
@@ -25779,11 +25757,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-<<<<<<< HEAD
-  m_Offset: {x: -5.854057, y: -2.9575932}
-=======
+
   m_Offset: {x: -3.1338587, y: -2.9575932}
->>>>>>> 67dc50e1f2d7d62820176336e206e8f2be0982ca
+
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -25794,11 +25770,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-<<<<<<< HEAD
-  m_Size: {x: 13.062018, y: 6.9151864}
-=======
+
   m_Size: {x: 7.621623, y: 6.9151864}
->>>>>>> 67dc50e1f2d7d62820176336e206e8f2be0982ca
+
   m_EdgeRadius: 0
 --- !u!1 &2104948454
 GameObject:
