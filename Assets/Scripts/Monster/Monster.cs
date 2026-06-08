@@ -32,6 +32,8 @@ public class Monster : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (GameState.InDialogue || GameState.InPause)
+            return;
         if (dead) return;
         Move();
     }

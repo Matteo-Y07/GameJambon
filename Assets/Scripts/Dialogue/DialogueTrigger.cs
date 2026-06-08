@@ -14,10 +14,7 @@ public class DialogueTrigger : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        Debug.Log("Intro fade status: " + (introFade != null ? introFade.intro.ToString() : "No IntroFade found"));
-    }
+    
 
     private void OnTriggerStay2D(Collider2D other)
     {

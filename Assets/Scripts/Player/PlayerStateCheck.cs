@@ -8,28 +8,41 @@ public class PlayerStateCheck : MonoBehaviour
     [SerializeField] private PlayerRespawn playerRespawn;
 
     private GarbageBar garbageBar;
+
     private bool isDead;
+    private bool deathHandled;
+
     void Start()
     {
         garbageBar = FindObjectOfType<GarbageBar>();
-        
     }
 
     void Update()
     {
+        if (deathHandled) return;
         isDead = (garbageBar != null && garbageBar.IsMaxReached()) || (playerHealth != null && playerHealth.IsDead());
-        if (isDead) Die();
+
+        if (isDead)
+            Die();
     }
 
     void Die()
     {
-        if (playerMovement != null) playerMovement.enabled = false;
-        if (playerRespawn != null) playerRespawn.TriggerRespawn();
+        deathHandled = true;
+
+        if (playerMovement != null)
+            playerMovement.enabled = false;
+
+        if (playerRespawn != null)
+            playerRespawn.TriggerRespawn();
     }
 
     public void ResetState()
     {
         isDead = false;
-        if (playerMovement != null && !playerMovement.enabled) playerMovement.enabled = true;
+        deathHandled = false;
+
+        if (playerMovement != null)
+            playerMovement.enabled = true;
     }
 }

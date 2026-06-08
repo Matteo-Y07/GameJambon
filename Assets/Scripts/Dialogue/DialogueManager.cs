@@ -5,30 +5,44 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    [Header("UI")]
     public GameObject dialoguePanel;
-
     public TMP_Text nameText;
     public TMP_Text dialogueText;
-
     public Image portraitImage;
+
+    [Header("Settings")]
+    [SerializeField] private float textSpeed = 0.03f;
 
     private DialogueLine[] currentDialogue;
     private int index;
-
     private bool isTyping;
+    public bool IsDialogueActive { get; private set; }
+
+    void Start()
+    {
+        if (dialoguePanel != null)
+            dialoguePanel.SetActive(false);
+    }
 
     void Update()
     {
-        if(dialoguePanel.activeSelf && Input.GetButtonDown("Submit"))
+        if (GameState.InPause)
+            return;
+
+        if (dialoguePanel.activeSelf && Input.GetButtonDown("Submit"))
         {
-            // Si le texte est encore en train de s'écrire
-            // on le termine instantanément
             ContinueDialogue();
         }
     }
 
     public void StartDialogue(DialogueLine[] dialogue)
     {
+        GameState.InDialogue = true;
+        IsDialogueActive = true;
+
+        Time.timeScale = 0f;
+
         dialoguePanel.SetActive(true);
 
         currentDialogue = dialogue;
@@ -42,12 +56,15 @@ public class DialogueManager : MonoBehaviour
         DialogueLine line = currentDialogue[index];
 
         nameText.text = line.characterName;
+
         if (line.portrait != null)
         {
+            portraitImage.enabled = true;
             portraitImage.sprite = line.portrait;
         }
-        else {
-            GetComponent<Image>().enabled = false;
+        else
+        {
+            portraitImage.enabled = false;
         }
 
         StopAllCoroutines();
@@ -58,13 +75,22 @@ public class DialogueManager : MonoBehaviour
     {
         index++;
 
-        if(index >= currentDialogue.Length)
+        if (index >= currentDialogue.Length)
         {
-            dialoguePanel.SetActive(false);
+            EndDialogue();
             return;
         }
 
         ShowLine();
+    }
+
+    void EndDialogue()
+    {
+        dialoguePanel.SetActive(false);
+
+        GameState.InDialogue = false;
+        IsDialogueActive = false;
+        Time.timeScale = 1f;
     }
 
     IEnumerator TypeLine(string text)
@@ -73,11 +99,10 @@ public class DialogueManager : MonoBehaviour
 
         dialogueText.text = "";
 
-        foreach(char c in text)
+        foreach (char c in text)
         {
             dialogueText.text += c;
-
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSecondsRealtime(textSpeed);
         }
 
         isTyping = false;
@@ -91,7 +116,6 @@ public class DialogueManager : MonoBehaviour
         if (isTyping)
         {
             StopAllCoroutines();
-
             dialogueText.text = currentDialogue[index].text;
             isTyping = false;
         }
@@ -100,4 +124,5 @@ public class DialogueManager : MonoBehaviour
             NextLine();
         }
     }
+    
 }

@@ -21,9 +21,10 @@ public class PlayerAnimation
         // pour la course
         player.GetAnimator().SetBool("isGrounded", player.IsGrounded());
         player.GetAnimator().SetBool("isRunning", player.IsGrounded() && Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f);
-
+        //pour l'escalade
+        player.GetAnimator().SetBool("isClimbing", player.IsGrabbing() && Input.GetAxisRaw("Vertical") != 0);
         //pour le saut
-        player.GetAnimator().SetBool("isJumping", player.IsJumping());
+        player.GetAnimator().SetBool("isJumping", player.IsJumping()  && !player.IsGrabbing());
         
         //pour le grab
         player.GetAnimator().SetBool("isGrabbing", (player.IsTouchingWallLeft() || player.IsTouchingWallRight()) && player.IsGrabbing());
@@ -37,7 +38,6 @@ public class PlayerAnimation
         //pour l'atterissage
         player.GetAnimator().SetBool("isLanding", player.IsGrounded() && player.GetRigidbody().velocity.y < -0.1f);
 
-        //pour l'escalade
-        player.GetAnimator().SetBool("isClimbing", player.IsGrabbing() && Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0f);
+        
     }
 }
