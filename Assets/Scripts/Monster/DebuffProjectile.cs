@@ -57,7 +57,6 @@ public class DebuffProjectile : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Projectile de type " + type + " a touché le joueur !");
 
             PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
 

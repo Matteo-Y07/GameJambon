@@ -111,6 +111,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     { 
+        if (GameState.InDialogue || GameState.InPause)
+        return;
         CheckGround();
         CheckWalls();
         HandleCoyoteTime();

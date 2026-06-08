@@ -5,7 +5,7 @@ public class PauseMenu : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject pauseMenuUI;
 
-    private bool isPaused = false;
+    private bool isPaused;
 
     void Start()
     {
@@ -13,14 +13,16 @@ public class PauseMenu : MonoBehaviour
             pauseMenuUI.SetActive(false);
 
         Time.timeScale = 1f;
+        isPaused = false;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Debug.Log("ESCAPE PRESSED");
+        if (GameState.InDialogue)
+            return;
 
+        if (Input.GetButtonDown("Cancel"))
+        {
             if (isPaused)
                 Resume();
             else
@@ -34,7 +36,9 @@ public class PauseMenu : MonoBehaviour
 
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
+
         isPaused = true;
+        GameState.InPause = true;
     }
 
     public void Resume()
@@ -43,7 +47,9 @@ public class PauseMenu : MonoBehaviour
 
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
+
         isPaused = false;
+        GameState.InPause = false;
     }
 
     public void RestartFromCheckpoint()

@@ -1,45 +1,78 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class IntroFade : MonoBehaviour
 {
-    public Image fadeImage;
-    public PlayerMovement playerMovement;
-    public bool intro = true;
+    [SerializeField] private Image fadeImage;
 
-    private void Start()
+    public IEnumerator FadeToBlack(float duration)
     {
-        StartCoroutine(IntroSequence());
-        playerMovement.enabled = false;
-
+        yield return FadeAlpha(1f, duration);
     }
 
-    IEnumerator IntroSequence()
+    public IEnumerator FadeFromBlack(float duration)
     {
-        yield return StartCoroutine(Fade(Color.black, Color.white, 2f));
-
-        yield return new WaitForSeconds(1f);
-
-        yield return StartCoroutine(Fade(Color.white, new Color(1,1,1,0), 2f));
+        yield return FadeAlpha(0f, duration);
     }
 
-    IEnumerator Fade(Color start, Color end, float duration)
+    public IEnumerator FadeBlackToWhite(float duration)
     {
-        float t = 0;
+        Color start = Color.black;
+        start.a = 1f;
 
-        while (t < duration)
+        Color end = Color.white;
+        end.a = 1f;
+
+        float time = 0f;
+
+        while (time < duration)
         {
-            t += Time.deltaTime;
-            fadeImage.color = Color.Lerp(start, end, t / duration);
+            time += Time.unscaledDeltaTime;
+            fadeImage.color = Color.Lerp(start, end, time / duration);
             yield return null;
         }
 
         fadeImage.color = end;
-        if (end.a == 0)
+    }
+
+    public IEnumerator FadeWhiteToTransparent(float duration)
+    {
+        Color start = Color.white;
+        start.a = 1f;
+
+        Color end = Color.white;
+        end.a = 0f;
+
+        float time = 0f;
+
+        while (time < duration)
         {
-            playerMovement.enabled = true;
-            intro = false;
+            time += Time.unscaledDeltaTime;
+            fadeImage.color = Color.Lerp(start, end, time / duration);
+            yield return null;
         }
+
+        fadeImage.color = end;
+    }
+
+    private IEnumerator FadeAlpha(float targetAlpha, float duration)
+    {
+        Color c = fadeImage.color;
+        float startAlpha = c.a;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.unscaledDeltaTime;
+
+            c.a = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
+            fadeImage.color = c;
+
+            yield return null;
+        }
+
+        c.a = targetAlpha;
+        fadeImage.color = c;
     }
 }
