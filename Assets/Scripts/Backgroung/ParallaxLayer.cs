@@ -29,6 +29,7 @@ public class ParallaxLayer : MonoBehaviour
         if (cameraTransform == null)
         {
             Camera cam = Camera.main;
+            
 
             if (cam != null)
                 cameraTransform = cam.transform;
