@@ -6,21 +6,33 @@ public class PlayerRespawn : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float respawnDelay = 0.2f;
 
-    [Header("References")]
-    [SerializeField] private PlayerHealth playerHealth;
-    [SerializeField] private PlayerStateCheck stateCheck;
-    [SerializeField] private Rigidbody2D rb;
+    // Références
+    private PlayerHealth playerHealth;
+    private PlayerStateCheck stateCheck;
+    private Rigidbody2D rb;
 
     private GarbageBar garbageBar;
 
     private Vector3 startPosition;
     private bool isRespawning;
 
+    void Awake()
+    {
+        // Liens automatiques sur le même GameObject
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
+        if (playerHealth == null) playerHealth = GetComponent<PlayerHealth>();
+        if (stateCheck == null) stateCheck = GetComponent<PlayerStateCheck>();
+    }
+
     void Start()
     {
         startPosition = transform.position;
-        if (rb == null) rb = GetComponent<Rigidbody2D>();
-        garbageBar = FindObjectOfType<GarbageBar>();
+
+        // Trouve automatiquement la GarbageBar dans le camion UI
+        if (garbageBar == null)
+        {
+            garbageBar = FindObjectOfType<GarbageBar>(true);
+        }
     }
 
     public void TriggerRespawn()

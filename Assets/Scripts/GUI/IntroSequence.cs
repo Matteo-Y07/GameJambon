@@ -9,6 +9,7 @@ public class IntroSequence : MonoBehaviour
     [SerializeField] private DialogueLine[] dialogue1;
     [SerializeField] private DialogueLine[] dialogue2;    
 
+
     private void Start()
     {
         StartCoroutine(PlayIntro());
