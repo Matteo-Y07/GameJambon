@@ -12601,11 +12601,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - characterName: Hero
-    text: "Des monstres ! Ce n\u2019est pas la premi\xE8re fois que je les vois ici,
-      ils sont de plus en plus nombreux..."
+    text: "Cette aura ! Ce n\u2019est pas possible, je le pensais mort"
     portrait: {fileID: 21300000, guid: 766605f9b92419949b97b3a19c545c0a, type: 3}
   - characterName: Hero
-    text: "Ceux-l\xE0 augmentent la pollution et ne te laissent plus respirer."
+    text: "C'est \xE0 cause de lui s'il y a des monstres qui sont apparu !"
     portrait: {fileID: 21300000, guid: 766605f9b92419949b97b3a19c545c0a, type: 3}
   manager: {fileID: 1531462487}
 --- !u!61 &604378885
