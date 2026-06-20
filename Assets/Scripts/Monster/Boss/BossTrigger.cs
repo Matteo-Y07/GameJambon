@@ -18,7 +18,6 @@ public class BossZoneTrigger : MonoBehaviour
         {
             if (boss != null)
             {
-                
                 boss.ActivateBoss();
             }
         }

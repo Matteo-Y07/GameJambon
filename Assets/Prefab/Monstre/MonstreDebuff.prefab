@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3615750544269832559}
   - component: {fileID: 6213045359096410534}
   - component: {fileID: 6767038956397065032}
-  - component: {fileID: 5097534015523538141}
   - component: {fileID: 8569966585083384338}
+  - component: {fileID: 2106777908559162604}
   m_Layer: 6
   m_Name: MonstreDebuff
   m_TagString: Untagged
@@ -115,32 +115,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5097534015523538141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2575740454346774814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df36782519910064ba9a4ce128c96b31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 5
-  moveSpeed: 2
-  damage: 1
-  detectionRange: 10
-  attackRange: 1
-  rb: {fileID: 6767038956397065032}
-  spriteRenderer: {fileID: 6213045359096410534}
-  loseTargetRange: 8
-  projectilePrefabs:
-  - {fileID: 1557952380173793099, guid: f0ac244a5072f4c408ffd6f638c65048, type: 3}
-  - {fileID: 917174690644096743, guid: 688dec515235ae84f87931d22cd39c7d, type: 3}
-  - {fileID: 1592063584028796737, guid: 2a3c0cff958e9224d8acff097a77173b, type: 3}
-  firePoint: {fileID: 5621636369034381294}
-  shootCooldown: 2
 --- !u!61 &8569966585083384338
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -186,6 +160,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5443952, y: 0.7249956}
   m_EdgeRadius: 0
+--- !u!114 &2106777908559162604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2575740454346774814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15e85db3c553c6478947855d27961b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
+  moveSpeed: 2
+  damage: 1
+  detectionRange: 10
+  attackRange: 1
+  rb: {fileID: 6767038956397065032}
+  spriteRenderer: {fileID: 6213045359096410534}
+  loseTargetRange: 8
+  projectilePrefabs:
+  - {fileID: 1557952380173793099, guid: f0ac244a5072f4c408ffd6f638c65048, type: 3}
+  - {fileID: 917174690644096743, guid: 688dec515235ae84f87931d22cd39c7d, type: 3}
+  - {fileID: 1592063584028796737, guid: 2a3c0cff958e9224d8acff097a77173b, type: 3}
+  firePoint: {fileID: 5621636369034381294}
+  shootCooldown: 2
 --- !u!1 &3347777990345944551
 GameObject:
   m_ObjectHideFlags: 0

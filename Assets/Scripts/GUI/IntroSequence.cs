@@ -7,17 +7,23 @@ public class IntroSequence : MonoBehaviour
     [SerializeField] private DialogueManager dialogueManager;
 
     [SerializeField] private DialogueLine[] dialogue1;
-    [SerializeField] private DialogueLine[] dialogue2;    
+    [SerializeField] private DialogueLine[] dialogue2;
+    [SerializeField] private PlayerMovement player;
 
 
     private void Start()
     {
+        if (player == null)
+        {
+            player = FindObjectOfType<PlayerMovement>();
+        }
         StartCoroutine(PlayIntro());
     }
 
     private IEnumerator PlayIntro()
     {
         // 1. S'assurer écran noir au départ
+        player.enabled = false;
         yield return introFade.FadeToBlack(0f);
 
         // 2. Premier dialogue
@@ -32,5 +38,9 @@ public class IntroSequence : MonoBehaviour
 
         // 5. Deuxième dialogue
         dialogueManager.StartDialogue(dialogue2);
+        yield return new WaitUntil(() => !dialogueManager.IsDialogueActive);
+
+        // 6. Réactiver le player pour le gameplay
+        player.enabled = true;
     }
 }

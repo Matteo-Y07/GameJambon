@@ -5,12 +5,12 @@ using UnityEngine.UI;
 public class BossTuto : MonoBehaviour
 {
     [Header("Boss Stats")]
-    public float maxHealth = 100f;
+    public float maxHealth = 1000f;
     public float currentHealth;
 
     [Header("UI (Automated)")]
-    private Slider healthBar;
-    private GameObject healthBarUI;
+    [SerializeField] private GameObject healthBarUI;
+    private Image healthBar;
 
     [Header("Activation")]
     public bool bossActivated = false;
@@ -27,29 +27,25 @@ public class BossTuto : MonoBehaviour
     {
         currentHealth = maxHealth;
 
-        // AUTOMATISATION : On trouve l'UI de la barre de boss dans le Canvas persistant
-        // Remplace "BossHealthBar" par le nom EXACT de l'objet parent de ta barre de boss dans l'UI
         healthBarUI = GameObject.Find("BossHealthBar");
 
         if (healthBarUI != null)
         {
-            // On récupère le Slider qui est sur cet objet ou dans ses enfants
-            healthBar = healthBarUI.GetComponentInChildren<Slider>();
-            
-            // On configure le slider par rapport aux HP max du boss
-            if (healthBar != null)
+            Transform fill = healthBarUI.transform.Find("Fill");
+
+            if (fill != null)
             {
-                healthBar.maxValue = maxHealth;
-                healthBar.value = currentHealth;
+                healthBar = fill.GetComponent<Image>();
+                healthBar.fillAmount = 1f;
             }
 
-            // On cache la barre en attendant le combat
             healthBarUI.SetActive(false);
         }
-        else
-        {
-            Debug.LogError("⚠️ BossTuto : Impossible de trouver l'objet 'BossHealthBar' dans le Canvas !");
-        }
+    }
+
+    public void SetHealthBarUI(GameObject ui)
+    {
+        healthBarUI = ui;
     }
 
     public void ActivateBoss()
@@ -94,24 +90,27 @@ public class BossTuto : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        Debug.Log("Boss touché : " + damage);
+
         if (!bossActivated) return;
 
         currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-        UpdateHealthBar();
+        if (healthBar != null)
+            healthBar.fillAmount = currentHealth / maxHealth;
+
+        Debug.Log("PV restants : " + currentHealth);
 
         if (currentHealth <= 0)
-        {
             Die();
-        }
     }
 
     void UpdateHealthBar()
     {
         if (healthBar != null)
         {
-            healthBar.value = currentHealth;
+            healthBar.fillAmount = currentHealth / maxHealth;
         }
     }
 

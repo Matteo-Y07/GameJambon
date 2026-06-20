@@ -54,6 +54,7 @@ public class IntroFade : MonoBehaviour
         }
 
         fadeImage.color = end;
+        fadeImage.gameObject.SetActive(false);
     }
 
     private IEnumerator FadeAlpha(float targetAlpha, float duration)

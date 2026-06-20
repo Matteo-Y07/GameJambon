@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 807163993492515044}
   - component: {fileID: 6724470892410567429}
   - component: {fileID: 813655547989342893}
-  - component: {fileID: 4504916052252697678}
   - component: {fileID: 5986967698673506555}
+  - component: {fileID: 454372873508346133}
   m_Layer: 6
   m_Name: MonstreNormal
   m_TagString: Untagged
@@ -114,25 +114,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4504916052252697678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1809573440072544497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b97dec2ccf274947a68730357e4be99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 5
-  moveSpeed: 2
-  damage: 1
-  detectionRange: 10
-  attackRange: 1
-  rb: {fileID: 813655547989342893}
-  spriteRenderer: {fileID: 6724470892410567429}
 --- !u!61 &5986967698673506555
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -178,3 +159,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.60672736, y: 0.7314944}
   m_EdgeRadius: 0
+--- !u!114 &454372873508346133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809573440072544497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002fa836bbc7c49498409e5b3573701e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
+  moveSpeed: 2
+  damage: 1
+  detectionRange: 10
+  attackRange: 1
+  rb: {fileID: 813655547989342893}
+  spriteRenderer: {fileID: 6724470892410567429}

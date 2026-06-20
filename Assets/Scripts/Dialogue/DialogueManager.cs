@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class DialogueManager : MonoBehaviour
     private int index;
     private bool isTyping;
     public bool IsDialogueActive { get; private set; }
+    public event Action DialogueEnded;
 
     void Start()
     {
@@ -91,6 +93,8 @@ public class DialogueManager : MonoBehaviour
         GameState.InDialogue = false;
         IsDialogueActive = false;
         Time.timeScale = 1f;
+
+        DialogueEnded?.Invoke();
     }
 
     IEnumerator TypeLine(string text)

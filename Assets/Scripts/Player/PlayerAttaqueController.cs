@@ -29,10 +29,19 @@ public class PlayerAttackController
             if (!IsEnemyInFront(hit.transform)) continue;
 
             Monster monster = hit.GetComponent<Monster>();
-            if (monster != null) monster.TakeDamage(player.GetDamage());
+            if (monster != null)
+            {
+                monster.TakeDamage(player.GetDamage());
+                continue;
+            }
+
+            BossTuto boss = hit.GetComponent<BossTuto>();
+            if (boss != null)
+            {
+                Debug.Log("Boss détecté !");
+                boss.TakeDamage(player.GetDamage());
+            }
         }
-        Debug.Log("Attaque !" + " Ennemis touchés: " + hits.Length + " | Prochain attaque dans: " + nextAttackTime + " secondes");
-        
     }
 
     bool IsEnemyInFront(Transform target)
