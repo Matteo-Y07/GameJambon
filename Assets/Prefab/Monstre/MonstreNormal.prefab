@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 807163993492515044}
   - component: {fileID: 6724470892410567429}
   - component: {fileID: 813655547989342893}
-  - component: {fileID: 4504916052252697678}
   - component: {fileID: 5986967698673506555}
+  - component: {fileID: 454372873508346133}
+  - component: {fileID: -8566699166543056771}
   m_Layer: 6
   m_Name: MonstreNormal
   m_TagString: Untagged
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -1619005394, guid: 2c8a6e63fbdc30c4989db9bf7ea554df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ea2e65efa4282a24bbe094dfd627ca56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -114,25 +115,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4504916052252697678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1809573440072544497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b97dec2ccf274947a68730357e4be99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 5
-  moveSpeed: 2
-  damage: 1
-  detectionRange: 10
-  attackRange: 1
-  rb: {fileID: 813655547989342893}
-  spriteRenderer: {fileID: 6724470892410567429}
 --- !u!61 &5986967698673506555
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -169,7 +151,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.4166666, y: 1.4166666}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -178,3 +160,43 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.60672736, y: 0.7314944}
   m_EdgeRadius: 0
+--- !u!114 &454372873508346133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809573440072544497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002fa836bbc7c49498409e5b3573701e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
+  moveSpeed: 2
+  damage: 1
+  detectionRange: 10
+  attackRange: 1
+  rb: {fileID: 813655547989342893}
+  spriteRenderer: {fileID: 6724470892410567429}
+--- !u!95 &-8566699166543056771
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809573440072544497}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: df09c3a96a5bf5c4c957b7af3048a0fb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -14,7 +14,7 @@ public class CutsceneManager : MonoBehaviour
     private IEnumerator CutsceneRoutine()
     {
         // 1. écran noir
-        yield return introFade.FadeToBlack(1f);
+        yield return introFade.Fade(Color.clear, Color.black, 1f);
 
         // 2. dialogue 1
         DialogueLine[] dialogue1 = GetDialogue1();
@@ -23,7 +23,7 @@ public class CutsceneManager : MonoBehaviour
         yield return new WaitUntil(() => !GameState.InDialogue);
 
         // 3. fade out écran noir (on “révèle” le jeu)
-        yield return introFade.FadeFromBlack(1f);
+        yield return introFade.Fade(Color.black, Color.clear, 1f);
 
         // 4. dialogue 2
         DialogueLine[] dialogue2 = GetDialogue2();

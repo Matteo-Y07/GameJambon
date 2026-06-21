@@ -11,6 +11,8 @@ public class MonsterSpawner : MonoBehaviour
     [Header("Spawn Points")]
     [SerializeField] private MonsterSpawnPoint[] spawnPoints;
 
+    private bool hasSpawned = false;
+
     void Start()
     {
         SpawnAll();
@@ -18,14 +20,22 @@ public class MonsterSpawner : MonoBehaviour
 
     void SpawnAll()
     {
+        if (hasSpawned) return;
+
+        hasSpawned = true;
+
         foreach (MonsterSpawnPoint point in spawnPoints)
         {
+            if (point == null) continue;
+
             GameObject prefab = GetPrefab(point.GetSpawnType());
 
             if (prefab != null)
             {
                 Instantiate(prefab, point.transform.position, Quaternion.identity);
             }
+
+            Destroy(point.gameObject);
         }
     }
 

@@ -18,9 +18,13 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
+    public void RespawnPlayer(GameObject player)
+    {
+        player.transform.position = GetCheckpoint(player.transform.position);
+    }
+    
     public void SetCheckpoint(Vector3 pos)
     {
         lastCheckpointPosition = pos;

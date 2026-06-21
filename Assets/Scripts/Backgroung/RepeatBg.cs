@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class RepeatBg : MonoBehaviour
 {
+    [SerializeField] private int nbBackground;
     private Transform cam;
     private float width;
 
@@ -10,6 +11,17 @@ public class RepeatBg : MonoBehaviour
         cam = Camera.main.transform;
         SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
         width = sr.bounds.size.x;
+        if (nbBackground == 0)
+        {
+            if (transform.parent != null)
+            {
+                nbBackground = transform.parent.childCount;
+            }
+            else 
+            {
+                nbBackground = 1;
+            }
+        }
     }
 
     void Update()
@@ -19,11 +31,11 @@ public class RepeatBg : MonoBehaviour
 
         if (posX + width < camX)
         {
-            transform.position += new Vector3(width * 2f, 0f, 0f);
+            transform.position += new Vector3(width * nbBackground, 0f, 0f);
         }
         else if (posX - width > camX)
         {
-            transform.position -= new Vector3(width * 2f, 0f, 0f);
+            transform.position -= new Vector3(width * nbBackground, 0f, 0f);
         }
     }
 }

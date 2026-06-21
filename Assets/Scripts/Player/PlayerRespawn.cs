@@ -52,8 +52,13 @@ public class PlayerRespawn : MonoBehaviour
 
         if (playerHealth != null) playerHealth.ResetHealth();
         if (garbageBar != null) garbageBar.ResetBar();
-        if (rb != null) rb.velocity = Vector2.zero;
-        if (stateCheck != null) stateCheck.ResetState();
+
+        rb.velocity = Vector2.zero;
+
+        if (stateCheck != null)
+            stateCheck.ResetState();
+
+        playerHealth.ResetHealth();
 
         isRespawning = false;
     }

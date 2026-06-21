@@ -12,6 +12,10 @@ public class DialogueTrigger : MonoBehaviour
         {
             introFade = FindObjectOfType<IntroFade>();
         }
+        if (manager == null)
+        {
+            manager = FindObjectOfType<DialogueManager>();
+        }
     }
 
     

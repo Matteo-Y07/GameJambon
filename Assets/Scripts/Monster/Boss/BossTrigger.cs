@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BossZoneTrigger : MonoBehaviour
+public class BossTrigger : MonoBehaviour
 {
     private BossTuto boss;
 
@@ -18,7 +18,6 @@ public class BossZoneTrigger : MonoBehaviour
         {
             if (boss != null)
             {
-                
                 boss.ActivateBoss();
             }
         }

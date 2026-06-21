@@ -8,6 +8,8 @@ public class PlayerStateCheck : MonoBehaviour
     private PlayerRespawn playerRespawn;
 
     private GarbageBar garbageBar;
+    private IntroFade introFade;
+    private GameObject deathScreen;
 
     private bool isDead;
     private bool deathHandled;
@@ -27,34 +29,50 @@ public class PlayerStateCheck : MonoBehaviour
         {
             garbageBar = FindObjectOfType<GarbageBar>(true);
         }
+        if (introFade == null)
+        {
+            introFade = FindObjectOfType<IntroFade>(true);
+        }
+        if (deathScreen == null)
+        {
+            deathScreen = GameObject.Find("DeathScreen");
+        }
     }
 
     void Update()
     {
-        if (deathHandled) return;
         isDead = (garbageBar != null && garbageBar.IsMaxReached()) || (playerHealth != null && playerHealth.IsDead());
 
-        if (isDead)
+        if (!deathHandled && isDead)
             Die();
+
+        if (deathHandled && Input.GetButtonDown("Submit"))
+            playerRespawn.TriggerRespawn();
     }
 
-    void Die()
+    public void Die()
     {
+        if (deathHandled) return;
+
         deathHandled = true;
 
-        if (playerMovement != null)
-            playerMovement.enabled = false;
+        playerMovement.isFrozen = true;
 
-        if (playerRespawn != null)
-            playerRespawn.TriggerRespawn();
+        // 🔥 LIFE SYSTEM
+        LifeSystem.Instance.LoseLife();
+
+        if (deathScreen != null && LifeSystem.Instance.HasLives())
+            StartCoroutine(deathScreen.GetComponent<DeathScreen>().FadeIn());
     }
 
     public void ResetState()
     {
         isDead = false;
         deathHandled = false;
-
+        if (introFade != null)
+            StartCoroutine(introFade.Fade(Color.black, Color.clear, 2f));
         if (playerMovement != null)
             playerMovement.enabled = true;
+        
     }
 }
