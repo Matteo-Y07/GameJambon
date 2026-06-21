@@ -8,6 +8,7 @@ public class PlayerStateCheck : MonoBehaviour
     private PlayerRespawn playerRespawn;
 
     private GarbageBar garbageBar;
+    private IntroFade introFade;
 
     private bool isDead;
     private bool deathHandled;
@@ -27,6 +28,10 @@ public class PlayerStateCheck : MonoBehaviour
         {
             garbageBar = FindObjectOfType<GarbageBar>(true);
         }
+        if (introFade == null)
+        {
+            introFade = FindObjectOfType<IntroFade>(true);
+        }
     }
 
     void Update()
@@ -44,7 +49,8 @@ public class PlayerStateCheck : MonoBehaviour
 
         if (playerMovement != null)
             playerMovement.enabled = false;
-
+        if (introFade != null)
+            StartCoroutine(introFade.FadeTransparentToBlack(2f));
         if (playerRespawn != null)
             playerRespawn.TriggerRespawn();
     }
@@ -53,8 +59,10 @@ public class PlayerStateCheck : MonoBehaviour
     {
         isDead = false;
         deathHandled = false;
-
+        if (introFade != null)
+            StartCoroutine(introFade.FadeFromBlack(2f));
         if (playerMovement != null)
             playerMovement.enabled = true;
+        
     }
 }

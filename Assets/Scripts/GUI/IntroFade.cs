@@ -76,4 +76,25 @@ public class IntroFade : MonoBehaviour
         c.a = targetAlpha;
         fadeImage.color = c;
     }
+
+    public IEnumerator FadeTransparentToBlack(float duration)
+    {
+        Color start = Color.black;
+        start.a = 0f;
+
+        Color end = Color.black;
+        end.a = 1f;
+
+        float time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.unscaledDeltaTime;
+            fadeImage.color = Color.Lerp(start, end, time / duration);
+            yield return null;
+        }
+
+        fadeImage.color = end;
+    }
+
 }
