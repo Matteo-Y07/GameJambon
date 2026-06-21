@@ -9,6 +9,7 @@ public class PlayerStateCheck : MonoBehaviour
 
     private GarbageBar garbageBar;
     private IntroFade introFade;
+    private GameObject deathScreen;
 
     private bool isDead;
     private bool deathHandled;
@@ -32,27 +33,36 @@ public class PlayerStateCheck : MonoBehaviour
         {
             introFade = FindObjectOfType<IntroFade>(true);
         }
+        if (deathScreen == null)
+        {
+            deathScreen = GameObject.Find("DeathScreen");
+        }
     }
 
     void Update()
     {
-        if (deathHandled) return;
         isDead = (garbageBar != null && garbageBar.IsMaxReached()) || (playerHealth != null && playerHealth.IsDead());
 
-        if (isDead)
+        if (!deathHandled && isDead)
             Die();
+
+        if (deathHandled && Input.GetButtonDown("Submit"))
+            playerRespawn.TriggerRespawn();
     }
 
     public void Die()
     {
+        if (deathHandled) return;
+
         deathHandled = true;
 
-        if (playerMovement != null)
-            playerMovement.enabled = false;
-        if (introFade != null)
-            StartCoroutine(introFade.Fade(Color.clear, Color.black, 2f));
-        if (playerRespawn != null)
-            playerRespawn.TriggerRespawn();
+        playerMovement.isFrozen = true;
+
+        // 🔥 LIFE SYSTEM
+        LifeSystem.Instance.LoseLife();
+
+        if (deathScreen != null && LifeSystem.Instance.HasLives())
+            StartCoroutine(deathScreen.GetComponent<DeathScreen>().FadeIn());
     }
 
     public void ResetState()
