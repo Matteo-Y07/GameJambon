@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
@@ -8,10 +7,8 @@ public class SceneTransition : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D player)
     {
-        if (player.CompareTag("Player"))
-        {
-            GameManager.instance.nextSpawnPoint = spawnPointName;
-            SceneManager.LoadScene(sceneToLoad);
-        }
+        if (!player.CompareTag("Player")) return;
+
+        SceneTransitionManager.Instance.Transition(sceneToLoad, spawnPointName);
     }
 }

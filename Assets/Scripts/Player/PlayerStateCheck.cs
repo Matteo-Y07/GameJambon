@@ -50,7 +50,7 @@ public class PlayerStateCheck : MonoBehaviour
         if (playerMovement != null)
             playerMovement.enabled = false;
         if (introFade != null)
-            StartCoroutine(introFade.FadeTransparentToBlack(2f));
+            StartCoroutine(introFade.Fade(Color.clear, Color.black, 2f));
         if (playerRespawn != null)
             playerRespawn.TriggerRespawn();
     }
@@ -60,7 +60,7 @@ public class PlayerStateCheck : MonoBehaviour
         isDead = false;
         deathHandled = false;
         if (introFade != null)
-            StartCoroutine(introFade.FadeFromBlack(2f));
+            StartCoroutine(introFade.Fade(Color.black, Color.clear, 2f));
         if (playerMovement != null)
             playerMovement.enabled = true;
         

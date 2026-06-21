@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("State")]
     [SerializeField] private float gravity = 2.5f;
     [SerializeField] private float maxTimerGrab = 7.0f;
+    
 
     [Header("Dash")]
     [SerializeField] private float dashPower = 15.0f;
@@ -72,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isWallJumping = false;
     private bool isDashing = false;
     private bool hasDash = true;
+    public bool isFrozen = false;
 
     // Timers
     private float coyoteTimer = 0f;
@@ -135,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     { 
-        if (GameState.InDialogue || GameState.InPause)
+        if (GameState.InDialogue || GameState.InPause || isFrozen)
         return;
         CheckGround();
         CheckWalls();
@@ -206,6 +208,23 @@ public class PlayerMovement : MonoBehaviour
         if (rb.velocity.y < 0f) rb.gravityScale = GetGravity() * 1.8f;
         else if (rb.velocity.y > 0f && !Input.GetButton("Jump")) rb.gravityScale = GetGravity() * 1.3f;
         else rb.gravityScale = GetGravity();
+    }
+
+    public void Freeze()
+    {
+        isFrozen = true;
+
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        rb.gravityScale = 0;
+        rb.simulated = false;
+    }
+
+    public void Unfreeze()
+    {
+        isFrozen = false;
+        rb.gravityScale = gravity;
+        rb.simulated = true;
     }
 
     // =========================

@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Game\SpawnManager.cs" />
     <Compile Include="Assets\Scripts\Game\SceneTransition.cs" />
     <Compile Include="Assets\Scripts\Monster\MonstreType\MonsterPollution.cs" />
+    <Compile Include="Assets\Scripts\Game\SceneTransitionManager.cs" />
     <Compile Include="Assets\Scripts\Game\Checkpoint.cs" />
     <Compile Include="Assets\Scripts\Monster\Boss\BossTuto.cs" />
     <Compile Include="Assets\Scripts\Game\CameraZone.cs" />

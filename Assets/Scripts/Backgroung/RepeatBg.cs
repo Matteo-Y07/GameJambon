@@ -13,7 +13,14 @@ public class RepeatBg : MonoBehaviour
         width = sr.bounds.size.x;
         if (nbBackground == 0)
         {
-            nbBackground = transform.parent.childCount;
+            if (transform.parent != null)
+            {
+                nbBackground = transform.parent.childCount;
+            }
+            else 
+            {
+                nbBackground = 1;
+            }
         }
     }
 

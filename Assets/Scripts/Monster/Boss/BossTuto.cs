@@ -15,7 +15,7 @@ public class BossTuto : MonoBehaviour
     private Rigidbody2D rb;
 
     [Header("Boss Stats")]
-    public float maxHealth = 1000f;
+    public float maxHealth = 100f;
     public float currentHealth;
 
     [Header("UI (Automated)")]
