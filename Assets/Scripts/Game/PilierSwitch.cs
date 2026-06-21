@@ -45,6 +45,14 @@ public class PillarSwitch : MonoBehaviour
         tilemapAlive.SetActive(true);
     }
 
+    void DestroyMonsters()
+    {
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject monster in monsters)
+        {
+            Destroy(monster);
+        }
+    }
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))

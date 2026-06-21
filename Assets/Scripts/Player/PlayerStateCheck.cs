@@ -43,7 +43,7 @@ public class PlayerStateCheck : MonoBehaviour
             Die();
     }
 
-    void Die()
+    public void Die()
     {
         deathHandled = true;
 

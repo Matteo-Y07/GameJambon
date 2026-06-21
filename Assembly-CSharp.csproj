@@ -68,9 +68,11 @@
     <Compile Include="Assets\Scripts\Dialogue\DialogueManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStateCheck.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovementController.cs" />
+    <Compile Include="Assets\Scripts\Game\DeadZone.cs" />
     <Compile Include="Assets\Scripts\Dialogue\DialogueLine.cs" />
     <Compile Include="Assets\Scripts\GUI\MenuController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAttaqueController.cs" />
+    <Compile Include="Assets\Scripts\GUI\Menu\MenuCamera.cs" />
     <Compile Include="Assets\Scripts\Game\SpawnManager.cs" />
     <Compile Include="Assets\Scripts\Game\SceneTransition.cs" />
     <Compile Include="Assets\Scripts\Monster\MonstreType\MonsterPollution.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Assets\Scripts\Monster\MonstreType\Monster.cs" />
     <Compile Include="Assets\Scripts\Monster\MonstreType\MonsterSpawnPoint.cs" />
     <Compile Include="Assets\Scripts\Monster\MonstreType\DebuffProjectile.cs" />
+    <Compile Include="Assets\Scripts\GUI\Menu\MenuRunner.cs" />
     <Compile Include="Assets\Scripts\Game\CatFollow.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Dialogue\TutorialTrigger.cs" />
@@ -133,14 +136,18 @@
     <None Include="Assets\UI\Pixel Font - Tripfive\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\UI\Pixel Font - Tripfive\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\UI\Pixel Font - Tripfive\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\UI\bg\craftpix-net-823949-free-nature-backgrounds-pixel-art\License.txt" />
     <None Include="Assets\UI\Pixel Font - Tripfive\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\UI\bg\Day-Night Skyboxes\readme.txt" />
     <None Include="Assets\UI\bg\Day-Night Skyboxes\Textures\License.txt" />
     <None Include="Assets\UI\Pixel Font - Tripfive\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\UI\bg\craftpix-891123-free-pixel-art-street-2d-backgrounds\License.txt" />
     <None Include="Assets\UI\Pixel Font - Tripfive\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\UI\Pixel Font - Tripfive\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\UI\Pixel Font - Tripfive\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\UI\Pixel Font - Tripfive\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\UI\bg\craftpix-net-154389-forest-and-trees-free-pixel-backgrounds\license.txt" />
+    <None Include="Assets\UI\bg\craftpix-891123-free-pixel-art-street-2d-backgrounds\readme.txt" />
     <None Include="Assets\UI\generator_config.txt" />
     <None Include="Assets\UI\Pixel Font - Tripfive\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
