@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BossTuto.unity
     guid: 26af72884da0c934b89b8b0a71228a56
+  - enabled: 1
+    path: Assets/Scenes/MenuGameOver.unity
+    guid: 91ecb7978d1ee4a49856bd306acc63e9
   m_configObjects: {}

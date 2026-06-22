@@ -2,77 +2,78 @@ using UnityEngine;
 
 public class PlayerStateCheck : MonoBehaviour
 {
-    // Références
     private PlayerHealth playerHealth;
     private PlayerMovement playerMovement;
     private PlayerRespawn playerRespawn;
-
     private GarbageBar garbageBar;
     private IntroFade introFade;
     private GameObject deathScreen;
 
-    private bool isDead;
     private bool deathHandled;
 
-    void Awake()
+    private void Awake()
     {
-        // Trouve automatiquement les scripts frères sur le même GameObject
-        if (playerHealth == null) playerHealth = GetComponent<PlayerHealth>();
-        if (playerMovement == null) playerMovement = GetComponent<PlayerMovement>();
-        if (playerRespawn == null) playerRespawn = GetComponent<PlayerRespawn>();
+        playerHealth = GetComponent<PlayerHealth>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerRespawn = GetComponent<PlayerRespawn>();
+
+        garbageBar = FindObjectOfType<GarbageBar>(true);
+        introFade = FindObjectOfType<IntroFade>(true);
+        deathScreen = GameObject.Find("DeathScreen");
     }
 
-    void Start()
+    private void Update()
     {
-        // Trouve automatiquement la GarbageBar dans le camion UI
-        if (garbageBar == null)
-        {
-            garbageBar = FindObjectOfType<GarbageBar>(true);
-        }
-        if (introFade == null)
-        {
-            introFade = FindObjectOfType<IntroFade>(true);
-        }
-        if (deathScreen == null)
-        {
-            deathScreen = GameObject.Find("DeathScreen");
-        }
-    }
+        bool diedByHP = playerHealth != null && playerHealth.IsDead();
+        bool diedByGarbage = garbageBar != null && garbageBar.IsMaxReached();
 
-    void Update()
-    {
-        isDead = (garbageBar != null && garbageBar.IsMaxReached()) || (playerHealth != null && playerHealth.IsDead());
+        if (!deathHandled && (diedByHP || diedByGarbage))
+            Die(DeathType.Normal);
 
-        if (!deathHandled && isDead)
-            Die();
-
+        // ✅ RESPawn input DOIT être actif après mort uniquement
         if (deathHandled && Input.GetButtonDown("Submit"))
-            playerRespawn.TriggerRespawn();
+        {
+            playerRespawn?.TriggerRespawn();
+        }
     }
 
-    public void Die()
+    public void Die(DeathType type)
     {
         if (deathHandled) return;
 
         deathHandled = true;
 
-        playerMovement.isFrozen = true;
+        if (playerMovement != null)
+            playerMovement.isFrozen = true;
 
-        // 🔥 LIFE SYSTEM
+        foreach (Monster m in FindObjectsByType<Monster>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            m.Freeze();
+
         LifeSystem.Instance.LoseLife();
 
-        if (deathScreen != null && LifeSystem.Instance.HasLives())
-            StartCoroutine(deathScreen.GetComponent<DeathScreen>().FadeIn());
+        if (type == DeathType.Normal)
+        {
+            if (deathScreen != null && LifeSystem.Instance.HasLives())
+                StartCoroutine(deathScreen.GetComponent<DeathScreen>().FadeIn());
+        }
+    }
+
+    public void Kill(DeathType type)
+    {
+        Die(type);
     }
 
     public void ResetState()
     {
-        isDead = false;
         deathHandled = false;
+
         if (introFade != null)
             StartCoroutine(introFade.Fade(Color.black, Color.clear, 2f));
+
         if (playerMovement != null)
-            playerMovement.enabled = true;
-        
+            playerMovement.isFrozen = false;
+
+        foreach (Monster m in FindObjectsByType<Monster>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            m.Unfreeze();
     }
 }

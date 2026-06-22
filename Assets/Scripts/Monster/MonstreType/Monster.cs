@@ -17,6 +17,7 @@ public class Monster : MonoBehaviour
 
     protected Transform player;
     protected bool dead = false;
+    protected bool isFrozen = false;
 
     protected virtual void Awake()
     {
@@ -34,7 +35,11 @@ public class Monster : MonoBehaviour
     {
         if (GameState.InDialogue || GameState.InPause)
             return;
+
         if (dead) return;
+
+        if (isFrozen) return;
+
         Move();
     }
 
@@ -74,6 +79,31 @@ public class Monster : MonoBehaviour
         {
             playerHealth.TakeDamage(damage);
         }
+    }
+
+    public void Freeze()
+    {
+        isFrozen = true;
+
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        rb.gravityScale = 0;
+        rb.simulated = false;
+    }
+
+    public void Unfreeze()
+    {
+        isFrozen = false;
+
+        if (player != null)
+        {
+            PlayerMovement pm = player.GetComponent<PlayerMovement>();
+
+            if (pm != null)
+                rb.gravityScale = pm.GetGravity();
+        }
+
+        rb.simulated = true;
     }
 
     //Setters & Getters

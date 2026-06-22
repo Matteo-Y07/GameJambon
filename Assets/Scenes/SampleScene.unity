@@ -164,6 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 55182595}
   - component: {fileID: 55182596}
+  - component: {fileID: 55182597}
   m_Layer: 0
   m_Name: _[PERSISTENT_GAME]
   m_TagString: Untagged
@@ -186,7 +187,6 @@ Transform:
   m_Children:
   - {fileID: 1888266390}
   - {fileID: 1322260921}
-  - {fileID: 1526210909}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &55182596
@@ -199,6 +199,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91aa7d14682148e4b9e856636d90296d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &55182597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55182594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 854760901d832834397f335d42443e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &70861806
@@ -980,74 +992,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &200559143
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 200559146}
-  - component: {fileID: 200559145}
-  - component: {fileID: 200559144}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &200559144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200559143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &200559145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200559143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &200559146
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200559143}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1322260921}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &203048122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1294,6 +1238,7 @@ GameObject:
   - component: {fileID: 267407366}
   - component: {fileID: 267407368}
   - component: {fileID: 267407367}
+  - component: {fileID: 267407369}
   m_Layer: 5
   m_Name: Dialogue
   m_TagString: Untagged
@@ -1362,6 +1307,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267407365}
   m_CullTransparentMesh: 1
+--- !u!114 &267407369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267407365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7499875000fdb74fa58a13ffc646016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 1333283919}
+  dialogueText: {fileID: 1779432156}
+  portrait: {fileID: 206789647}
+  panel: {fileID: 267407365}
 --- !u!1001 &281572208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1721,7 +1682,6 @@ MonoBehaviour:
   - characterName: "Syst\xE8me"
     text: Appuyez sur C ou Espace pour sauter.
     portrait: {fileID: 21300000, guid: cd1c2af6d3122f347b2a569bc4461239, type: 3}
-  manager: {fileID: 1531462487}
 --- !u!61 &383082105
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13105,7 +13065,6 @@ MonoBehaviour:
   - characterName: Hero
     text: "Ceux-l\xE0 augmentent la pollution et ne te laissent plus respirer."
     portrait: {fileID: 21300000, guid: 766605f9b92419949b97b3a19c545c0a, type: 3}
-  manager: {fileID: 1531462487}
 --- !u!61 &604378885
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13560,7 +13519,6 @@ MonoBehaviour:
   - characterName: Hero
     text: "C'est \xE0 cause de lui s'il y a des monstres qui sont apparu !"
     portrait: {fileID: 21300000, guid: 766605f9b92419949b97b3a19c545c0a, type: 3}
-  manager: {fileID: 1531462487}
 --- !u!61 &687212164
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15345,7 +15303,6 @@ MonoBehaviour:
   - characterName: System
     text: "Appuyer sur Q ou D pour vous d\xE9placer."
     portrait: {fileID: 21300000, guid: cd1c2af6d3122f347b2a569bc4461239, type: 3}
-  manager: {fileID: 1531462487}
 --- !u!61 &1128102753
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15489,7 +15446,6 @@ MonoBehaviour:
     text: "Oh ! Un point de sauvegarde, \xE7a me sera utile plus tard. Mon p\xE8re
       m'a dit qu'on pouvait y r\xE9apparaitre."
     portrait: {fileID: 21300000, guid: 766605f9b92419949b97b3a19c545c0a, type: 3}
-  manager: {fileID: 1531462487}
 --- !u!61 &1216427418
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15940,7 +15896,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1789415075}
-  - {fileID: 200559146}
   m_Father: {fileID: 55182595}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1329557824
@@ -16752,6 +16707,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b0a787d2d2b4349a0a4b6b30e0510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heart3: {fileID: 1422446258}
+  heart2: {fileID: 70861808}
+  heart1: {fileID: 898048643}
   hp3: 100
   hp2: 100
   hp1: 100
@@ -17170,13 +17128,13 @@ Transform:
   m_GameObject: {fileID: 1526210908}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1686.6958, y: -1130.1566, z: 7.707387}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1932741165}
   - {fileID: 1484510133}
-  m_Father: {fileID: 55182595}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1531462485
 GameObject:
@@ -17226,10 +17184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2376957752554714996e88403df351ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialoguePanel: {fileID: 267407365}
-  nameText: {fileID: 1333283919}
-  dialogueText: {fileID: 1779432156}
-  portraitImage: {fileID: 206789647}
   textSpeed: 0.03
 --- !u!1 &1541473857
 GameObject:
@@ -20530,7 +20484,6 @@ MonoBehaviour:
   - characterName: "Syst\xE8me"
     text: Et vous pouvez sauter depuis un mur pour effectuer un wall jump.
     portrait: {fileID: 21300000, guid: cd1c2af6d3122f347b2a569bc4461239, type: 3}
-  manager: {fileID: 1531462487}
 --- !u!61 &1631909031
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -25778,7 +25731,6 @@ MonoBehaviour:
   - characterName: "Syst\xE8me "
     text: "Pour passer ce pr\xE9cipice, appuyez sur X pour effectuer un dash."
     portrait: {fileID: 21300000, guid: cd1c2af6d3122f347b2a569bc4461239, type: 3}
-  manager: {fileID: 1531462487}
 --- !u!61 &2104948456
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -26128,4 +26080,5 @@ SceneRoots:
   - {fileID: 53089948}
   - {fileID: 1253842011}
   - {fileID: 1008010532}
+  - {fileID: 1526210909}
   - {fileID: 55182595}

@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LifeSystem : MonoBehaviour
 {
     public static LifeSystem Instance;
+
+    public string sceneToLoadOnGameOver = "MenuGameOver";
 
     [SerializeField] private int maxLives = 3;
     private int currentLives;
@@ -16,8 +19,6 @@ public class LifeSystem : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
-
         currentLives = maxLives;
     }
 
@@ -29,12 +30,8 @@ public class LifeSystem : MonoBehaviour
     {
         currentLives--;
 
-        Debug.Log("nombre de vies restantes : " + currentLives);
-
         if (currentLives <= 0)
-        {
             GameOver();
-        }
     }
 
     public void ResetLives()
@@ -44,9 +41,7 @@ public class LifeSystem : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("GAME OVER");
-
-        // ici tu peux load menu
-        // SceneManager.LoadScene("GameOver");
+        ResetLives();
+        SceneManager.LoadScene(sceneToLoadOnGameOver);
     }
 }

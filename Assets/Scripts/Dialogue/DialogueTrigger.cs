@@ -1,32 +1,38 @@
 using UnityEngine;
+
 public class DialogueTrigger : MonoBehaviour
 {
     public DialogueLine[] dialogue;
-    public DialogueManager manager;
 
-    private bool triggered = false;
-    private IntroFade introFade;
-    void Start()
+    private bool triggered;
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (introFade == null)
-        {
-            introFade = FindObjectOfType<IntroFade>();
-        }
-        if (manager == null)
-        {
-            manager = FindObjectOfType<DialogueManager>();
-        }
+        if (!other.CompareTag("Player"))
+            return;
+
+        if (triggered)
+            return;
+
+        if (!GameState.CanTriggerDialogue)
+            return;
+
+        if (GameState.InDialogue)
+            return;
+
+        if (DialogueManager.Instance == null)
+            return;
+
+        triggered = true;
+
+        DialogueManager.Instance.StartDialogue(dialogue);
     }
 
-    
-
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.CompareTag("Player") && !triggered)
-        {
-            triggered = true;
+        if (!other.CompareTag("Player"))
+            return;
 
-            manager.StartDialogue(dialogue);
-        }
+        triggered = false;
     }
 }
