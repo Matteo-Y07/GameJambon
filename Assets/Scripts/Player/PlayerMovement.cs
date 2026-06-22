@@ -137,8 +137,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     { 
-        if (GameState.InDialogue || GameState.InPause || isFrozen)
-        return;
+        if (GameState.InPause || isFrozen || DialogueManager.Instance.IsDialogueActive)
+            return;
         CheckGround();
         CheckWalls();
         HandleCoyoteTime();

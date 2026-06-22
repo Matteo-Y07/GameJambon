@@ -33,11 +33,10 @@ public class Monster : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (GameState.InDialogue || GameState.InPause)
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive)
             return;
 
         if (dead) return;
-
         if (isFrozen) return;
 
         Move();

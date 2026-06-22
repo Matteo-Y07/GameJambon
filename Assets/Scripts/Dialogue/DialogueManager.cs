@@ -6,7 +6,8 @@ public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
 
-    [SerializeField] private float textSpeed = 0.03f;
+    [SerializeField]
+    private float textSpeed = 0.03f;
 
     private DialogueLine[] currentDialogue;
     private int index;
@@ -14,12 +15,16 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typingCoroutine;
 
     public bool IsDialogueActive { get; private set; }
+
     public event Action DialogueEnded;
 
-    void Awake()
+    private void Awake()
     {
+        Debug.Log("[DialogueManager] Awake");
+
         if (Instance != null && Instance != this)
         {
+            Debug.LogWarning("[DialogueManager] Duplicate instance destroyed");
             Destroy(gameObject);
             return;
         }
@@ -27,32 +32,40 @@ public class DialogueManager : MonoBehaviour
         Instance = this;
     }
 
-    IEnumerator Start()
+    private IEnumerator Start()
     {
-        yield return new WaitForSeconds(0.5f);
+        Debug.Log("[DialogueManager] Start (init delay)");
+        yield return new WaitForSecondsRealtime(0.5f);
+
         GameState.CanTriggerDialogue = true;
+        Debug.Log("[DialogueManager] CanTriggerDialogue = TRUE");
     }
 
-    void Update()
+    private void Update()
     {
         if (!IsDialogueActive)
             return;
 
         if (Input.GetButtonDown("Submit"))
+        {
+            Debug.Log("[DialogueManager] Submit pressed");
             ContinueDialogue();
+        }
     }
 
     public void StartDialogue(DialogueLine[] dialogue)
     {
-        if (!GameState.CanTriggerDialogue)
-            return;
+        Debug.Log("[DialogueManager] StartDialogue() called");
 
         if (dialogue == null || dialogue.Length == 0)
+        {
+            Debug.LogWarning("[DialogueManager] Invalid dialogue array");
             return;
+        }
 
         if (DialogueUI.Instance == null || DialogueUI.Instance.panel == null)
         {
-            Debug.LogError("DialogueUI not ready (missing instance or panel)");
+            Debug.LogWarning("[DialogueManager] UI missing");
             return;
         }
 
@@ -60,17 +73,22 @@ public class DialogueManager : MonoBehaviour
         index = 0;
 
         IsDialogueActive = true;
-        GameState.InDialogue = true;
+
+        Time.timeScale = 0f;
 
         DialogueUI.Instance.panel.SetActive(true);
+
+        Debug.Log("[DialogueManager] Dialogue STARTED");
 
         ShowLine();
     }
 
-    void ShowLine()
+    private void ShowLine()
     {
-        var ui = DialogueUI.Instance;
-        var line = currentDialogue[index];
+        Debug.Log($"[DialogueManager] ShowLine index={index}");
+
+        DialogueUI ui = DialogueUI.Instance;
+        DialogueLine line = currentDialogue[index];
 
         ui.nameText.text = line.characterName;
 
@@ -85,16 +103,21 @@ public class DialogueManager : MonoBehaviour
         }
 
         if (typingCoroutine != null)
+        {
+            Debug.Log("[DialogueManager] Stopping previous typing coroutine");
             StopCoroutine(typingCoroutine);
+        }
 
         typingCoroutine = StartCoroutine(TypeText(line.text));
     }
 
-    IEnumerator TypeText(string text)
+    private IEnumerator TypeText(string text)
     {
+        Debug.Log("[DialogueManager] TypeText START");
+
         isTyping = true;
 
-        var ui = DialogueUI.Instance;
+        DialogueUI ui = DialogueUI.Instance;
         ui.dialogueText.text = "";
 
         foreach (char c in text)
@@ -104,16 +127,23 @@ public class DialogueManager : MonoBehaviour
         }
 
         isTyping = false;
+
+        Debug.Log("[DialogueManager] TypeText END");
     }
 
     public void ContinueDialogue()
     {
-        var ui = DialogueUI.Instance;
+        Debug.Log("[DialogueManager] ContinueDialogue()");
+
+        DialogueUI ui = DialogueUI.Instance;
 
         if (isTyping)
         {
+            Debug.Log("[DialogueManager] Skipping type animation");
+
             StopCoroutine(typingCoroutine);
             ui.dialogueText.text = currentDialogue[index].text;
+
             isTyping = false;
             return;
         }
@@ -122,6 +152,7 @@ public class DialogueManager : MonoBehaviour
 
         if (index >= currentDialogue.Length)
         {
+            Debug.Log("[DialogueManager] End of dialogue reached");
             EndDialogue();
             return;
         }
@@ -129,21 +160,29 @@ public class DialogueManager : MonoBehaviour
         ShowLine();
     }
 
-    void EndDialogue()
+    private void EndDialogue()
     {
-        var ui = DialogueUI.Instance;
+        Debug.Log("[DialogueManager] EndDialogue()");
+
+        DialogueUI ui = DialogueUI.Instance;
 
         if (ui != null && ui.panel != null)
             ui.panel.SetActive(false);
 
         IsDialogueActive = false;
-        GameState.InDialogue = false;
+
+        Time.timeScale = 1f;
 
         DialogueEnded?.Invoke();
+
+        Debug.Log("[DialogueManager] Dialogue ENDED event invoked");
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
+        Debug.Log("[DialogueManager] OnDestroy");
+
         StopAllCoroutines();
+        Time.timeScale = 1f;
     }
 }

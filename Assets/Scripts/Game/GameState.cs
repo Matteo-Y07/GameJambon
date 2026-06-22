@@ -1,14 +1,7 @@
 public static class GameState
 {
-    private static bool inDialogue;
     private static bool inPause;
     private static bool canTriggerDialogue;
-
-    public static bool InDialogue
-    {
-        get => inDialogue;
-        set => inDialogue = value;
-    }
 
     public static bool InPause
     {
@@ -19,13 +12,18 @@ public static class GameState
     public static bool CanTriggerDialogue
     {
         get => canTriggerDialogue;
-        set => canTriggerDialogue = value;
+        set
+        {
+            canTriggerDialogue = value;
+            UnityEngine.Debug.Log($"[GameState] CanTriggerDialogue = {value}");
+        }
     }
 
     public static void Reset()
     {
-        inDialogue = false;
         inPause = false;
         canTriggerDialogue = false;
+
+        UnityEngine.Debug.Log("[GameState] Reset()");
     }
 }

@@ -4,6 +4,7 @@ public class PauseMenu : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private GameObject pauseMenuUI;
+
     private bool isPaused;
 
     void Start()
@@ -17,7 +18,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (GameState.InDialogue)
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive)
             return;
 
         if (Input.GetButtonDown("Cancel"))
